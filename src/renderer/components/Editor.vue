@@ -1,36 +1,36 @@
 <template>
   <div id="component" class="component">
     <div class="navigation">
-      <Navigation></Navigation>
+      <Navigation />
     </div>
     <div class="notes">
-      <Notes></Notes>
+      <NoteList />
     </div>
     <div class="markdown">
-      <Markdown></Markdown>
+      <Markdown />
     </div>
     <div class="markup">
-      <Markup></Markup>
+      <Markup />
     </div>
   </div>
 </template>
 
 <script>
-  import Navigation from './Navigation'
-  import Notes from './Notes'
-  import Markdown from './Markdown'
-  import Markup from './Markup'
+  import Navigation from './Navigation/Navigation'
+  import NoteList from './Notes/NoteList'
+  import Markdown from './Markdown/Markdown'
+  import Markup from './Markup/Markup'
 
   export default {
     name: 'landing-page',
     components: {
       Navigation,
-      Notes,
+      NoteList,
       Markdown,
       Markup
     },
     created () {
-      this.$store.dispatch('reloadNotes')
+      this.$store.dispatch('editor/reloadNotes')
     }
   }
 </script>
@@ -41,27 +41,27 @@
     height: 100%;
 
     .navigation {
-      min-width: 150px;
+      min-width: 200px;
       display: flex;
       flex: 1;
       background-color: #2D3134;
     }
 
     .notes {
-      min-width: 150px;
+      min-width: 200px;
       display: flex;
-      flex: 2;
+      flex: 1;
       background-color: rgb(190, 190, 190);
     }
 
     .markdown {
       display: flex;
-      flex: 3;
+      flex: 2;
     }
 
     .markup {
       display: flex;
-      flex: 3;
+      flex: 2;
     }
 }
 </style>
