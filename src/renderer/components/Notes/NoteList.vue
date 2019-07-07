@@ -1,18 +1,22 @@
 <template>
   <div>
     <div v-for="(note, i) in visibleNotes" :key="i">
-      <div>{{note.title}}</div>
+      <NoteCard :note="note" />
     </div>
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  import NoteCard from './NoteCard'
 
   export default {
-    name: 'Notes',
+    name: 'NoteList',
+    components: {
+      NoteCard
+    },
     computed: {
-      ...mapGetters([
+      ...mapGetters('editor', [
         'visibleNotes'
       ])
     }
@@ -20,5 +24,4 @@
 </script>
 
 <style lang="scss" scoped>
-
 </style>

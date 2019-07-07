@@ -26,6 +26,7 @@ const mutations = {
     state.ui.selectionMode = mode
   },
   setSelectedProject (state, project) {
+    state.ui.selectionMode = null
     state.ui.selectedProject = project
   }
 }
@@ -82,6 +83,7 @@ const getters = {
 }
 
 export default {
+  namespaced: true,
   state,
   mutations,
   actions,
