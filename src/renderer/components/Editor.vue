@@ -44,26 +44,24 @@
       min-width: 150px;
       display: flex;
       flex: 1;
-      background-color: rgb(30, 30, 30);
-      color: rgb(220, 220, 220)
+      background-color: #2D3134;
     }
 
     .notes {
       min-width: 150px;
       display: flex;
-      flex: 1;
-      background-color: rgb(235, 235, 235);
-      border-right: 1px solid rgb(200, 200, 200);
+      flex: 2;
+      background-color: rgb(190, 190, 190);
     }
 
     .markdown {
       display: flex;
-      flex: 2;
+      flex: 3;
     }
 
     .markup {
       display: flex;
-      flex: 2;
+      flex: 3;
     }
 }
 </style>

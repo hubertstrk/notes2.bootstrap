@@ -9,4 +9,8 @@ html, body {
   overflow-x: hidden;
 }
 
+p {
+  margin-bottom: 0rem;
+}
+
 a {text-decoration: none;}

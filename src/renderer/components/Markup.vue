@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Markup</h1>
   </div>
 </template>
 
