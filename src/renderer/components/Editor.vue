@@ -41,17 +41,16 @@
     height: 100%;
 
     .navigation {
-      min-width: 200px;
+      min-width: 300px;
       display: flex;
       flex: 1;
       background-color: #2D3134;
     }
 
     .notes {
-      min-width: 200px;
+      min-width: 300px;
       display: flex;
       flex: 1;
-      background-color: rgb(190, 190, 190);
     }
 
     .markdown {

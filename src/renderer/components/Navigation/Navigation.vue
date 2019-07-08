@@ -1,21 +1,60 @@
 <template>
   <div class="navigation">
-    <NavigationCard mode="all" title="All Notes" />
-    <NavigationCard mode="starred" title="Starred" />
-    <ProjectList />
-    <NavigationCard mode="deleted" title="Deleted" />
+    <NavigationCard
+      @click="setSelectionMode('all')"
+      mode="all"
+      icon="sticky-note"
+      title="All Notes"
+      :count="all.length"
+    />
+    <NavigationCard
+      @click="setSelectionMode('starred')"
+      mode="starred"
+      icon="star"
+      title="Starred"
+      :count="starred.length"
+    />
+    <NavigationCard
+      @click="setSelectionMode('deleted')"
+      mode="deleted"
+      icon="trash"
+      title="Deleted"
+      :count="deleted.length"
+    />
+
+    <h4 class="project-title">Projects</h4>
+    <NavigationCard
+      v-for="(project, i) in projects" :key="i"
+      :mode="project" icon="chevron-right" :title="project" :count="all.filter(x => x.project === project).length"
+      @click="setSelectedProject(project)"
+    />
+
   </div>
 </template>
 
 <script>
+  import {mapMutations, mapGetters} from 'vuex'
+
   import NavigationCard from './NavigationCard'
-  import ProjectList from './ProjectList'
 
   export default {
     name: 'Navigation',
     components: {
-      NavigationCard,
-      ProjectList
+      NavigationCard
+    },
+    computed: {
+      ...mapGetters('editor', [
+        'all',
+        'starred',
+        'deleted',
+        'projects'
+      ])
+    },
+    methods: {
+      ...mapMutations('editor', [
+        'setSelectionMode',
+        'setSelectedProject'
+      ])
     }
   }
 </script>
@@ -27,17 +66,8 @@
   color: #73777A;
   padding: 20px;
 
-  > div {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-  }
-
-  .icon-text {
-    display: flex;
-    > div {
-      align-self: center;
-      margin-right: 10px;
-    }
+  .project-title {
+    margin: 15px 0;
   }
 }
 </style>
