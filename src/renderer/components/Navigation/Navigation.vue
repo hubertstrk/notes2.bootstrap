@@ -1,59 +1,50 @@
 <template>
-  <div class="navigation">
-    <NavigationCard
-      @click="setSelectionMode('all')"
-      mode="all"
-      icon="sticky-note"
-      title="All Notes"
-      :count="all.length"
-    />
-    <NavigationCard
-      @click="setSelectionMode('starred')"
-      mode="starred"
-      icon="star"
-      title="Starred"
-      :count="starred.length"
-    />
-    <NavigationCard
-      @click="setSelectionMode('deleted')"
-      mode="deleted"
-      icon="trash"
-      title="Deleted"
-      :count="deleted.length"
-    />
+  <div class="d-flex flex-column navigation">
+    <CommonNavigation />
 
-    <h4 class="project-title">Projects</h4>
-    <NavigationCard
-      v-for="(project, i) in projects" :key="i"
-      :mode="project" icon="chevron-right" :title="project" :count="all.filter(x => x.project === project).length"
-      @click="setSelectedProject(project)"
-    />
+    <div v-b-toggle.collapse-1>
+      <NavigationCard
+        name="project-collapse"
+      >
+        <template #icon>
+          <font-awesome-icon icon="chevron-right" />
+        </template>
+
+        <template #title>
+          Projects
+        </template>
+
+        <template #info>
+          {{projects.length}}
+        </template>
+
+      </NavigationCard>
+    </div>
+
+    <b-collapse id="collapse-1" class="project-navigation">
+      <ProjectNavigation />
+    </b-collapse>
 
   </div>
 </template>
 
 <script>
-  import {mapMutations, mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex'
 
   import NavigationCard from './NavigationCard'
+  import CommonNavigation from './CommonNavigation'
+  import ProjectNavigation from './ProjectNavigation'
 
   export default {
     name: 'Navigation',
     components: {
-      NavigationCard
+      NavigationCard,
+      CommonNavigation,
+      ProjectNavigation
     },
     computed: {
       ...mapGetters('editor', [
-        'all',
-        'starred',
-        'deleted',
         'projects'
-      ])
-    },
-    methods: {
-      ...mapMutations('editor', [
-        'setSelectionMode',
-        'setSelectedProject'
       ])
     }
   }
@@ -61,13 +52,12 @@
 
 <style lang="scss" scoped>
 .navigation {
-  display: flex;
-  flex-direction: column;
+  background-color: #2D3134;
   color: #73777A;
   padding: 20px;
 
-  .project-title {
-    margin: 15px 0;
+  .project-navigation {
+    margin-left: 0px;
   }
 }
 </style>

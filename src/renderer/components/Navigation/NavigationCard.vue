@@ -1,37 +1,25 @@
 <template>
   <div
     class="navigation-card"
-    :class="{active: selectionMode === mode || selectedProject === mode}"
-    @click="$emit('click', mode)"
+    :class="{active: selectedName === name}"
+    @click="$emit('click', name)"
   >
-    <div class="navigation-card-icon">
-      <font-awesome-icon :icon="icon" />
+    <div class="card-icon">
+      <slot name="icon" />
     </div>
-    <div class="navigation-card-title">
-      {{title}}
+    <div class="card-title">
+      <slot name="title" />
     </div>
-    <div class="navigation-card-counter">
-      {{count}}
+    <div class="card-info">
+      <slot name="info" />
     </div>
   </div>
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex'
-
   export default {
-    props: ['mode', 'icon', 'title', 'count'],
-    computed: {
-      ...mapState('editor', {
-        selectionMode: state => state.ui.selectionMode,
-        selectedProject: state => state.ui.selectedProject
-      })
-    },
-    methods: {
-      ...mapMutations('editor', [
-        'setSelectionMode'
-      ])
-    }
+    name: 'NavigationCard',
+    props: ['name', 'selected-name']
   }
 </script>
 
@@ -40,9 +28,9 @@ $active-color: rgb(200, 200, 200);
 
 .navigation-card {
   display: flex;
-  cursor: pointer;
   font-size: 1.1rem;
-  margin: 10px 0;
+  margin-bottom: 20px;
+  cursor: pointer;
 
   :hover {
     color: $active-color;
@@ -53,19 +41,18 @@ $active-color: rgb(200, 200, 200);
     align-items: center;
   }
 
-  .navigation-card-icon {
+  .card-icon {
+    font-size: 1rem;
+  }
+
+  .card-icon, .card-info {
     width: 35px;
     justify-content: center;
   }
 
-  .navigation-card-title {
+  .card-title {
     width: 100%;
     margin: 0 10px;
-  }
-
-  .navigation-card-counter {
-    width: 35px;
-    justify-content: center;
   }
 }
 .active {

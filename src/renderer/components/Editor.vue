@@ -44,7 +44,6 @@
       min-width: 300px;
       display: flex;
       flex: 1;
-      background-color: #2D3134;
     }
 
     .notes {
