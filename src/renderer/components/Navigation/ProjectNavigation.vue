@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavigationCard v-for="project in projects"
+    <NavigationCard v-for="project in projects.sort()"
       @click="setSelectedProject(project)"
       :key="project"
       :name="project"

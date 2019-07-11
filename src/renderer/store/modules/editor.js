@@ -44,7 +44,6 @@ const actions = {
     const content = await Promise.all(contentActions)
     content.forEach((noteBuffer) => {
       const note = noteApi.deserialize(noteBuffer)
-      note.title = note.text.substring(0, 20)
       commit('addNote', note)
     })
   }

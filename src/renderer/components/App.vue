@@ -6,11 +6,11 @@
     <div class="notes">
       <NoteList />
     </div>
-    <div class="markdown">
-      <Markdown />
+    <div class="editor">
+      <Editor />
     </div>
     <div class="markup">
-      <Markup />
+      <Markdown />
     </div>
   </div>
 </template>
@@ -18,16 +18,16 @@
 <script>
   import Navigation from './Navigation/Navigation'
   import NoteList from './Notes/NoteList'
+  import Editor from './Editor/Editor'
   import Markdown from './Markdown/Markdown'
-  import Markup from './Markup/Markup'
 
   export default {
-    name: 'landing-page',
+    name: 'App',
     components: {
       Navigation,
       NoteList,
-      Markdown,
-      Markup
+      Editor,
+      Markdown
     },
     created () {
       this.$store.dispatch('editor/reloadNotes')
@@ -44,15 +44,17 @@
       min-width: 300px;
       display: flex;
       flex: 1;
+      overflow-y: auto;
     }
 
     .notes {
       min-width: 300px;
       display: flex;
       flex: 1;
+      overflow-y: auto;
     }
 
-    .markdown {
+    .editor {
       display: flex;
       flex: 2;
     }

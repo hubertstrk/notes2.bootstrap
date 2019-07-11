@@ -5,7 +5,7 @@
 
 <script>
   export default {
-    name: 'Markdup'
+    name: 'Editor'
   }
 </script>
 
