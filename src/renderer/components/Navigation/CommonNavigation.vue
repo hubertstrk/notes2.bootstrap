@@ -33,12 +33,7 @@
       NavigationCard
     },
     computed: {
-      ...mapGetters('editor', [
-        'all',
-        'starred',
-        'deleted',
-        'projects'
-      ]),
+      ...mapGetters('editor', ['all', 'starred', 'deleted', 'projects']),
       ...mapState('editor', {
         selectionMode: state => state.ui.selectionMode
       }),
