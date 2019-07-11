@@ -35,10 +35,7 @@
       NavigationCard
     },
     computed: {
-      ...mapGetters('editor', [
-        'all',
-        'projects'
-      ]),
+      ...mapGetters('editor', ['all', 'projects']),
       ...mapState('editor', {
         selectedProject: state => state.ui.selectedProject
       })

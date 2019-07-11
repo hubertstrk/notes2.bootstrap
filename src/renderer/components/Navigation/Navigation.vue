@@ -21,7 +21,7 @@
       </NavigationCard>
     </div>
 
-    <b-collapse id="collapse-1" class="project-navigation">
+    <b-collapse id="collapse-1" class="collapse-container">
       <ProjectNavigation />
     </b-collapse>
 
@@ -55,9 +55,5 @@
   background-color: #2D3134;
   color: #73777A;
   padding: 20px;
-
-  .project-navigation {
-    margin-left: 0px;
-  }
 }
 </style>

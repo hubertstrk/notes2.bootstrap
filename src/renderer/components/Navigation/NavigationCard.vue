@@ -32,10 +32,6 @@ $active-color: rgb(200, 200, 200);
   margin-bottom: 20px;
   cursor: pointer;
 
-  :hover {
-    color: $active-color;
-  }
-
   > div {
     display: flex;
     align-items: center;
@@ -55,7 +51,9 @@ $active-color: rgb(200, 200, 200);
     margin: 0 10px;
   }
 }
+
 .active {
   color: $active-color;
 }
+
 </style>
