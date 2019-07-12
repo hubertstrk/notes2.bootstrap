@@ -6,7 +6,7 @@ let headings = []
 
 renderer.heading = function (text, level) {
   const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-')
-  headings.push({text, level})
+  headings.push({title: text, level})
   return `
     <h${level} id="${escapedText}">
       ${text}
@@ -25,8 +25,12 @@ marked.setOptions({
   xhtml: false
 })
 
-export const parseHeadings = (markdown) => {
+export const getHeadings = (markdown) => {
   headings = []
-  marked(markdown, { sanitize: true })
+  marked(markdown, {})
   return headings
+}
+
+export const getHtml = (markdown) => {
+  return marked(markdown, {})
 }

@@ -28,9 +28,9 @@ const createFile = (path, name, text) => {
  */
 const readFile = (directory, name) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path.join(directory, name), 'utf8', (error, text) => {
+    fs.readFile(path.join(directory, name), 'utf8', (error, buffer) => {
       if (error) reject(error)
-      resolve(text)
+      resolve({buffer, directory, name})
     })
   })
 }

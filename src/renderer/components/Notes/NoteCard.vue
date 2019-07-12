@@ -1,5 +1,5 @@
 <template>
-  <div class="note-card">
+  <div class="note-card" @click="setActiveNoteId(id)">
     <div class="card-row-upper">
       <div class="card-title">{{title}}</div>
       <div class="card-icon">
@@ -15,9 +15,25 @@
 </template>
 
 <script>
+  import {mapGetters, mapMutations} from 'vuex'
+
   export default {
     name: 'NoteCard',
-    props: ['title']
+    props: ['id'],
+    computed: {
+      ...mapGetters('editor', [
+        'visibleNotesTitles'
+      ]),
+      title () {
+        const titles = this.visibleNotesTitles[this.id]
+        return titles[0].title || ''
+      }
+    },
+    methods: {
+      ...mapMutations('editor', [
+        'setActiveNoteId'
+      ])
+    }
   }
 </script>
 

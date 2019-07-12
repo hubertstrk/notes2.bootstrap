@@ -1,7 +1,7 @@
 <template>
   <div class="note-list">
-    <template v-for="(heading, i) in headings" >
-      <NoteCard :title="heading" :key="i" />
+    <template v-for="note in visibleNotes" >
+      <NoteCard :id="note.id" :key="note.id" />
     </template>
   </div>
 </template>
@@ -9,8 +9,6 @@
 <script>
   import {mapGetters} from 'vuex'
   import NoteCard from './NoteCard'
-
-  import {parseHeadings} from '../../helper/notes'
 
   export default {
     name: 'NoteList',
@@ -20,19 +18,13 @@
     computed: {
       ...mapGetters('editor', [
         'visibleNotes'
-      ]),
-      headings () {
-        return this.visibleNotes
-          .map(note => parseHeadings(note.text))
-          .map(headings => headings[0].text || '')
-      }
+      ])
     }
   }
 </script>
 
 <style lang="scss" scoped>
 .note-list {
-  background-color: #73777A;
   flex: 1;
 }
 </style>

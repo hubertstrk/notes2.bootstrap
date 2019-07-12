@@ -4,12 +4,13 @@ import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
 import noteApi from '@/api/note'
 
+import {getHeadings} from '../../helper/notes'
+
 const state = {
   notes: [],
-  active: null,
+  activeNoteId: null,
   settings: {
-    directories: ['C:\\Temp\\Work', 'C:\\Temp\\Private'],
-    active: null
+    directories: ['C:\\Temp\\Work', 'C:\\Temp\\Private']
   },
   ui: {
     selectionMode: 'all', // all, starred, deleted
@@ -28,6 +29,9 @@ const mutations = {
   setSelectedProject (state, project) {
     state.ui.selectionMode = null
     state.ui.selectedProject = project
+  },
+  setActiveNoteId (state, id) {
+    state.activeNoteId = id
   }
 }
 
@@ -38,12 +42,13 @@ const actions = {
     })
     const paths = await Promise.all(fileActions)
 
-    const contentActions = await flatten(paths).map((path) => {
-      return fileApi.readFile(path.directory, path.name)
-    })
-    const content = await Promise.all(contentActions)
-    content.forEach((noteBuffer) => {
-      const note = noteApi.deserialize(noteBuffer)
+    const readActions = flatten(paths).map(path => fileApi.readFile(path.directory, path.name))
+
+    const contents = await Promise.all(readActions)
+
+    contents.forEach(({buffer, name}) => {
+      const note = noteApi.deserialize(buffer)
+      note.id = name
       commit('addNote', note)
     })
   }
@@ -78,6 +83,14 @@ const getters = {
   },
   notesByProject (state, getters) {
     return getters.all.filter(x => x.project === state.ui.selectedProject)
+  },
+  visibleNotesTitles (state, getters) {
+    return getters.visibleNotes.reduce((lookup, note) => {
+      const headings = getHeadings(note.text)
+      lookup[note.id] = {}
+      lookup[note.id] = headings
+      return lookup
+    }, {})
   }
 }
 
