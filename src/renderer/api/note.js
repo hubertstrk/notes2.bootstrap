@@ -35,7 +35,7 @@ const deserialize = (result) => {
   length = buffer.readUInt16BE(index)
   index += 16
 
-  const text = buffer.toString('utf-8', index, index + length)
+  const text = buffer.toString('utf-8', index, index + length).replace(/\0/g, '')
   index += length
 
   return {starred, project, text}

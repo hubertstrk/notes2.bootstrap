@@ -4,13 +4,13 @@
     :class="{active: selectedName === name}"
     @click="$emit('click', name)"
   >
-    <div class="card-icon">
+    <div class="navigation-card-icon">
       <slot name="icon" />
     </div>
-    <div class="card-title">
+    <div class="navigation-card-title">
       <slot name="title" />
     </div>
-    <div class="card-info">
+    <div class="navigation-card-info">
       <slot name="info" />
     </div>
   </div>
@@ -37,16 +37,16 @@ $active-color: rgb(200, 200, 200);
     align-items: center;
   }
 
-  .card-icon {
+  .navigation-card-icon {
     font-size: 1rem;
   }
 
-  .card-icon, .card-info {
+  .navigation-card-icon, .navigation-card-info {
     width: 35px;
     justify-content: center;
   }
 
-  .card-title {
+  .navigation-card-title {
     width: 100%;
     margin: 0 10px;
   }

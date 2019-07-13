@@ -26,5 +26,9 @@
 <style lang="scss" scoped>
 .note-list {
   flex: 1;
+
+  > div {
+    border-bottom: 1px solid rgb(216, 216, 216);
+  }
 }
 </style>
