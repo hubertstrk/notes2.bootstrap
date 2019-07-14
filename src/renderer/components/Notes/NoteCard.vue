@@ -34,6 +34,7 @@
 
   display: flex;
   padding: 10px;
+  cursor: pointer;
 
   .note-card-title {
     font-size: 1.3rem;
