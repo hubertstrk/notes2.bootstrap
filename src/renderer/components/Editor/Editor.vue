@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  import {debounce} from 'lodash'
   import {mapState, mapGetters} from 'vuex'
 
   import AceEditor from 'vue2-ace-editor'
@@ -38,8 +39,12 @@
     },
     methods: {
       onChanged (text) {
-        console.info(text)
+        if (!text) return
+        this.updateNote({id: this.activeNoteId, text})
       },
+      updateNote: debounce(function (note) {
+        this.$store.dispatch('editor/updateNote', note)
+      }, 100),
       editorInit: function (editor) {
         this.editor = editor
         require('brace/ext/language_tools')

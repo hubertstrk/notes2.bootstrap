@@ -1,10 +1,8 @@
-import {flatten} from 'lodash'
+import {flatten, isEqual} from 'lodash'
 
 import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
 import noteApi from '@/api/note'
-
-import {getHeadings} from '../../helper/notes'
 
 const state = {
   notes: [],
@@ -32,6 +30,10 @@ const mutations = {
   },
   setActiveNoteId (state, id) {
     state.activeNoteId = id
+  },
+  updateNote (state, note) {
+    const index = state.notes.findIndex(x => x.id === note.id)
+    state.notes[index] = note
   }
 }
 
@@ -46,11 +48,20 @@ const actions = {
 
     const contents = await Promise.all(readActions)
 
-    contents.forEach(({buffer, name}) => {
+    contents.forEach(({buffer, directory, name}) => {
       const note = noteApi.deserialize(buffer)
+      note.directory = directory
       note.id = name
       commit('addNote', note)
     })
+  },
+  updateNote ({commit, getters}, note) {
+    const index = getters.all.findIndex(x => x.id === note.id)
+    const copy = Object.assign({}, getters.all[index], note)
+
+    if (!isEqual(getters.all[index], copy)) {
+      commit('updateNote', copy)
+    }
   }
 }
 
@@ -83,14 +94,6 @@ const getters = {
   },
   notesByProject (state, getters) {
     return getters.all.filter(x => x.project === state.ui.selectedProject)
-  },
-  visibleNotesTitles (state, getters) {
-    return getters.visibleNotes.reduce((lookup, note) => {
-      const headings = getHeadings(note.text)
-      lookup[note.id] = {}
-      lookup[note.id] = headings
-      return lookup
-    }, {})
   }
 }
 

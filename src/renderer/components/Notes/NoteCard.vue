@@ -1,5 +1,5 @@
 <template>
-  <div class="note-card" @click="setActiveNoteId(id)">
+  <div class="note-card" @click="setActiveNoteId(id)" :class="{'active-note': id === activeNoteId}">
     <div class="note-card-title">
       {{title}}
     </div>
@@ -7,18 +7,25 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {getHeadings} from '../../helper/notes'
+  import {mapState, mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: 'NoteCard',
     props: ['id'],
     computed: {
+      ...mapState('editor', {
+        activeNoteId: state => state.activeNoteId
+      }),
       ...mapGetters('editor', [
-        'visibleNotesTitles'
+        'visibleNotes'
       ]),
+      text () {
+        return this.visibleNotes.find(x => x.id === this.id).text
+      },
       title () {
-        const titles = this.visibleNotesTitles[this.id]
-        return titles[0].title || ''
+        const headings = getHeadings(this.text)
+        return headings && headings[0] ? headings[0].title : 'no title'
       }
     },
     methods: {
@@ -40,4 +47,17 @@
     font-size: 1.3rem;
   }
 }
+
+.active-note {
+  background-color: rgb(240,240,240);
+}
 </style>
+
+// visibleNotesTitles (state, getters) {
+//   return getters.visibleNotes.reduce((lookup, note) => {
+//     const headings = getHeadings(note.text)
+//     lookup[note.id] = {}
+//     lookup[note.id] = headings
+//     return lookup
+//   }, {})
+// }
