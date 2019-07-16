@@ -7,7 +7,8 @@ import {
   faStickyNote,
   faTrash,
   faFolder,
-  faChevronRight
+  faChevronRight,
+  faBookmark
 } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -17,7 +18,8 @@ library.add(
   faStickyNote,
   faTrash,
   faFolder,
-  faChevronRight
+  faChevronRight,
+  faBookmark
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

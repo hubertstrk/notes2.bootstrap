@@ -1,5 +1,5 @@
 <template>
-  <MarkdownViewer :text="text" />
+  <MarkdownViewer :text="text" class="markdown-component" />
 </template>
 
 <script>
@@ -16,4 +16,6 @@
 </script>
 
 <style lang="scss" scoped>
+.markdown-component {
+}
 </style>

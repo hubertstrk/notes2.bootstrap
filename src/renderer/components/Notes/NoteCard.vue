@@ -34,7 +34,6 @@
 
 <style lang="scss" scoped>
 .note-card {
-  display: flex;
   padding: 10px;
   cursor: pointer;
 

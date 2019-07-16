@@ -13,6 +13,7 @@
 .menu-component {
   display: flex;
   align-items: center;
+  // height: 60px;
 
   .menu-content {
     display: flex;

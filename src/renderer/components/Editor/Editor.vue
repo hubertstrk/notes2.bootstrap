@@ -1,9 +1,9 @@
 <template>
   <div v-if="activeNoteId" class="editor-component">
-    <Menu class="editor-menu">
-      <slot>
-        <h1>Menu</h1>
-      </slot>
+    <Menu>
+      <div class="editor-menu">
+        <font-awesome-icon icon="star" size="lg" />
+      </div>
     </Menu>
     <AceEditor
       class="editor"
@@ -68,16 +68,8 @@
   flex-direction: column;
   flex: 1;
 
-  .editor-menu {
-
-    display: flex;
-    height: 60px;
-
-  }
-
   .editor {
 
-    padding: 10px;
     display: flex;
     flex: 1;
 
