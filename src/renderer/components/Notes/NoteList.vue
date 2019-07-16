@@ -1,13 +1,13 @@
 <template>
   <div class="note-list">
     <template v-for="note in visibleNotes" >
-      <NoteCard :id="note.id" :key="note.id" />
+      <NoteCard :note="note" :key="note.id" @click="setActiveNoteId" />
     </template>
   </div>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapMutations, mapGetters} from 'vuex'
   import NoteCard from './NoteCard'
 
   export default {
@@ -18,6 +18,11 @@
     computed: {
       ...mapGetters('editor', [
         'visibleNotes'
+      ])
+    },
+    methods: {
+      ...mapMutations('editor', [
+        'setActiveNoteId'
       ])
     }
   }

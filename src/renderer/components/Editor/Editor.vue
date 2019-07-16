@@ -1,24 +1,33 @@
 <template>
-  <AceEditor
-    class="editor"
-    :value="text"
-    @input="onChanged"
-    @init="editorInit"
-    lang="markdown"
-    theme="github">
-  </AceEditor>
+  <div v-if="activeNoteId" class="editor-component">
+    <Menu class="editor-menu">
+      <slot>
+        <h1>Menu</h1>
+      </slot>
+    </Menu>
+    <AceEditor
+      class="editor"
+      :value="text"
+      @input="onChanged"
+      @init="editorInit"
+      lang="markdown"
+      theme="github">
+    </AceEditor>
+  </div>
 </template>
 
 <script>
   import {debounce} from 'lodash'
-
   import {NoteMixin} from '../../mixins/NoteMixin'
+
+  import Menu from '../Shared/Menu'
   import AceEditor from 'vue2-ace-editor'
 
   export default {
     name: 'Editor',
     mixins: [NoteMixin],
     components: {
+      Menu,
       AceEditor
     },
     data () {
@@ -53,11 +62,26 @@
 </script>
 
 <style lang="scss" scoped>
-.editor {
+.editor-component {
 
-  padding: 10px;
   display: flex;
+  flex-direction: column;
   flex: 1;
 
+  .editor-menu {
+
+    display: flex;
+    height: 60px;
+
+  }
+
+  .editor {
+
+    padding: 10px;
+    display: flex;
+    flex: 1;
+
+  }
 }
+
 </style>
