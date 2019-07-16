@@ -52,12 +52,3 @@
   background-color: rgb(240,240,240);
 }
 </style>
-
-// visibleNotesTitles (state, getters) {
-//   return getters.visibleNotes.reduce((lookup, note) => {
-//     const headings = getHeadings(note.text)
-//     lookup[note.id] = {}
-//     lookup[note.id] = headings
-//     return lookup
-//   }, {})
-// }

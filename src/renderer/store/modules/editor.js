@@ -66,7 +66,7 @@ const actions = {
 
 const getters = {
   projects (state) {
-    return [...new Set(state.notes.map(x => x.project))]
+    return [...new Set(Object.values(state.notes).map(x => x.project))]
   },
   visibleNotes (state, getters) {
     if (state.ui.selectedProject) {
@@ -91,8 +91,8 @@ const getters = {
   deleted (state) {
     return Object.values(state.notes).filter(x => x.deleted)
   },
-  notesByProject (state, getters) {
-    return Object.values(getters.all).filter(x => x.project === state.ui.selectedProject)
+  notesByProject (state) {
+    return Object.values(state.notes).filter(x => x.project === state.ui.selectedProject)
   }
 }
 
