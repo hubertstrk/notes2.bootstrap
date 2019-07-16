@@ -1,33 +1,19 @@
 <template>
-  <MarkdownViewer :text="activeText" />
+  <MarkdownViewer :text="text" />
 </template>
 
 <script>
   import MarkdownViewer from './MarkdownViewer'
-  import {mapState, mapGetters} from 'vuex'
+  import {NoteMixin} from '../../mixins/NoteMixin'
 
   export default {
     name: 'Markdown',
+    mixins: [NoteMixin],
     components: {
       MarkdownViewer
-    },
-    computed: {
-      ...mapState('editor', {
-        activeNoteId: state => state.activeNoteId
-      }),
-      ...mapGetters('editor', [
-        'all'
-      ]),
-      activeNote () {
-        return this.all.find(x => x.id === this.activeNoteId)
-      },
-      activeText () {
-        return this.activeNote ? this.activeNote.text : ''
-      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

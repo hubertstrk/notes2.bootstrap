@@ -11,30 +11,19 @@
 
 <script>
   import {debounce} from 'lodash'
-  import {mapState, mapGetters} from 'vuex'
 
+  import {NoteMixin} from '../../mixins/NoteMixin'
   import AceEditor from 'vue2-ace-editor'
 
   export default {
     name: 'Editor',
+    mixins: [NoteMixin],
     components: {
       AceEditor
     },
     data () {
       return {
         editor: null
-      }
-    },
-    computed: {
-      ...mapGetters('editor', [
-        'all'
-      ]),
-      ...mapState('editor', {
-        activeNoteId: state => state.activeNoteId
-      }),
-      text () {
-        if (!this.activeNoteId) return ''
-        return this.all.find(x => x.id === this.activeNoteId).text
       }
     },
     methods: {
@@ -44,7 +33,7 @@
       },
       updateNote: debounce(function (note) {
         this.$store.dispatch('editor/updateNote', note)
-      }, 100),
+      }, 10),
       editorInit: function (editor) {
         this.editor = editor
         require('brace/ext/language_tools')

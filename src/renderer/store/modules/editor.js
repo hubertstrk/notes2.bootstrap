@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {flatten, isEqual} from 'lodash'
 
 import directoryApi from '@/api/directory'
@@ -18,7 +19,7 @@ const state = {
 
 const mutations = {
   addNote (state, note) {
-    state.notes.push(note)
+    Vue.set(state.notes, note.id, note)
   },
   setSelectionMode (state, mode) {
     state.ui.selectedProject = null
@@ -32,8 +33,7 @@ const mutations = {
     state.activeNoteId = id
   },
   updateNote (state, note) {
-    const index = state.notes.findIndex(x => x.id === note.id)
-    state.notes[index] = note
+    Vue.set(state.notes, note.id, note)
   }
 }
 
@@ -55,11 +55,10 @@ const actions = {
       commit('addNote', note)
     })
   },
-  updateNote ({commit, getters}, note) {
-    const index = getters.all.findIndex(x => x.id === note.id)
-    const copy = Object.assign({}, getters.all[index], note)
+  updateNote ({state, commit}, note) {
+    const copy = Object.assign({}, state.notes[note.id], note)
 
-    if (!isEqual(getters.all[index], copy)) {
+    if (!isEqual(state.notes[note.id], copy)) {
       commit('updateNote', copy)
     }
   }
@@ -84,16 +83,16 @@ const getters = {
     }
   },
   all (state) {
-    return state.notes
+    return Object.values(state.notes)
   },
   starred (state) {
-    return state.notes.filter(x => x.starred)
+    return Object.values(state.notes).filter(x => x.starred)
   },
   deleted (state) {
-    return state.notes.filter(x => x.deleted)
+    return Object.values(state.notes).filter(x => x.deleted)
   },
   notesByProject (state, getters) {
-    return getters.all.filter(x => x.project === state.ui.selectedProject)
+    return Object.values(getters.all).filter(x => x.project === state.ui.selectedProject)
   }
 }
 
