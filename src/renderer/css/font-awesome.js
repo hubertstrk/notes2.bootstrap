@@ -8,8 +8,22 @@ import {
   faTrash,
   faFolder,
   faChevronRight,
-  faBookmark
+  faBookmark,
+  faPlus,
+  faSearchPlus,
+  faSearchMinus,
+  faItalic,
+  faBold,
+  faTable,
+  faLink,
+  faCode,
+  faPrint,
+  faCog
 } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faBookmark as farBookmark
+} from '@fortawesome/free-regular-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -19,7 +33,18 @@ library.add(
   faTrash,
   faFolder,
   faChevronRight,
-  faBookmark
+  faBookmark,
+  faPlus,
+  faSearchPlus,
+  faSearchMinus,
+  faItalic,
+  faBold,
+  faTable,
+  faLink,
+  faCode,
+  faPrint,
+  faCog,
+  farBookmark
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

@@ -5,6 +5,8 @@ import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
 import noteApi from '@/api/note'
 
+const uuidv4 = require('uuid/v4')
+
 const state = {
   notes: [],
   activeNoteId: null,
@@ -34,6 +36,9 @@ const mutations = {
   },
   updateNote (state, note) {
     Vue.set(state.notes, note.id, note)
+  },
+  deleteNote (state, id) {
+    Vue.delete(state.notes, id)
   }
 }
 
@@ -55,12 +60,37 @@ const actions = {
       commit('addNote', note)
     })
   },
+  addNote ({state, commit}) {
+    const selectedProject = state.ui.selectedProject
+
+    const note = {
+      id: uuidv4(),
+      text: '# Title',
+      starred: false,
+      project: selectedProject,
+      directory: Object.values(state.notes).filter(x => x.project === selectedProject)[0].directory
+    }
+
+    commit('addNote', note)
+    commit('setActiveNoteId', note.id)
+
+    const buffer = noteApi.serialize(note)
+    return fileApi.writeBinary(note.directory, note.id, buffer)
+  },
   updateNote ({state, commit}, note) {
     const copy = Object.assign({}, state.notes[note.id], note)
 
     if (!isEqual(state.notes[note.id], copy)) {
       commit('updateNote', copy)
     }
+  },
+  deleteNote ({state, commit}) {
+    const activeNote = state.notes[state.activeNoteId]
+    return fileApi.deleteFile(activeNote.directory, activeNote.id)
+      .then(() => {
+        commit('deleteNote', activeNote.id)
+        commit('setActiveNoteId', null)
+      })
   }
 }
 

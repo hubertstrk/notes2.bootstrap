@@ -46,6 +46,8 @@ app.on('activate', () => {
   }
 })
 
+app.setAppUserModelId(process.execPath)
+
 /**
  * Auto Updater
  *
