@@ -1,15 +1,13 @@
 <template>
   <div v-if="activeNoteId" class="markdown-component">
-    <Menu>
-      <div class="markup-menu">
-        <div>
-          <b-button variant="primary"><font-awesome-icon icon="print" /> Print</b-button>
-        </div>
-        <div>
-          <b-button variant="dark"><font-awesome-icon icon="cog" /> Settings</b-button>
-        </div>
+    <div class="markup-menu">
+      <div>
+        <app-button light icon="print" text="Print" />
       </div>
-    </Menu>
+      <div>
+        <app-button light icon="cog" text="Settings" />
+      </div>
+    </div>
     <MarkdownViewer :text="text" />
   </div>
 </template>
@@ -17,14 +15,14 @@
 <script>
   import {NoteMixin} from '../../mixins/NoteMixin'
 
-  import Menu from '../Shared/Menu'
+  import AppButton from '../Shared/AppButton'
   import MarkdownViewer from './MarkdownViewer'
 
   export default {
     name: 'Markdown',
     mixins: [NoteMixin],
     components: {
-      Menu,
+      AppButton,
       MarkdownViewer
     }
   }
@@ -38,7 +36,6 @@
 
   .markup-menu {
     display: flex;
-    flex: 1;
     padding: 10px;
     justify-content: space-between;
 

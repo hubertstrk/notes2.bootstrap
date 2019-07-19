@@ -1,16 +1,12 @@
 <template>
   <div class="note-list-component">
-    <Menu>
-      <div class="note-list-menu">
-        <label class="sr-only" for="inline-form-input-search">Search</label>
-        <b-input-group>
-          <b-input id="inline-form-input-search" v-model="search" placeholder="Search"></b-input>
-        </b-input-group>
-        <b-button v-if="selectedProject" variant="primary" @click="onAddNote">
-          <font-awesome-icon icon="plus" /> Add
-        </b-button>
-      </div>
-    </Menu>
+    <div class="note-list-menu">
+      <label class="sr-only" for="inline-form-input-search">Search</label>
+      <b-input-group>
+        <b-input id="inline-form-input-search" v-model="search" placeholder="Search"></b-input>
+      </b-input-group>
+      <app-button icon="plus" @click="onAddNote" text=" Add" success />
+    </div>
     <div class="note-list">
       <template v-for="note in visibleNotes">
         <NoteCard :note="note" :key="note.id" @click="setActiveNoteId" />
@@ -22,7 +18,9 @@
 <script>
   import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
 
-  import Menu from '../Shared/Menu'
+  import {notify} from '../../helper/AppNotifications'
+
+  import AppButton from '../Shared/AppButton'
   import NoteCard from './NoteCard'
 
   export default {
@@ -33,7 +31,7 @@
       }
     },
     components: {
-      Menu,
+      AppButton,
       NoteCard
     },
     computed: {
@@ -51,15 +49,9 @@
       ...mapActions('editor', [
         'addNote'
       ]),
-      onAddNote () {
-        // https://electronjs.org/docs/tutorial/notifications
-
-        this.addNote().then(() => {
-          let notification = new Notification('Note', {
-            body: 'Your note has been successfully created.'
-          })
-          notification.onclick = () => {}
-        })
+      async onAddNote () {
+        await this.addNote()
+        notify('Note successfully stored')
       }
     }
   }
@@ -74,7 +66,6 @@
 
   .note-list-menu {
     display: flex;
-    flex: 1;
     padding: 10px;
 
     > * {

@@ -20,15 +20,15 @@ const flush = () => {
 
   try {
     running = true
-    console.info(`queue contains ${queue.length} elements`)
+    // console.info(`queue contains ${queue.length} elements`)
     while (queue.length > 0) {
       const note = queue.shift()
       const buffer = noteApi.serialize(note)
       fileApi.writeBinary(note.directory, note.id, buffer)
-      console.info(`note with id ${note.id} stored`)
+      // console.info(`note with id ${note.id} stored`)
     }
   } finally {
-    console.info('queue flush finished')
+    // console.info('queue flush finished')
     running = false
   }
 }

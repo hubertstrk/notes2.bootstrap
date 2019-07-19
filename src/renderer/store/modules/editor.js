@@ -11,7 +11,8 @@ const state = {
   notes: [],
   activeNoteId: null,
   settings: {
-    directories: ['C:\\Temp\\Work', 'C:\\Temp\\Private']
+    directories: ['C:\\Temp\\Work', 'C:\\Temp\\Private'],
+    fontSize: 20
   },
   ui: {
     selectionMode: 'all', // all, starred, deleted
@@ -39,6 +40,9 @@ const mutations = {
   },
   deleteNote (state, id) {
     Vue.delete(state.notes, id)
+  },
+  updateSettings (state, settings) {
+    state.settings = settings
   }
 }
 
@@ -91,6 +95,10 @@ const actions = {
         commit('deleteNote', activeNote.id)
         commit('setActiveNoteId', null)
       })
+  },
+  updateSettings ({state, commit}, settings) {
+    const copy = Object.assign({}, state.settings, settings)
+    commit('updateSettings', copy)
   }
 }
 

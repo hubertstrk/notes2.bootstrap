@@ -8,6 +8,11 @@
   export default {
     name: 'MarkdownViewer',
     props: ['text'],
+    data () {
+      return {
+        iFrame: null
+      }
+    },
     methods: {
       createIFrame () {
         const iFrame = document.createElement('iframe')
@@ -18,11 +23,11 @@
         iFrame.setAttribute('border', 0)
         iFrame.setAttribute('height', '100%')
         iFrame.setAttribute('width', '100%')
-        return iFrame
+        this.iFrame = iFrame
       },
-      mountedIFrame (iFrame) {
+      mountIFrame () {
         const el = document.querySelector('#iframe-container')
-        el.appendChild(iFrame, el)
+        el.appendChild(this.iFrame, el)
       },
       addMarkup (html) {
         const container = document.createElement('div')
@@ -37,13 +42,17 @@
     },
     watch: {
       text () {
+        if (!this.iFrame) {
+          this.createIFrame()
+          this.mountIFrame()
+        }
         const html = getHtml(this.text)
         this.addMarkup(html)
       }
     },
     mounted () {
-      const iFrame = this.createIFrame()
-      this.mountedIFrame(iFrame)
+      this.createIFrame()
+      this.mountIFrame()
     }
   }
 </script>
