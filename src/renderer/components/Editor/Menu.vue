@@ -1,7 +1,7 @@
 <template>
   <div class="editor-menu-component">
     <div>
-      <b-button :pressed.sync="checked" variant="light">
+      <b-button :value="starred" @update="updateNote({id: activeNoteId, starred: $event.target.value})" variant="light">
         <font-awesome-icon icon="bookmark" />
       </b-button>
       <app-devider xlarge />
@@ -19,7 +19,7 @@
       </b-button-group>
     </div>
     <div>
-      <app-button icon="trash" @click="onDeleteNote" text="Delete" danger />
+      <app-button icon="trash" @click="$emit('delete')" text="Delete" danger />
     </div>
   </div>
 </template>
@@ -36,12 +36,6 @@
     components: {
       AppDevider,
       AppButton
-    },
-    data () {
-      return {
-        checked: false,
-        fontSize: 12
-      }
     },
     mixins: [
       NoteMixin

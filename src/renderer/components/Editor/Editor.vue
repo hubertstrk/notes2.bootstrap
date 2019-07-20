@@ -1,63 +1,28 @@
 <template>
   <div class="editor-component">
-    <EditorMenu class="editor-menu" />
-    <AceEditor class="editor" :value="text" @input="onChanged" @init="intialize" lang="markdown" theme="github" />
+    <Menu class="editor-menu" />
+    <Ace class="editor-ace" v-model="text" :options="{fontSize}" />
   </div>
 </template>
 
 <script>
   import {mapState} from 'vuex'
-  import {debounce} from 'lodash'
   import {NoteMixin} from '../../mixins/NoteMixin'
 
-  import EditorMenu from './EditorMenu'
-  import AceEditor from 'vue2-ace-editor'
+  import Menu from './Menu'
+  import Ace from './Ace'
 
   export default {
     name: 'Editor',
     mixins: [NoteMixin],
     components: {
-      EditorMenu,
-      AceEditor
-    },
-    data () {
-      return {
-        editor: null
-      }
+      Menu,
+      Ace
     },
     computed: {
       ...mapState('editor', {
         fontSize: state => state.settings.fontSize
       })
-    },
-    methods: {
-      onChanged (text) {
-        if (!text) return
-        this.updateNote({id: this.activeNoteId, text})
-      },
-      updateNote: debounce(function (note) {
-        this.$store.dispatch('editor/updateNote', note)
-      }, 10),
-      intialize: function (editor) {
-        this.editor = editor
-        require('brace/ext/language_tools')
-
-        require('brace/mode/markdown')
-        require('brace/snippets/markdown')
-        require('brace/theme/github')
-
-        this.editor.setFontSize(this.fontSize)
-        this.editor.setShowFoldWidgets(false)
-        this.editor.setShowPrintMargin(false)
-        this.editor.setHighlightGutterLine(false)
-        this.editor.renderer.setShowGutter(false)
-      }
-    },
-    watch: {
-      fontSize (value) {
-        this.editor.setFontSize(value)
-        this.editor.resize()
-      }
     }
   }
 </script>
@@ -69,7 +34,11 @@
   flex-direction: column;
   flex: 1;
 
-  .editor {
+  .editor-menu {
+    display: flex;
+  }
+
+  .editor-ace {
 
     display: flex;
     flex: 1;
