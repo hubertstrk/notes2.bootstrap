@@ -1,50 +1,40 @@
 <template>
   <div class="editor-menu-component">
     <div>
-      <b-button :value="starred" @update="updateNote({id: activeNoteId, starred: $event.target.value})" variant="light">
+      <b-button :value="starred" @update="updateNote({id: activeNoteId, starred: $event})" variant="light">
         <font-awesome-icon icon="bookmark" />
       </b-button>
-      <app-devider xlarge />
-      <b-button-group>
-        <app-button light icon="search-plus" @click="zoomIn" />
-        <app-button light icon="search-minus" @click="zoomOut" />
-      </b-button-group>
-      <app-devider xlarge />
-      <b-button-group>
-        <app-button light icon="italic" />
-        <app-button light icon="bold" />
-        <app-button light icon="link" />
-        <app-button light icon="code" />
-        <app-button light icon="table" />
-      </b-button-group>
+      <AppDevider xlarge />
+      <ControlCommands />
+      <AppDevider xlarge />
+      <InsertCommands />
     </div>
     <div>
-      <app-button icon="trash" @click="$emit('delete')" text="Delete" danger />
+      <NoteCommands />
     </div>
   </div>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import {mapActions} from 'vuex'
   import {NoteMixin} from '../../mixins/NoteMixin'
   import {notify} from '../../helper/AppNotifications'
 
-  import AppButton from '../Shared/AppButton'
   import AppDevider from '../Shared/AppDevider'
+  import InsertCommands from './Commands/InsertCommands'
+  import ControlCommands from './Commands/ControlCommands'
+  import NoteCommands from './Commands/NoteCommands'
 
   export default {
     components: {
       AppDevider,
-      AppButton
+      InsertCommands,
+      ControlCommands,
+      NoteCommands
     },
     mixins: [
       NoteMixin
     ],
-    computed: {
-      ...mapState('editor', {
-        settings: state => state.settings
-      })
-    },
     methods: {
       ...mapActions('editor', [
         'deleteNote',
@@ -54,12 +44,6 @@
       async onDeleteNote () {
         await this.deleteNote()
         notify('Note deleted')
-      },
-      zoomIn (value) {
-        this.updateSettings({fontSize: (this.settings.fontSize + value) * 1.1})
-      },
-      zoomOut (value) {
-        this.updateSettings({fontSize: (this.settings.fontSize + value) * 0.9})
       }
     },
     watch: {

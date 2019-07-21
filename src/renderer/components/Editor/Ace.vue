@@ -1,25 +1,30 @@
 <template>
-  <ace-editor v-model="content" @init="intialize" lang="markdown" theme="chrome" :options="options" />
+  <AceEditor :value="content" :options="options" @input="contentChanged" @init="intialize"
+    lang="markdown" theme="chrome" />
 </template>
 
 <script>
+  import { EventBus } from '../../helper/EventBus'
+
   import AceEditor from 'vue2-ace-editor'
 
   export default {
-    name: 'AppEditor',
+    name: 'Ace',
     components: {
       AceEditor
     },
-    props: ['value', 'options'],
+    props: {
+      value: String,
+      options: Object
+    },
     data () {
       return {
         editor: null
       }
     },
     computed: {
-      content: {
-        get () { return this.value },
-        set (content) { this.$emit('input', content) }
+      content () {
+        return this.value
       }
     },
     methods: {
@@ -34,10 +39,16 @@
         this.editor.setShowPrintMargin(false)
         this.editor.setHighlightGutterLine(false)
         this.editor.renderer.setShowGutter(false)
-
-        // this.editor.setFontSize(this.fontSize)
-        this.editor.resize()
+      },
+      contentChanged (content) {
+        this.$emit('input', content)
       }
+    },
+    created () {
+      EventBus.$on('editor-insert-template', template => {
+        // TODO: insert template
+        console.info(template)
+      })
     }
   }
 </script>

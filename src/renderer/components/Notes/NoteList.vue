@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
+  import {mapMutations, mapActions, mapGetters} from 'vuex'
 
   import {notify} from '../../helper/AppNotifications'
 
@@ -35,9 +35,6 @@
       NoteCard
     },
     computed: {
-      ...mapState('editor', {
-        selectedProject: state => state.ui.selectedProject
-      }),
       ...mapGetters('editor', [
         'visibleNotes'
       ])

@@ -1,13 +1,14 @@
 <template>
-  <div id="iframe-container"></div>
+  <div ref="iFrameContainer" class="iFrame-container"></div>
 </template>
 
 <script>
+  import {NoteMixin} from '../../mixins/NoteMixin'
   import {getHtml} from '../../helper/notes'
 
   export default {
     name: 'MarkdownViewer',
-    props: ['text'],
+    mixins: [NoteMixin],
     data () {
       return {
         iFrame: null
@@ -23,42 +24,31 @@
         iFrame.setAttribute('border', 0)
         iFrame.setAttribute('height', '100%')
         iFrame.setAttribute('width', '100%')
-        this.iFrame = iFrame
+
+        this.$refs.iFrameContainer.appendChild(iFrame)
       },
-      mountIFrame () {
-        const el = document.querySelector('#iframe-container')
-        el.appendChild(this.iFrame, el)
-      },
-      addMarkup (html) {
+      addMarkup (text) {
+        const html = getHtml(text)
         const container = document.createElement('div')
         container.innerHTML = html
 
         const iFrame = document.querySelector('#iframe')
         iFrame.contentDocument.body.innerHTML = container.innerHTML
-        iFrame.onload = function () {
-          iFrame.contentDocument.body.innerHTML = container.innerHTML
-        }
       }
     },
     watch: {
       text () {
-        if (!this.iFrame) {
-          this.createIFrame()
-          this.mountIFrame()
-        }
-        const html = getHtml(this.text)
-        this.addMarkup(html)
+        this.addMarkup(this.text)
       }
     },
     mounted () {
       this.createIFrame()
-      this.mountIFrame()
     }
   }
 </script>
 
 <style lang="scss" scoped>
-#iframe-container {
+.iFrame-container {
   display: flex;
   flex: 1;
 }

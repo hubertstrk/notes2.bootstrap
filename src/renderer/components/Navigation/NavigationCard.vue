@@ -19,7 +19,7 @@
 <script>
   export default {
     name: 'NavigationCard',
-    props: ['name', 'selected-name']
+    props: ['name', 'selectedName']
   }
 </script>
 

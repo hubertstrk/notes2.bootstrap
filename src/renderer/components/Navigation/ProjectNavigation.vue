@@ -1,10 +1,8 @@
 <template>
   <div>
     <NavigationCard v-for="project in projects.sort()"
+      :key="project" :name="project" :selectedName="selectedProject"
       @click="setSelectedProject(project)"
-      :key="project"
-      :name="project"
-      :selectedName="selectedProject"
     >
       <template #icon>
         <font-awesome-icon icon="folder" />
@@ -35,7 +33,10 @@
       NavigationCard
     },
     computed: {
-      ...mapGetters('editor', ['all', 'projects']),
+      ...mapGetters('editor', [
+        'all',
+        'projects'
+      ]),
       ...mapState('editor', {
         selectedProject: state => state.ui.selectedProject
       })

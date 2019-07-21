@@ -1,30 +1,18 @@
 <template>
-  <div class="devider" :class="{'large': large, 'xlarge': xlarge}" />
+  <div class="devider-component" :class="{'large': large}" />
 </template>
 
 <script>
   export default {
-    props: {
-      large: {
-        default: false,
-        type: Boolean
-      },
-      xlarge: {
-        default: false,
-        type: Boolean
-      }
-    }
+    props: ['large', 'xlarge']
   }
 </script>
 
 <style lang="scss" scoped>
-.devider {
-  display: flex;
-}
-.large {
+.devider-component {
   margin: 0 3px;
 }
-.xlarge {
+.large {
   margin: 0 6px;
 }
 

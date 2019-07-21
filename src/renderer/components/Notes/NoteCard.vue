@@ -12,7 +12,7 @@
 
 <script>
   import {getHeadings} from '../../helper/notes'
-  import {mapState, mapGetters} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'NoteCard',
@@ -21,9 +21,6 @@
       ...mapState('editor', {
         activeNoteId: state => state.activeNoteId
       }),
-      ...mapGetters('editor', [
-        'visibleNotes'
-      ]),
       title () {
         const headings = getHeadings(this.note.text)
         return headings && headings[0] ? headings[0].title : 'no title'

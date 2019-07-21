@@ -1,6 +1,6 @@
 <template>
   <div class="editor-component">
-    <Menu class="editor-menu" />
+    <EditorMenu class="editor-menu" />
     <Ace class="editor-ace" v-model="text" :options="{fontSize}" />
   </div>
 </template>
@@ -9,14 +9,14 @@
   import {mapState} from 'vuex'
   import {NoteMixin} from '../../mixins/NoteMixin'
 
-  import Menu from './Menu'
+  import EditorMenu from './EditorMenu'
   import Ace from './Ace'
 
   export default {
     name: 'Editor',
     mixins: [NoteMixin],
     components: {
-      Menu,
+      EditorMenu,
       Ace
     },
     computed: {
@@ -39,10 +39,8 @@
   }
 
   .editor-ace {
-
     display: flex;
     flex: 1;
-
   }
 }
 

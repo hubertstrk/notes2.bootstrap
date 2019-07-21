@@ -3,9 +3,8 @@
     <CommonNavigation />
 
     <div v-b-toggle.collapse-1>
-      <NavigationCard
-        name="project-collapse"
-      >
+      <NavigationCard name="project-collapse">
+
         <template #icon>
           <font-awesome-icon icon="chevron-right" />
         </template>

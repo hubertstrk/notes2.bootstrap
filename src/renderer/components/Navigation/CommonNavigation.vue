@@ -1,10 +1,10 @@
 <template>
   <div>
-    <NavigationCard v-for="link in navigationLinks"
-      @click="setSelectionMode(link.name)"
+    <NavigationCard v-for="link in links"
       :key="link.name"
       :name="link.name"
       :selectedName="selectionMode"
+      @click="setSelectionMode(link.name)"
     >
       <template #icon>
         <font-awesome-icon :icon="link.icon" />
@@ -15,7 +15,7 @@
       </template>
 
       <template #info>
-        {{link.info}}
+        {{groupStatistics[link.name]}}
       </template>
 
     </NavigationCard>
@@ -32,17 +32,30 @@
     components: {
       NavigationCard
     },
+    data () {
+      return {
+        links: [
+          {name: 'all', icon: 'sticky-note', title: 'All'},
+          {name: 'starred', icon: 'star', title: 'Starred'},
+          {name: 'deleted', icon: 'trash', title: 'Deleted'}
+        ]
+      }
+    },
     computed: {
-      ...mapGetters('editor', ['all', 'starred', 'deleted', 'projects']),
       ...mapState('editor', {
         selectionMode: state => state.ui.selectionMode
       }),
-      navigationLinks () {
-        return [
-          {name: 'all', icon: 'sticky-note', title: 'All Notes', info: this.all.length},
-          {name: 'starred', icon: 'star', title: 'Starred', info: this.starred.length},
-          {name: 'deleted', icon: 'trash', title: 'Deleted', info: this.deleted.length}
-        ]
+      ...mapGetters('editor', [
+        'all',
+        'starred',
+        'deleted',
+        'projects'
+      ]),
+      groupStatistics () {
+        return ['starred', 'all', 'deleted'].reduce((lookup, group) => {
+          lookup[group] = this[group].length
+          return lookup
+        }, {})
       }
     },
     methods: {
