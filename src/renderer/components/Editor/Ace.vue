@@ -24,7 +24,7 @@
     },
     computed: {
       content () {
-        return this.value
+        return this.value ? this.value : ''
       }
     },
     methods: {

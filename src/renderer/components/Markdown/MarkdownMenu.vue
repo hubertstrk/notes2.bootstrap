@@ -1,5 +1,5 @@
 <template>
-  <div v-if="activeNoteId" class="markup-menu">
+  <div class="markup-menu">
     <div>
       <AppButton icon="print" text="Print" />
     </div>
@@ -10,11 +10,9 @@
 </template>
 
 <script>
-  import {NoteMixin} from '../../mixins/NoteMixin'
   import AppButton from '../Shared/AppButton'
 
   export default {
-    mixins: [NoteMixin],
     components: {
       AppButton
     }

@@ -4,7 +4,7 @@
 
 <script>
   import {NoteMixin} from '../../mixins/NoteMixin'
-  import {getHtml} from '../../helper/notes'
+  import {getHtml} from '../../helper/Marked'
 
   export default {
     name: 'MarkdownViewer',
@@ -38,7 +38,9 @@
     },
     watch: {
       text () {
-        this.addMarkup(this.text)
+        if (this.text) {
+          this.addMarkup(this.text)
+        }
       }
     },
     mounted () {

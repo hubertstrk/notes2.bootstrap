@@ -6,33 +6,18 @@ export const NoteMixin = {
       activeNoteId: state => state.activeNoteId,
       notes: state => state.notes
     }),
-    text: {
-      get () {
-        if (!this.activeNoteId) return ''
-        return this.notes[this.activeNoteId].text
-      },
-      set (text) {
-        this.updateNote({id: this.activeNoteId, text})
+    ...['starred', 'text', 'project'].reduce((obj, prop) => {
+      const computedProp = {
+        get () {
+          return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null
+        },
+        set (value) {
+          this.updateNote({id: this.activeNoteId, [prop]: value})
+        }
       }
-    },
-    starred: {
-      get () {
-        if (!this.activeNoteId) return null
-        return this.notes[this.activeNoteId].starred
-      },
-      set (starred) {
-        this.updateNote({id: this.activeNoteId, starred})
-      }
-    },
-    project: {
-      get () {
-        if (!this.activeNoteId) return null
-        return this.notes[this.activeNoteId].project
-      },
-      set (project) {
-        this.updateNote({id: this.activeNoteId, project})
-      }
-    }
+      obj[prop] = computedProp
+      return obj
+    }, {})
   },
   methods: {
     ...mapActions('editor', [

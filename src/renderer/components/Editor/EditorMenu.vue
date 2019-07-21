@@ -1,9 +1,9 @@
 <template>
   <div class="editor-menu-component">
     <div>
-      <b-button :value="starred" @update="updateNote({id: activeNoteId, starred: $event})" variant="light">
+      <!-- <b-button :value="starred" @update="updateNote({id: activeNoteId, starred: $event})" variant="light">
         <font-awesome-icon icon="bookmark" />
-      </b-button>
+      </b-button> -->
       <AppDevider xlarge />
       <ControlCommands />
       <AppDevider xlarge />
@@ -47,16 +47,16 @@
       }
     },
     watch: {
-      checked (value) {
-        if (!value) return
-        this.updateNote({id: this.activeNoteId, starred: value})
-      },
-      starred () {
-        this.checked = this.starred
-      }
+      // checked (value) {
+      //   if (!value) return
+      //   this.updateNote({id: this.activeNoteId, starred: value})
+      // },
+      // starred () {
+      //   this.checked = this.starred
+      // }
     },
     created () {
-      this.checked = this.starred
+      // this.checked = this.starred
     }
   }
 </script>

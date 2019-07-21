@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import {getHeadings} from '../../helper/notes'
+  import {getHeadings} from '../../helper/Marked'
   import {mapState} from 'vuex'
 
   export default {
