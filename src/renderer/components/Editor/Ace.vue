@@ -46,8 +46,8 @@
     },
     created () {
       EventBus.$on('editor-insert-template', template => {
-        // TODO: insert template
-        console.info(template)
+        this.editor.insert(template)
+        this.editor.focus()
       })
     }
   }

@@ -24,7 +24,6 @@
         iFrame.setAttribute('border', 0)
         iFrame.setAttribute('height', '100%')
         iFrame.setAttribute('width', '100%')
-
         this.$refs.iFrameContainer.appendChild(iFrame)
       },
       addMarkup (text) {
