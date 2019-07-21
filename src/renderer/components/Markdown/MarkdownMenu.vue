@@ -1,7 +1,7 @@
 <template>
   <div class="markup-menu">
     <div>
-      <AppButton icon="print" text="Print" />
+      <AppButton icon="print" text="Print" @click="print" />
     </div>
     <div>
       <AppButton icon="cog" text="Settings" />
@@ -15,6 +15,11 @@
   export default {
     components: {
       AppButton
+    },
+    methods: {
+      print () {
+        document.querySelector('#iframe').contentWindow.print()
+      }
     }
   }
 </script>
