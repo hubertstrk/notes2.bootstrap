@@ -8,7 +8,7 @@
 <script>
   import {mapState, mapActions} from 'vuex'
 
-  import AppButton from '../../Shared/AppButton'
+  import AppButton from '@/components/Shared/AppButton'
 
   export default {
     components: {

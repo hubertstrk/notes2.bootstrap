@@ -10,8 +10,8 @@
 </template>
 
 <script>
-  import { EventBus } from '../../../helper/EventBus'
-  import AppButton from '../../Shared/AppButton'
+  import { EventBus } from '@/helper/EventBus'
+  import AppButton from '@/components/Shared/AppButton'
 
   export default {
     components: {

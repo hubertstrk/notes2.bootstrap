@@ -1,10 +1,10 @@
 <template>
-  <AceEditor :value="content" :options="options" @input="contentChanged" @init="intialize"
+  <AceEditor v-model="content" :options="options" @init="intialize"
     lang="markdown" theme="chrome" />
 </template>
 
 <script>
-  import { EventBus } from '../../helper/EventBus'
+  import { EventBus } from '@/helper/EventBus'
 
   import AceEditor from 'vue2-ace-editor'
 
@@ -23,8 +23,9 @@
       }
     },
     computed: {
-      content () {
-        return this.value ? this.value : ''
+      content: {
+        get () { return this.value ? this.value : '' },
+        set (value) { this.$emit('input', value) }
       }
     },
     methods: {
@@ -39,9 +40,13 @@
         this.editor.setShowPrintMargin(false)
         this.editor.setHighlightGutterLine(false)
         this.editor.renderer.setShowGutter(false)
-      },
-      contentChanged (content) {
-        this.$emit('input', content)
+
+        this.editor.setReadOnly(true)
+      }
+    },
+    watch: {
+      value () {
+        this.editor.setReadOnly(!this.value)
       }
     },
     created () {

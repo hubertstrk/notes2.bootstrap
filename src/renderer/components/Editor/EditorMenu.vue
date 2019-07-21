@@ -1,9 +1,6 @@
 <template>
   <div class="editor-menu-component">
     <div>
-      <!-- <b-button :value="starred" @update="updateNote({id: activeNoteId, starred: $event})" variant="light">
-        <font-awesome-icon icon="bookmark" />
-      </b-button> -->
       <AppDevider xlarge />
       <ControlCommands />
       <AppDevider xlarge />
@@ -16,11 +13,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import {NoteMixin} from '../../mixins/NoteMixin'
-  import {notify} from '../../helper/AppNotifications'
-
-  import AppDevider from '../Shared/AppDevider'
+  import AppDevider from '@/components/Shared/AppDevider'
   import InsertCommands from './Commands/InsertCommands'
   import ControlCommands from './Commands/ControlCommands'
   import NoteCommands from './Commands/NoteCommands'
@@ -31,32 +24,6 @@
       InsertCommands,
       ControlCommands,
       NoteCommands
-    },
-    mixins: [
-      NoteMixin
-    ],
-    methods: {
-      ...mapActions('editor', [
-        'deleteNote',
-        'updateNote',
-        'updateSettings'
-      ]),
-      async onDeleteNote () {
-        await this.deleteNote()
-        notify('Note deleted')
-      }
-    },
-    watch: {
-      // checked (value) {
-      //   if (!value) return
-      //   this.updateNote({id: this.activeNoteId, starred: value})
-      // },
-      // starred () {
-      //   this.checked = this.starred
-      // }
-    },
-    created () {
-      // this.checked = this.starred
     }
   }
 </script>

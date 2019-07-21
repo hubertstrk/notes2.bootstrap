@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import AppButton from '../Shared/AppButton'
+  import AppButton from '@/components/Shared/AppButton'
 
   export default {
     components: {

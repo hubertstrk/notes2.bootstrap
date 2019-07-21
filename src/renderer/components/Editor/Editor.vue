@@ -7,7 +7,7 @@
 
 <script>
   import {mapState} from 'vuex'
-  import {NoteMixin} from '../../mixins/NoteMixin'
+  import {NoteMixin} from '@/mixins/NoteMixin'
 
   import EditorMenu from './EditorMenu'
   import Ace from './Ace'

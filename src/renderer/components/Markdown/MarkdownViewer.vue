@@ -3,8 +3,8 @@
 </template>
 
 <script>
-  import {NoteMixin} from '../../mixins/NoteMixin'
-  import {getHtml} from '../../helper/Marked'
+  import {NoteMixin} from '@/mixins/NoteMixin'
+  import {getHtml} from '@/helper/Marked'
 
   export default {
     name: 'MarkdownViewer',
@@ -39,6 +39,11 @@
       text () {
         if (this.text) {
           this.addMarkup(this.text)
+        }
+      },
+      activeNoteId () {
+        if (!this.activeNoteId) {
+          this.addMarkup('')
         }
       }
     },

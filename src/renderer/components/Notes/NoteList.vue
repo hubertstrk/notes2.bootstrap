@@ -18,9 +18,9 @@
 <script>
   import {mapMutations, mapActions, mapGetters} from 'vuex'
 
-  import {notify} from '../../helper/AppNotifications'
+  import {notify} from '@/helper/AppNotifications'
 
-  import AppButton from '../Shared/AppButton'
+  import AppButton from '@/components/Shared/AppButton'
   import NoteCard from './NoteCard'
 
   export default {
