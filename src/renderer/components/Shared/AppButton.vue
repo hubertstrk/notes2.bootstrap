@@ -1,6 +1,6 @@
 <template>
   <b-button class="app-button" @click="$emit('click', null)" :variant="variant ? variant : 'light'">
-    <span><font-awesome-icon :icon="icon" /></span>
+    <span><font-awesome-icon :icon="icon" :style="{color}" /></span>
     <span v-if="text" class="text">{{text}}</span>
   </b-button>
 </template>
@@ -15,7 +15,8 @@
       dark: Boolean,
       light: Boolean,
       text: String,
-      icon: String
+      icon: String,
+      color: String
     },
     computed: {
       variant () {

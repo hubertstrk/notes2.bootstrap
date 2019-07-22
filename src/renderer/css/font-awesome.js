@@ -26,7 +26,7 @@ import {
   faBookmark as farBookmark
 } from '@fortawesome/free-regular-svg-icons'
 
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 
 library.add(
   faStar,
@@ -50,3 +50,4 @@ library.add(
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)

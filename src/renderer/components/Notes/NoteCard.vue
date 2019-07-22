@@ -5,7 +5,7 @@
     @click="$emit('click', note.id)"
   >
     <div class="note-card-title">
-      {{title}}
+      <div class="lead">{{title}}</div>
     </div>
   </div>
 </template>
