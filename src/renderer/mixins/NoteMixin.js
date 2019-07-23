@@ -12,7 +12,9 @@ export const NoteMixin = {
           return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null
         },
         set (value) {
-          this.updateNote({id: this.activeNoteId, [prop]: value})
+          if (value) {
+            this.updateNote({id: this.activeNoteId, [prop]: value})
+          }
         }
       }
       obj[prop] = computedProp

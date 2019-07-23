@@ -15,7 +15,7 @@ const state = {
     fontSize: 20
   },
   ui: {
-    selectionMode: 'all', // all, starred, deleted
+    selectionMode: 'all', // all, starred, archived
     selectedProject: null
   }
 }
@@ -84,7 +84,7 @@ const actions = {
   updateNote ({state, commit}, note) {
     const copy = Object.assign({}, state.notes[note.id], note)
 
-    if (!isEqual(state.notes[note.id], copy)) {
+    if (note && note.id && !isEqual(state.notes[note.id], copy)) {
       commit('updateNote', copy)
     }
   },

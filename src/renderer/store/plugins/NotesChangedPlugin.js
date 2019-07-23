@@ -3,7 +3,9 @@ import queue from '../../helper/StorageQueue'
 const notesChangedPlugin = store => {
   store.subscribe((mutation, state) => {
     if (mutation.type === 'editor/updateNote') {
-      queue.add(mutation.payload)
+      if (mutation.payload.id) {
+        queue.add(mutation.payload)
+      }
     }
   })
 
