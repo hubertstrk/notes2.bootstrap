@@ -6,7 +6,7 @@ export const NoteMixin = {
       activeNoteId: state => state.activeNoteId,
       notes: state => state.notes
     }),
-    ...['starred', 'text', 'project'].reduce((obj, prop) => {
+    ...['starred', 'text', 'project', 'archived'].reduce((obj, prop) => {
       const computedProp = {
         get () {
           return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null

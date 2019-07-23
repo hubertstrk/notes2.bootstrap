@@ -37,7 +37,7 @@
         links: [
           {name: 'all', icon: 'sticky-note', title: 'All'},
           {name: 'starred', icon: 'star', title: 'Starred'},
-          {name: 'deleted', icon: 'trash', title: 'Deleted'}
+          {name: 'archived', icon: 'archive', title: 'Archived'}
         ]
       }
     },
@@ -48,11 +48,11 @@
       ...mapGetters('editor', [
         'all',
         'starred',
-        'deleted',
+        'archived',
         'projects'
       ]),
       groupStatistics () {
-        return ['starred', 'all', 'deleted'].reduce((lookup, group) => {
+        return ['starred', 'all', 'archived'].reduce((lookup, group) => {
           lookup[group] = this[group].length
           return lookup
         }, {})

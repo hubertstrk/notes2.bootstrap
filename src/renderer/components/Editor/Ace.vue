@@ -1,6 +1,6 @@
 <template>
   <AceEditor v-model="content" :options="options" @init="intialize"
-    lang="markdown" theme="chrome" />
+    lang="markdown" theme="github" />
 </template>
 
 <script>
@@ -35,6 +35,9 @@
         require('brace/mode/markdown')
         require('brace/snippets/markdown')
         require('brace/theme/github')
+        require('brace/theme/xcode')
+        require('brace/theme/crimson_editor')
+        require('brace/theme/tomorrow')
 
         this.editor.setShowFoldWidgets(false)
         this.editor.setShowPrintMargin(false)

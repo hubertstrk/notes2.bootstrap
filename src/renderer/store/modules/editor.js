@@ -116,21 +116,21 @@ const getters = {
     if (state.ui.selectionMode === 'starred') {
       return getters.starred
     }
-    if (state.ui.selectionMode === 'deleted') {
-      return getters.deleted
+    if (state.ui.selectionMode === 'archived') {
+      return getters.archived
     }
   },
   all (state) {
-    return Object.values(state.notes)
+    return Object.values(state.notes).filter(x => !x.archived)
   },
-  starred (state) {
-    return Object.values(state.notes).filter(x => x.starred)
+  starred (state, getters) {
+    return getters.all.filter(x => x.starred)
   },
-  deleted (state) {
-    return Object.values(state.notes).filter(x => x.deleted)
+  archived (state) {
+    return Object.values(state.notes).filter(x => x.archived)
   },
-  notesByProject (state) {
-    return Object.values(state.notes).filter(x => x.project === state.ui.selectedProject)
+  notesByProject (state, getters) {
+    return getters.all.filter(x => x.project === state.ui.selectedProject)
   }
 }
 

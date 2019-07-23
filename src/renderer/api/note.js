@@ -5,12 +5,13 @@ import binary from './binary'
  * @param {*} {starred, project, text}
  * @returns
  */
-const serialize = ({starred, project, text}) => {
+const serialize = ({starred, project, text, archived}) => {
   const starredBuffer = binary.encodeBoolean(starred)
+  const archivedBuffer = binary.encodeBoolean(archived)
   const projectBuffer = binary.encodeString(project)
   const textBuffer = binary.encodeString(text)
 
-  return Buffer.concat([starredBuffer, projectBuffer, textBuffer])
+  return Buffer.concat([starredBuffer, archivedBuffer, projectBuffer, textBuffer])
 }
 /**
  * Deserialize a buffer as note.
@@ -26,6 +27,9 @@ const deserialize = (result) => {
   const starred = buffer[0] === 1
   index += 1
 
+  const archived = buffer[1] === 1
+  index += 1
+
   length = buffer.readUInt16BE(index)
   index += 16
 
@@ -38,7 +42,7 @@ const deserialize = (result) => {
   const text = buffer.toString('utf-8', index, index + length).replace(/\0/g, '')
   index += length
 
-  return {starred, project, text}
+  return {starred, archived, project, text}
 }
 
 export default {

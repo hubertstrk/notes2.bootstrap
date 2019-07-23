@@ -10,6 +10,7 @@
     props: {
       success: Boolean,
       danger: Boolean,
+      warning: Boolean,
       primary: Boolean,
       info: Boolean,
       dark: Boolean,
@@ -25,6 +26,7 @@
         else if (this.light) return 'light'
         else if (this.dark) return 'dark'
         else if (this.info) return 'info'
+        else if (this.warning) return 'warning'
         else if (this.success) return 'success'
         else return null
       }

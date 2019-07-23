@@ -19,6 +19,7 @@ import {
   faCode,
   faPrint,
   faCog,
+  faArchive,
   faStrikethrough
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -46,6 +47,7 @@ library.add(
   faPrint,
   faCog,
   faStrikethrough,
+  faArchive,
   farBookmark
 )
 

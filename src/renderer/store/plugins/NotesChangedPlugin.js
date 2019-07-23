@@ -7,7 +7,7 @@ const notesChangedPlugin = store => {
     }
   })
 
-  // setInterval(queue.flush, 1000)
+  setInterval(queue.flush, 1000)
 }
 
 export default notesChangedPlugin
