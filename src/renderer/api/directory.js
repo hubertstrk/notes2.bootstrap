@@ -22,10 +22,10 @@ const createDirectory = (path) => {
  * @param {*} directory
  * @returns
  */
-const readDirectory = (directory) => {
+const readDirectory = (directory, extension) => {
   return new Promise((resolve) => {
     const names = fs.readdirSync(directory)
-    const paths = names.map((name) => {
+    const paths = names.filter(x => x.includes(extension)).map((name) => {
       return { directory, name }
     })
     resolve(paths)

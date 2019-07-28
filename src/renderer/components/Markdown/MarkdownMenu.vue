@@ -4,7 +4,7 @@
       <AppButton icon="print" text="Print" @click="print" />
     </div>
     <div>
-      <AppButton icon="cog" text="Settings" />
+      <AppButton icon="cog" text="Settings" @click="$router.push('settings')" />
     </div>
   </div>
 </template>

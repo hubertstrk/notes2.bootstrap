@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import {mapMutations, mapActions, mapGetters} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
 
   import {notify} from '@/helper/AppNotifications'
 
@@ -40,11 +40,9 @@
       ])
     },
     methods: {
-      ...mapMutations('editor', [
-        'setActiveNoteId'
-      ]),
       ...mapActions('editor', [
-        'addNote'
+        'addNote',
+        'setActiveNoteId'
       ]),
       async onAddNote () {
         await this.addNote()

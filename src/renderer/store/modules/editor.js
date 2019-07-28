@@ -1,15 +1,17 @@
 import Vue from 'vue'
-import {flatten, isEqual} from 'lodash'
+import {flatten, isEqual, cloneDeep} from 'lodash'
 
 import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
 import noteApi from '@/api/note'
+import neDb from '@/api/neDb'
 
 const uuidv4 = require('uuid/v4')
 
 const state = {
   notes: [],
   activeNoteId: null,
+  collections: [],
   settings: {
     directories: ['C:\\Temp\\Work', 'C:\\Temp\\Private'],
     fontSize: 20
@@ -43,13 +45,16 @@ const mutations = {
   },
   updateSettings (state, settings) {
     state.settings = settings
+  },
+  addCollections (state, collections) {
+    state.collections = collections
   }
 }
 
 const actions = {
   async reloadNotes ({state, commit}) {
     const fileActions = state.settings.directories.map((dir) => {
-      return directoryApi.readDirectory(dir)
+      return directoryApi.readDirectory(dir, '.note')
     })
     const paths = await Promise.all(fileActions)
 
@@ -63,6 +68,10 @@ const actions = {
       note.id = name
       commit('addNote', note)
     })
+
+    const collectionActions = await neDb.loadCollections(state.settings.directories)
+    const collections = await Promise.all(collectionActions)
+    commit('addCollections', cloneDeep(collections))
   },
   addNote ({state, commit}) {
     const selectedProject = state.ui.selectedProject
@@ -99,6 +108,9 @@ const actions = {
   updateSettings ({state, commit}, settings) {
     const copy = Object.assign({}, state.settings, settings)
     commit('updateSettings', copy)
+  },
+  setActiveNoteId ({commit}, id) {
+    commit('setActiveNoteId', id)
   }
 }
 

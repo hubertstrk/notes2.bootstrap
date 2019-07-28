@@ -20,7 +20,8 @@ import {
   faPrint,
   faCog,
   faArchive,
-  faStrikethrough
+  faStrikethrough,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -48,6 +49,7 @@ library.add(
   faCog,
   faStrikethrough,
   faArchive,
+  faTimes,
   farBookmark
 )
 
