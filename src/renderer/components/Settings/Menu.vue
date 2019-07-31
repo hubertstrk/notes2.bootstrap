@@ -1,7 +1,7 @@
 <template>
   <div class="settings-menu">
     <div class='settings-title'>
-      <h1 class="display-4">Settings</h1>
+      <h1 class="display-4">{{title}}</h1>
     </div>
     <div class="settings-close" @click="$router.push('/')">
       <div><font-awesome-icon icon="times" size="3x" /></div>
@@ -12,7 +12,13 @@
 
 <script>
   export default {
-    name: 'SettingsMenu'
+    name: 'SettingsMenu',
+    props: {
+      title: {
+        type: String,
+        default: 'menu-title'
+      }
+    }
   }
 </script>
 
@@ -21,12 +27,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
 
   .settings-close {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 
     .close-text {
       text-transform: uppercase;

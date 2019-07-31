@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import {flatten, isEqual, cloneDeep} from 'lodash'
+import {flatten, cloneDeep} from 'lodash'
+import {noteEquals} from '../../helper'
 
 import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
@@ -13,7 +14,7 @@ const state = {
   activeNoteId: null,
   collections: [],
   settings: {
-    directories: ['C:\\Temp\\Work', 'C:\\Temp\\Private'],
+    storageLocations: [{directory: 'C:\\Temp\\Work', name: 'Work'}, {directory: 'C:\\Temp\\Private', name: 'Private'}],
     fontSize: 20
   },
   ui: {
@@ -48,13 +49,22 @@ const mutations = {
   },
   addCollections (state, collections) {
     state.collections = collections
+  },
+  addStorageLocation (state, storageLocation) {
+    state.settings.storageLocations.push(storageLocation)
+  },
+  deleteStorageLocation (state, storageLocation) {
+    const index = state.settings.storageLocations.findIndex(x => x.directory === storageLocation.directory)
+    if (index !== -1) {
+      state.settings.storageLocations.splice(index, 1)
+    }
   }
 }
 
 const actions = {
   async reloadNotes ({state, commit}) {
-    const fileActions = state.settings.directories.map((dir) => {
-      return directoryApi.readDirectory(dir, '.note')
+    const fileActions = state.settings.storageLocations.map((dir) => {
+      return directoryApi.readDirectory(dir.directory, '.note')
     })
     const paths = await Promise.all(fileActions)
 
@@ -92,8 +102,7 @@ const actions = {
   },
   updateNote ({state, commit}, note) {
     const copy = Object.assign({}, state.notes[note.id], note)
-
-    if (note && note.id && !isEqual(state.notes[note.id], copy)) {
+    if (!noteEquals(state.notes[note.id], copy)) {
       commit('updateNote', copy)
     }
   },
@@ -111,6 +120,12 @@ const actions = {
   },
   setActiveNoteId ({commit}, id) {
     commit('setActiveNoteId', id)
+  },
+  addStorageLocation ({commit}, storageLocation) {
+    commit('addStorageLocation', storageLocation)
+  },
+  deleteStorageLocation ({commit}, storageLocation) {
+    commit('deleteStorageLocation', storageLocation)
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="editor-component">
     <EditorMenu class="editor-menu" />
-    <Ace class="editor-ace" v-model="text" :options="{fontSize}" />
+    <Ace class="editor-ace" :value="text" @input="onTextChanged" :options="{fontSize}" />
   </div>
 </template>
 
@@ -23,6 +23,13 @@
       ...mapState('editor', {
         fontSize: state => state.settings.fontSize
       })
+    },
+    methods: {
+      onTextChanged (text) {
+        if (text !== '') {
+          this.text = text
+        }
+      }
     }
   }
 </script>

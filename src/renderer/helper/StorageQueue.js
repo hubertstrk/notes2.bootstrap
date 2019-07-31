@@ -20,6 +20,7 @@ const flush = () => {
     const note = queue.shift()
     const buffer = noteApi.serialize(note)
     fileApi.writeBinary(note.directory, note.id, buffer)
+    console.info(`${note.id}`)
   }
 }
 

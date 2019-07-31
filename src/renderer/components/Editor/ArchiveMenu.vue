@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <AppButton icon="archive" warning @click="archived = false" text="Restore" />
-    <AppDevider xlarge />
+  <div class="archive-menu">
+    <AppButton icon="archive" warning @click="onArchive" text="Restore" />
     <AppButton icon="trash" danger @click="onDeleteNote" text="Delete" />
   </div>
 </template>
@@ -28,10 +27,17 @@
       async onDeleteNote () {
         await this.deleteNote()
         notify('Note deleted')
+      },
+      onArchive () {
+        this.archived = !this.archived
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+.archive-menu {
+  display: flex;
+  justify-content: space-between;
+}
 </style>

@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <b-card no-body>
-    <b-tabs pills card vertical>
-      <b-tab title="Tab 1" active><b-card-text>Tab Contents 1</b-card-text></b-tab>
-      <b-tab title="Tab 2"><b-card-text>Tab Contents 2</b-card-text></b-tab>
-      <b-tab title="Tab 3"><b-card-text>Tab Contents 3</b-card-text></b-tab>
-    </b-tabs>
-  </b-card>
+  <div class="settings-component">
+    <div class="settings-sidebar">
+      <a href="#" @click="$router.push('/Settings/StorageLocations')">Storage</a>
+      <a href="#" @click="$router.push('/Settings/Appearance')">Appearance</a>
+      <a href="#" @click="$router.push('/Settings/About')">About</a>
+    </div>
+    <div class="settings-tab-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -17,4 +18,24 @@
 </script>
 
 <style lang="scss" scoped>
+.settings-component {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .settings-sidebar {
+    display: flex;
+    flex: 1;
+    padding: 10px 0;
+
+    > * {
+      margin-right: 10px;
+    }
+  }
+
+  .settings-tab-content {
+    display: flex;
+    flex: 4;
+  }
+}
 </style>

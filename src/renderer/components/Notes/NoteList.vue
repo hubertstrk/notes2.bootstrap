@@ -5,7 +5,7 @@
       <b-input-group>
         <b-input id="inline-form-input-search" v-model="search" placeholder="Search"></b-input>
       </b-input-group>
-      <app-button icon="plus" @click="onAddNote" text=" Add" success />
+      <app-button icon="plus" @click="$router.push('NewNote')" text=" Add" success />
     </div>
     <div class="note-list">
       <template v-for="note in visibleNotes">
@@ -46,7 +46,7 @@
       ]),
       async onAddNote () {
         await this.addNote()
-        notify('Note successfully stored')
+        notify('Note created')
       }
     }
   }

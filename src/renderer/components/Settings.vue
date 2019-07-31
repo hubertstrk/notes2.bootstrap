@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Menu />
+  <div class="settings">
+    <Menu title="Settings" />
     <Content />
   </div>
 </template>
@@ -19,4 +19,7 @@
 </script>
 
 <style lang="scss" scoped>
+.settings {
+  padding: 30px;
+}
 </style>

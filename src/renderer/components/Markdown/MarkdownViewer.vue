@@ -3,8 +3,8 @@
 </template>
 
 <script>
-  import {NoteMixin} from '@/mixins/NoteMixin'
   import {getHtml} from '@/helper/Marked'
+  import {NoteMixin} from '@/mixins/NoteMixin'
 
   export default {
     name: 'MarkdownViewer',
