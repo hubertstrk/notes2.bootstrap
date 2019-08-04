@@ -3,12 +3,12 @@
 
       <h3>Add Location</h3>
 
-      <b-form-group id="input-group" label="Name" label-for="location-name-input" description="Use an appropriate location name to better identify your projects">
+      <b-form-group class="input-form" id="input-group" label="Name" label-for="location-name-input" description="Use an appropriate name to better identify your projects">
         <b-form-input id="location-name-input" v-model="location.name" type="text" required placeholder=""></b-form-input>
       </b-form-group>
 
       <div class="directory-selection">
-        <b-form-group id="input-group" label="Directory" label-for="location-directory-control" description="The directory is the place where your notes are stored">
+        <b-form-group id="input-group" label="Directory" label-for="location-directory-control" description="Make your projects available on all devices and choose a folder which is synchronized with a cloud storage">
           <b-form-input disabled id="location-directory-control" v-model="location.directory" type="text" required placeholder=""></b-form-input>
         </b-form-group>
       </div>
@@ -63,7 +63,12 @@
 </script>
 
 <style lang="scss" scoped>
+.input-form {
+  width: 400px;
+}
+
 .directory-selection {
   display: flex;
+  width: 400px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppButton icon="archive" @click="archived = true" text="Archive" warning />
+    <AppButton @click="archived = true" text="Archive" />
   </div>
 </template>
 

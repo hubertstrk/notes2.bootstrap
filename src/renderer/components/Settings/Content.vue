@@ -37,7 +37,7 @@
       margin-right: 10px;
     }
   }
-  
+
   .settings-tab-content {
     display: flex;
     flex: 4;

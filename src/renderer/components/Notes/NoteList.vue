@@ -5,7 +5,7 @@
       <b-input-group>
         <b-input id="inline-form-input-search" v-model="search" placeholder="Search"></b-input>
       </b-input-group>
-      <app-button @click="$router.push('NewNote')" text=" Add" success />
+      <app-button @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
       <template v-for="note in visibleNotes">

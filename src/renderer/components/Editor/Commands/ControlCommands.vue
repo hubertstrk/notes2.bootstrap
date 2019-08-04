@@ -1,6 +1,6 @@
 <template>
   <b-button-group>
-    <b-form-checkbox v-model="starred" name="bookmark-button" button :button-variant="starred ? 'primary' : 'light'">
+    <b-form-checkbox v-model="starred" name="bookmark-button" button :button-variant="starred ? 'dark' : 'light'">
       <font-awesome-icon icon="star" />
     </b-form-checkbox>
     <AppButton icon="search-plus" @click="zoom(1)" />

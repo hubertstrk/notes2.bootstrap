@@ -1,6 +1,6 @@
 <template>
-  <div class="archive-menu">
-    <AppButton icon="archive" warning @click="onArchive" text="Restore" />
+  <div>
+    <AppButton @click="onArchive" text="Restore" />
     <AppButton icon="trash" danger @click="onDeleteNote" text="Delete" />
   </div>
 </template>
@@ -36,8 +36,4 @@
 </script>
 
 <style lang="scss" scoped>
-.archive-menu {
-  display: flex;
-  justify-content: space-between;
-}
 </style>
