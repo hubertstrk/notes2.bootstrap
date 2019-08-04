@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import notesChangedPlugin from './plugins/NotesChangedPlugin'
-import HistoryPlugin from './plugins/HistoryPlugin'
 
 // import { createPersistedState, createSharedMutations } from 'vuex-electron'
 
@@ -15,8 +14,7 @@ export default new Vuex.Store({
   plugins: [
     // createPersistedState(),
     // createSharedMutations()
-    notesChangedPlugin,
-    HistoryPlugin
+    notesChangedPlugin
   ],
   strict: process.env.NODE_ENV !== 'production'
 })

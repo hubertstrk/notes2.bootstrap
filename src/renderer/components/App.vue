@@ -29,8 +29,9 @@
       Editor,
       Markdown
     },
-    created () {
-      this.$store.dispatch('editor/reloadNotes')
+    async created () {
+      await this.$store.dispatch('settings/reloadSettings')
+      await this.$store.dispatch('editor/reloadNotes')
     }
   }
 </script>

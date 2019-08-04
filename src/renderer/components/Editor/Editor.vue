@@ -20,8 +20,8 @@
       Ace
     },
     computed: {
-      ...mapState('editor', {
-        fontSize: state => state.settings.fontSize
+      ...mapState('settings', {
+        fontSize: state => state.fontSize
       })
     },
     methods: {

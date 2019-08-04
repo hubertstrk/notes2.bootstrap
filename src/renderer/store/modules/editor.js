@@ -1,29 +1,26 @@
 import Vue from 'vue'
-import {flatten, cloneDeep} from 'lodash'
-import {noteEquals} from '../../helper'
-
+import {flatten} from 'lodash'
+import {noteEquals} from '@/helper/Note'
 import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
 import noteApi from '@/api/note'
-import neDb from '@/api/neDb'
 
 const uuidv4 = require('uuid/v4')
 
 const state = {
-  notes: [],
-  activeNoteId: null,
-  collections: [],
-  settings: {
-    storageLocations: [{directory: 'C:\\Temp\\Work', name: 'Work'}, {directory: 'C:\\Temp\\Private', name: 'Private'}],
-    fontSize: 20
-  },
+  notes: {},
   ui: {
     selectionMode: 'all', // all, starred, archived
+    activeNoteId: null,
     selectedProject: null
   }
 }
 
 const mutations = {
+  setNotes (state, notes) {
+    state.notes = {}
+    notes.forEach(note => Vue.set(state.notes, note.id, note))
+  },
   addNote (state, note) {
     Vue.set(state.notes, note.id, note)
   },
@@ -36,34 +33,19 @@ const mutations = {
     state.ui.selectedProject = project
   },
   setActiveNoteId (state, id) {
-    state.activeNoteId = id
+    state.ui.activeNoteId = id
   },
   updateNote (state, note) {
     Vue.set(state.notes, note.id, note)
   },
   deleteNote (state, id) {
     Vue.delete(state.notes, id)
-  },
-  updateSettings (state, settings) {
-    state.settings = settings
-  },
-  addCollections (state, collections) {
-    state.collections = collections
-  },
-  addStorageLocation (state, storageLocation) {
-    state.settings.storageLocations.push(storageLocation)
-  },
-  deleteStorageLocation (state, storageLocation) {
-    const index = state.settings.storageLocations.findIndex(x => x.directory === storageLocation.directory)
-    if (index !== -1) {
-      state.settings.storageLocations.splice(index, 1)
-    }
   }
 }
 
 const actions = {
-  async reloadNotes ({state, commit}) {
-    const fileActions = state.settings.storageLocations.map((dir) => {
+  async reloadNotes ({rootState, commit}) {
+    const fileActions = rootState.settings.locations.map((dir) => {
       return directoryApi.readDirectory(dir.directory, '.note')
     })
     const paths = await Promise.all(fileActions)
@@ -72,16 +54,16 @@ const actions = {
 
     const contents = await Promise.all(readActions)
 
-    contents.forEach(({buffer, directory, name}) => {
+    const notes = contents.map(({buffer, directory, name}) => {
       const note = noteApi.deserialize(buffer)
       note.directory = directory
       note.id = name
-      commit('addNote', note)
+      return note
     })
-
-    const collectionActions = await neDb.loadCollections(state.settings.directories)
-    const collections = await Promise.all(collectionActions)
-    commit('addCollections', cloneDeep(collections))
+    commit('setNotes', notes)
+    if (notes.length > 0) {
+      commit('setActiveNoteId', notes[0].id)
+    }
   },
   addNote ({state, commit}) {
     const selectedProject = state.ui.selectedProject
@@ -113,19 +95,6 @@ const actions = {
         commit('deleteNote', activeNote.id)
         commit('setActiveNoteId', null)
       })
-  },
-  updateSettings ({state, commit}, settings) {
-    const copy = Object.assign({}, state.settings, settings)
-    commit('updateSettings', copy)
-  },
-  setActiveNoteId ({commit}, id) {
-    commit('setActiveNoteId', id)
-  },
-  addStorageLocation ({commit}, storageLocation) {
-    commit('addStorageLocation', storageLocation)
-  },
-  deleteStorageLocation ({commit}, storageLocation) {
-    commit('deleteStorageLocation', storageLocation)
   }
 }
 

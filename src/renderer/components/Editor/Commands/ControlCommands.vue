@@ -20,16 +20,16 @@
     },
     mixins: [NoteMixin],
     computed: {
-      ...mapState('editor', {
-        settings: state => state.settings
+      ...mapState('settings', {
+        fontSize: state => state.fontSize
       })
     },
     methods: {
-      ...mapActions('editor', [
-        'updateSettings'
+      ...mapActions('settings', [
+        'setFontSize'
       ]),
       zoom (value) {
-        this.updateSettings({fontSize: (this.settings.fontSize + value)})
+        this.setFontSize(this.fontSize + value)
       }
     }
   }

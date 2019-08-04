@@ -7,17 +7,17 @@
       the Google Drive or Dropbox. If you want to keep your data locally choose a directory on your computer which is not synchronized with a cloud storage.
     </b-alert>
     <AppButton icon="plus" success @click="openDirectorySelection" text="Add directory" />
-    <div>{{directory}}</div>
+    <div>{{location.directory}}</div>
     <b-form-input
-      v-model="name" type="text" directoryplaceholder="Enter directory name" >
+      v-model="location.name" type="text" >
     </b-form-input>
-    <AppButton :disabled="!directory && !name" icon="plus" success @click="onAddStorageLocation" text="Create directory" />
+    <AppButton icon="plus" success @click="onAddLocation" text="Create directory" />
   </div>
 </template>
 
 <script>
   import AppButton from '@/components/Shared/AppButton'
-  import {mapActions} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   const {dialog} = require('electron').remote
 
   export default {
@@ -27,13 +27,20 @@
     },
     data () {
       return {
-        directory: null,
-        name: null
+        location: {
+          directory: null,
+          name: null
+        }
       }
     },
+    computed: {
+      ...mapState('settings', {
+        locations: state => state.storageLocations
+      })
+    },
     methods: {
-      ...mapActions('editor', [
-        'addStorageLocation'
+      ...mapActions('settings', [
+        'addLocation'
       ]),
       openDirectorySelection () {
         dialog.showOpenDialog({
@@ -41,14 +48,13 @@
           properties: ['openDirectory']
         }, (folders) => {
           if (folders && folders.length === 1) {
-            this.directory = folders[0]
+            this.location.directory = folders[0]
           }
         })
       },
-      async onAddStorageLocation () {
-        await this.addStorageLocation({directory: this.directory, name: this.name})
-        this.selectedDirectory = null
-        this.storgaeLocationName = null
+      async onAddLocation () {
+        await this.addLocation(this.location)
+        this.location = {directory: null, name: null}
       }
     }
   }

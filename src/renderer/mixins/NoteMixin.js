@@ -3,7 +3,7 @@ import {mapState, mapActions} from 'vuex'
 export const NoteMixin = {
   computed: {
     ...mapState('editor', {
-      activeNoteId: state => state.activeNoteId,
+      activeNoteId: state => state.ui.activeNoteId,
       notes: state => state.notes
     }),
     ...['starred', 'text', 'project', 'archived'].reduce((obj, prop) => {

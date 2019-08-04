@@ -1,11 +1,10 @@
 <template>
   <div>
     <NewStorageLocation />
-
     <h1>Manage</h1>
-    <div v-for="storageLocations in storageLocations" :key="storageLocations.directory">
-      <AppButton icon="trash" @click="deleteStorageLocation(storageLocations)">Delete</AppButton>
-      <p>{{storageLocations.name}}, {{storageLocations.directory}}</p>
+    <div v-for="(location, i) in locations" :key="i">
+      <AppButton icon="trash" @click="onDeleteLocation(location)">Delete</AppButton>
+      <p>{{location.name}}, {{location.directory}}</p>
     </div>
   </div>
 </template>
@@ -22,14 +21,17 @@
       NewStorageLocation
     },
     computed: {
-      ...mapState('editor', {
-        storageLocations: state => state.settings.storageLocations
-      })
+      ...mapState('settings', [
+        'locations'
+      ])
     },
     methods: {
-      ...mapActions('editor', [
-        'deleteStorageLocation'
-      ])
+      ...mapActions('settings', [
+        'deleteLocation'
+      ]),
+      async onDeleteLocation (location) {
+        await this.deleteLocation(location)
+      }
     }
   }
 </script>

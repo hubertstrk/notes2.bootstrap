@@ -9,14 +9,14 @@
     </div>
     <div class="note-list">
       <template v-for="note in visibleNotes">
-        <NoteCard :note="note" :key="note.id" @click="setActiveNoteId" />
+        <NoteCard :note="note" :key="note.id" @click="setActiveNoteId(note.id)" />
       </template>
     </div>
   </div>
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
+  import {mapActions, mapMutations, mapGetters} from 'vuex'
 
   import {notify} from '@/helper/AppNotifications'
 
@@ -40,9 +40,11 @@
       ])
     },
     methods: {
-      ...mapActions('editor', [
-        'addNote',
+      ...mapMutations('editor', [
         'setActiveNoteId'
+      ]),
+      ...mapActions('editor', [
+        'addNote'
       ]),
       async onAddNote () {
         await this.addNote()
