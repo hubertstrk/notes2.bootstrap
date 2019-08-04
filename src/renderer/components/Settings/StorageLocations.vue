@@ -1,41 +1,34 @@
 <template>
-  <div>
-    <NewStorageLocation />
-    <h1>Manage</h1>
-    <div v-for="(location, i) in locations" :key="i">
-      <AppButton icon="trash" @click="onDeleteLocation(location)">Delete</AppButton>
-      <p>{{location.name}}, {{location.directory}}</p>
+  <div class="storage-location-component">
+    <h1>Storage Locations</h1>
+    <div class="location-content">
+      <NewStorageLocation />
+      <LocationList />
     </div>
   </div>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
-  import AppButton from '@/components/Shared/AppButton'
   import NewStorageLocation from './NewStorageLocation'
+  import LocationList from './LocationList'
 
   export default {
     name: 'StorageLocations',
     components: {
-      AppButton,
-      NewStorageLocation
-    },
-    computed: {
-      ...mapState('settings', [
-        'locations'
-      ])
-    },
-    methods: {
-      ...mapActions('settings', [
-        'deleteLocation'
-      ]),
-      async onDeleteLocation (location) {
-        await this.deleteLocation(location)
-      }
+      NewStorageLocation,
+      LocationList
     }
   }
 </script>
 
 <style lang="scss" scoped>
+.storage-location-component {
+  width: 100%;
 
+  .location-content {
+    > * {
+      margin-top: 30px;
+    }
+  }
+}
 </style>

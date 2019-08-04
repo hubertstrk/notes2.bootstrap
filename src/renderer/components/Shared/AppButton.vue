@@ -1,6 +1,6 @@
 <template>
   <b-button :disabled="disabled" class="app-button" @click="$emit('click', null)" :variant="variant ? variant : 'light'">
-    <span><font-awesome-icon :icon="icon" :style="{color}" /></span>
+    <span v-if="icon"><font-awesome-icon :icon="icon" :style="{color}" /></span>
     <span v-if="text" class="text">{{text}}</span>
   </b-button>
 </template>
@@ -39,11 +39,4 @@
 </script>
 
 <style lang="scss" scoped>
-.app-button {
-
-  .text {
-    margin-left: 10px;
-  }
-
-}
 </style>

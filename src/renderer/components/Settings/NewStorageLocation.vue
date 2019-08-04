@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h1>Add</h1>
-    <b-alert show variant="primary">
-      To add a storage location select a folder and provide a name.
-      To make your projects available on all devices choose a directory which is synchronized with a cloud storage such as
-      the Google Drive or Dropbox. If you want to keep your data locally choose a directory on your computer which is not synchronized with a cloud storage.
-    </b-alert>
-    <AppButton icon="plus" success @click="openDirectorySelection" text="Add directory" />
-    <div>{{location.directory}}</div>
-    <b-form-input
-      v-model="location.name" type="text" >
-    </b-form-input>
-    <AppButton icon="plus" success @click="onAddLocation" text="Create directory" />
+
+      <h3>Add Location</h3>
+
+      <b-form-group id="input-group" label="Name" label-for="location-name-input" description="Use an appropriate location name to better identify your projects">
+        <b-form-input id="location-name-input" v-model="location.name" type="text" required placeholder=""></b-form-input>
+      </b-form-group>
+
+      <div class="directory-selection">
+        <b-form-group id="input-group" label="Directory" label-for="location-directory-control" description="The directory is the place where your notes are stored">
+          <b-form-input disabled id="location-directory-control" v-model="location.directory" type="text" required placeholder=""></b-form-input>
+        </b-form-group>
+      </div>
+      <AppButton icon="folder" success @click="openDirectorySelection" text="Select" />
+      <AppButton icon="plus" primary @click="onAddLocation" text="Add directory" />
   </div>
 </template>
 
@@ -61,4 +63,7 @@
 </script>
 
 <style lang="scss" scoped>
+.directory-selection {
+  display: flex;
+}
 </style>

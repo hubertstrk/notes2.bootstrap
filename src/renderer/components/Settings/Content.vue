@@ -13,7 +13,12 @@
 
 <script>
   export default {
-    name: 'SettingsContent'
+    name: 'SettingsContent',
+    data () {
+      return {
+        active: 'locations'
+      }
+    }
   }
 </script>
 
@@ -32,7 +37,7 @@
       margin-right: 10px;
     }
   }
-
+  
   .settings-tab-content {
     display: flex;
     flex: 4;
