@@ -1,7 +1,7 @@
 <template>
   <div
     class="note-card"
-    :class="{'active-note': note.id === activeNoteId}"
+    :class="{'active-note' : note.id === activeNoteId}"
     @click="$emit('click', note.id)"
   >
     <div class="note-card-title">
@@ -33,12 +33,13 @@
   padding: 10px;
   cursor: pointer;
 
-  .active-note {
-    background-color: rgb(240,240,240);
-  }
-
   .note-card-title {
     font-size: 1.3rem;
   }
 }
+
+.active-note {
+  background-color: rgb(240,240,240);
+}
+
 </style>

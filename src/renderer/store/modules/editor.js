@@ -65,22 +65,20 @@ const actions = {
       commit('setActiveNoteId', notes[0].id)
     }
   },
-  addNote ({state, commit}) {
-    const selectedProject = state.ui.selectedProject
-
+  addNote ({commit}, {location, project}) {
     const note = {
       id: uuidv4(),
       text: '# Title',
       starred: false,
-      project: selectedProject,
-      directory: Object.values(state.notes).filter(x => x.project === selectedProject)[0].directory
+      project: project,
+      directory: location.directory
     }
 
     commit('addNote', note)
     commit('setActiveNoteId', note.id)
 
     const buffer = noteApi.serialize(note)
-    return fileApi.writeBinary(note.directory, note.id, buffer)
+    return fileApi.writeBinary(note.directory, note.id + '.note', buffer)
   },
   updateNote ({state, commit}, note) {
     const copy = Object.assign({}, state.notes[note.id], note)

@@ -38,7 +38,7 @@
     },
     computed: {
       ...mapState('settings', {
-        locations: state => state.storageLocations
+        locations: state => state.locations
       })
     },
     methods: {
