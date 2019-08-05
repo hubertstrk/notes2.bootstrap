@@ -12,15 +12,13 @@
 
 <script>
   import {getHeadings} from '@/helper/Marked'
-  import {mapState} from 'vuex'
+  import {NoteMixin} from '@/mixins/NoteMixin'
 
   export default {
     name: 'NoteCard',
+    mixins: [NoteMixin],
     props: ['note'],
     computed: {
-      ...mapState('editor', {
-        activeNoteId: state => state.activeNoteId
-      }),
       title () {
         const headings = getHeadings(this.note.text)
         return headings && headings[0] ? headings[0].title : 'no title'
@@ -31,15 +29,16 @@
 
 <style lang="scss" scoped>
 .note-card {
+
   padding: 10px;
   cursor: pointer;
+
+  .active-note {
+    background-color: rgb(240,240,240);
+  }
 
   .note-card-title {
     font-size: 1.3rem;
   }
-}
-
-.active-note {
-  background-color: rgb(240,240,240);
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div>
     <template v-if="!actionCalled">
-      <AppButton @click="actionCalled = true" :text="text" />
+      <AppButton @click="actionCalled = true" :text="text" primary />
     </template>
     <template v-else>
-      <AppButton primary @click="actionCalled = false" text="Cancel" />
+      <AppButton success @click="actionCalled = false" text="Cancel" />
       <AppButton icon="trash" danger @click="$emit('confirm')" text="Confirm" />
     </template>
   </div>

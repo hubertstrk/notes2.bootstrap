@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="location-list-component">
     <h3>Manage Locations</h3>
-    <div class="locations">
+    <!-- <b-alert show variant="info">When deleting a location your notes still remain and are not deleted. You can add the same location at any time.</b-alert> -->
+    <div class="location-cards">
       <LocationItem v-for="(location, i) in locations" :location="location" :key="i" />
     </div>
   </div>
@@ -25,8 +26,14 @@
 </script>
 
 <style lang="scss" scoped>
-.locations {
+.location-list-component {
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+
+  .location-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 </style>

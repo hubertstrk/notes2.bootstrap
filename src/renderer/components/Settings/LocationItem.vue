@@ -1,23 +1,39 @@
 <template>
-  <b-card class="location-item">
-    <h4 slot="header">{{location.name}}</h4>
-    <b-card-text>
-      {{location.directory}}
-    </b-card-text>
-
-    <ConfirmButton text="Delete" @confirm="onDeleteLocation()"></ConfirmButton>
+  <b-card class="location-item" footer-tag="footer">
+    <h5 slot="header">
+      <font-awesome-icon icon="database" />
+      <span>{{location.name}}</span>
+    </h5>
+    <b-card-text><pre><code>{{location.directory}}</code></pre></b-card-text>
+    <b-card-text><pre><code>{{notesAtLocation}} Notes</code></pre></b-card-text>
+    <div slot="footer">
+      <ConfirmButton text="Delete" @confirm="onDeleteLocation()" />
+    </div>
   </b-card>
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   import ConfirmButton from '@/components/Shared/ConfirmButton'
 
   export default {
     name: 'LocationItem',
-    props: ['location'],
+    props: {
+      location: {
+        type: Object,
+        default: null
+      }
+    },
     components: {
       ConfirmButton
+    },
+    computed: {
+      ...mapState('editor', [
+        'notes'
+      ]),
+      notesAtLocation () {
+        return Object.values(this.notes).filter(note => note.directory === this.location.directory).length
+      }
     },
     methods: {
       ...mapActions('settings', [
@@ -32,7 +48,7 @@
 
 <style lang="scss" scoped>
 .location-item {
-  margin: 6px;
+  margin: 10px 10px 10px 0;
   width: 300px;
 }
 </style>
