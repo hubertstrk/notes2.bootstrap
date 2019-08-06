@@ -39,10 +39,12 @@
         require('brace/theme/crimson_editor')
         require('brace/theme/tomorrow')
 
+        this.editor.setWrapBehavioursEnabled(true)
         this.editor.setShowFoldWidgets(false)
         this.editor.setShowPrintMargin(false)
         this.editor.setHighlightGutterLine(false)
         this.editor.renderer.setShowGutter(false)
+        this.editor.getSession().setUseWrapMode(true)
 
         this.editor.setReadOnly(true)
       }

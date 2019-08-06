@@ -1,10 +1,10 @@
 <template>
   <div class="markup-menu">
     <div>
-      <AppButton icon="print" text="Print" @click="print" />
+      <AppButton icon="print" @click="print" />
     </div>
     <div>
-      <AppButton icon="cog" text="Settings" @click="$router.push('/Settings/StorageLocations')" />
+      <AppButton primary icon="cog" text="Settings" @click="$router.push('/Settings/StorageLocations')" />
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@
 .markup-menu {
   display: flex;
   padding: 10px;
+  align-items: center;
   justify-content: space-between;
 
   > div {

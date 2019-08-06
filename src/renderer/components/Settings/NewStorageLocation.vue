@@ -1,7 +1,7 @@
 <template>
   <div class="new-storage-location-component">
     <h3>Add Location</h3>
-    <b-alert show variant="info">Add a new location by entering a name and selecting a storage directory.</b-alert>
+    <b-alert show variant="primary">Add a new location by entering a name and selecting a storage directory.</b-alert>
     <b-form-group id="input-group" label="Name" label-for="location-name-input" description="Use an appropriate name to better identify your projects">
       <b-form-input id="location-name-input" v-model="location.name" type="text"></b-form-input>
     </b-form-group>

@@ -4,21 +4,34 @@
 
     <div class="new-note-form">
 
-      <b-form-group id="input-group-location-selection" label="Location name" label-for="location-selection" description="Select a location">
+      <b-form-group id="input-group-title" label="Title" label-for="title" description="Enter a title for your note">
+        <b-form-input id="title" v-model="title" type="text"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-location-selection" label="Location name" label-for="location-selection" description="Select a storage location">
         <b-form-select id="location-selection" v-model="location" :options="locationOptions"></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-project-selection" label="Project name" label-for="project-selection" description="Select an existing project name">
-        <b-form-select id="project-selection" v-model="project" :options="projectOptions"></b-form-select>
+      <b-form-radio-group buttons style="margin: 0 0 15px 0;"
+        id="btn-radios-project-mode" v-model="useExtisingProject"
+        :options="projectModeOptions" name="radios-btn-project-mode"
+      ></b-form-radio-group>
+
+      <b-form-group id="input-group-project-selection" label="Project name" label-for="project-selection" description="Select an existing project">
+        <b-form-select :disabled="!useExtisingProject" id="project-selection" v-model="projectName" :options="projectOptions"></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-project-input" label="Project name" label-for="project-input" description="Enter a new project name">
-        <b-form-input id="project-input" v-model="newProjectName" type="text"></b-form-input>
+      <b-form-group id="input-group-project-input" label="Project name" label-for="project-input" description="Enter a new project">
+        <b-form-input :disabled="useExtisingProject" id="project-input" v-model="projectName" type="text"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-starred">
+        <b-form-checkbox v-model="starred" value="true">Starred</b-form-checkbox>
       </b-form-group>
 
     </div>
 
-    <AppButton primary @click="onNewNote()" text="Create Note" />
+    <AppButton :disabled="!createEnabled" primary @click="onNewNote()" text="Create Note" />
 
   </div>
 </template>
@@ -36,8 +49,10 @@
     data () {
       return {
         location: null,
-        project: null,
-        newProjectName: ''
+        projectName: '',
+        useExtisingProject: true,
+        starred: false,
+        title: ''
       }
     },
     computed: {
@@ -52,6 +67,15 @@
       },
       projectOptions () {
         return this.projects ? this.projects : null
+      },
+      projectModeOptions () {
+        return [
+          { text: 'Existing Project', value: true },
+          { text: 'New Project', value: false }
+        ]
+      },
+      createEnabled () {
+        return this.location !== null && this.projectName !== ''
       }
     },
     methods: {
@@ -59,7 +83,7 @@
         'addNote'
       ]),
       async onNewNote () {
-        await this.addNote({location: this.location, project: this.newProjectName !== '' ? this.newProjectName : this.project})
+        await this.addNote({location: this.location, project: this.projectName, starred: this.starred, title: this.title})
         this.$router.push('/')
       }
     }

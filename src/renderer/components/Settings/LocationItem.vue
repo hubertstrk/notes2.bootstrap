@@ -1,19 +1,21 @@
 <template>
   <b-card class="location-item" footer-tag="footer">
     <h5 slot="header">
-      <font-awesome-icon icon="database" />
       <span>{{location.name}}</span>
     </h5>
-    <b-card-text><pre><code>{{location.directory}}</code></pre></b-card-text>
-    <b-card-text><pre><code>{{notesAtLocation}} Notes</code></pre></b-card-text>
-    <div slot="footer">
+    <b-card-text class="location-item-info">
+      <div><font-awesome-icon icon="database" /> {{notesAtLocation.length}}</div>
+      <div><font-awesome-icon icon="archive" /> {{archivedNotes.length}}</div>
+    </b-card-text>
+    <b-card-text>
+      <pre><code>{{location.directory}}</code></pre>
       <ConfirmButton text="Delete" @confirm="onDeleteLocation()" />
-    </div>
+    </b-card-text>
   </b-card>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions, mapGetters} from 'vuex'
   import ConfirmButton from '@/components/Shared/ConfirmButton'
 
   export default {
@@ -31,8 +33,14 @@
       ...mapState('editor', [
         'notes'
       ]),
+      ...mapGetters('editor', [
+        'archived'
+      ]),
       notesAtLocation () {
-        return Object.values(this.notes).filter(note => note.directory === this.location.directory).length
+        return Object.values(this.notes).filter(note => note.directory === this.location.directory)
+      },
+      archivedNotes () {
+        return this.archived.filter(note => note.directory === this.location.directory)
       }
     },
     methods: {
@@ -48,7 +56,18 @@
 
 <style lang="scss" scoped>
 .location-item {
+
   margin: 10px 10px 10px 0;
   width: 300px;
+
+  .location-item-info {
+
+    display: flex;
+    align-items: center;
+
+    > * {
+      margin-right: 10px;
+    }
+  }
 }
 </style>

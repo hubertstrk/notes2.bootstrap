@@ -1,7 +1,10 @@
 <template>
   <div class="editor-component">
-    <EditorMenu class="editor-menu" />
-    <Ace class="editor-ace" :value="text" @input="onTextChanged" :options="{fontSize}" />
+    <div class="editor-upper">
+      <EditorMenu class="editor-menu" />
+      <Ace class="editor-ace" :value="text" @input="onTextChanged" :options="{fontSize}" />
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -11,13 +14,15 @@
 
   import EditorMenu from './EditorMenu'
   import Ace from './Ace'
+  import Footer from './Footer.vue'
 
   export default {
     name: 'Editor',
     mixins: [NoteMixin],
     components: {
       EditorMenu,
-      Ace
+      Ace,
+      Footer
     },
     computed: {
       ...mapState('settings', {
@@ -40,6 +45,13 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  justify-content: space-between;
+
+  .editor-upper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 
   .editor-menu {
     display: flex;

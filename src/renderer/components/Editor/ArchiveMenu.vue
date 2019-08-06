@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppButton @click="onArchive" text="Restore" />
-    <AppButton icon="trash" danger @click="onDeleteNote" text="Delete" />
+    <ConfirmButton text="Delete" @confirm="deleteNote()" />
   </div>
 </template>
 
@@ -12,13 +12,15 @@
 
   import AppDevider from '@/components/Shared/AppDevider'
   import AppButton from '@/components/Shared/AppButton'
+  import ConfirmButton from '@/components/Shared/ConfirmButton'
 
   export default {
     name: 'AcrhiveMenu',
     mixins: [NoteMixin],
     components: {
       AppDevider,
-      AppButton
+      AppButton,
+      ConfirmButton
     },
     methods: {
       ...mapActions('editor', [

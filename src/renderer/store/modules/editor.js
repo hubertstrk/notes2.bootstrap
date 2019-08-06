@@ -65,17 +65,18 @@ const actions = {
       commit('setActiveNoteId', notes[0].id)
     }
   },
-  addNote ({commit}, {location, project}) {
+  addNote ({commit}, {location, project, starred, title}) {
     const note = {
       id: uuidv4(),
-      text: '# Title',
-      starred: false,
+      text: `# ${title}`,
+      starred: starred,
       project: project,
       directory: location.directory
     }
 
     commit('addNote', note)
     commit('setActiveNoteId', note.id)
+    commit('setSelectedProject', project)
 
     const buffer = noteApi.serialize(note)
     return fileApi.writeBinary(note.directory, note.id + '.note', buffer)
@@ -87,7 +88,7 @@ const actions = {
     }
   },
   deleteNote ({state, commit}) {
-    const activeNote = state.notes[state.activeNoteId]
+    const activeNote = state.notes[state.ui.activeNoteId]
     return fileApi.deleteFile(activeNote.directory, activeNote.id)
       .then(() => {
         commit('deleteNote', activeNote.id)

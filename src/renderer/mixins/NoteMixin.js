@@ -1,4 +1,4 @@
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapMutations, mapActions} from 'vuex'
 
 export const NoteMixin = {
   computed: {
@@ -13,6 +13,9 @@ export const NoteMixin = {
         },
         set (value) {
           this.updateNote({id: this.activeNoteId, [prop]: value})
+          if (prop === 'archived') {
+            this.setSelectionMode('archived')
+          }
         }
       }
       obj[prop] = computedProp
@@ -22,6 +25,9 @@ export const NoteMixin = {
   methods: {
     ...mapActions('editor', [
       'updateNote'
+    ]),
+    ...mapMutations('editor', [
+      'setSelectionMode'
     ])
   }
 }
