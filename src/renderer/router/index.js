@@ -20,6 +20,11 @@ export default new Router({
       component: require('@/components/NewNote').default
     },
     {
+      path: '/NoteInfo',
+      name: 'NoteInfo',
+      component: require('@/components/NoteInfo').default
+    },
+    {
       path: '/Settings',
       name: 'Settings',
       component: require('@/components/Settings').default,

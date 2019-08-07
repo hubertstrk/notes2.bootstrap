@@ -21,7 +21,6 @@
     mixins: [NoteMixin],
     computed: {
       ...mapState('editor', ['notes']),
-      ...mapState('settings', ['locations']),
       location () {
         if (!this.activeNoteId) return ''
         const note = this.notes[this.activeNoteId]

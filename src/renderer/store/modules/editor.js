@@ -13,7 +13,8 @@ const state = {
     selectionMode: 'all', // all, starred, archived
     activeNoteId: null,
     selectedProject: null
-  }
+  },
+  statistics: null
 }
 
 const mutations = {
@@ -40,6 +41,9 @@ const mutations = {
   },
   deleteNote (state, id) {
     Vue.delete(state.notes, id)
+  },
+  setStatistics (state, statistics) {
+    state.statistics = statistics
   }
 }
 
@@ -94,6 +98,16 @@ const actions = {
         commit('deleteNote', activeNote.id)
         commit('setActiveNoteId', null)
       })
+  },
+  loadStatistics ({state, commit}) {
+    commit('setStatistics', null)
+    if (state.ui.activeNoteId) {
+      const note = state.notes[state.ui.activeNoteId]
+      return fileApi.getStatistic(note.directory, note.id)
+        .then((statistics) => {
+          commit('setStatistics', statistics)
+        })
+    }
   }
 }
 

@@ -4,7 +4,7 @@
       <AppButton @click="actionCalled = true" :text="text" primary />
     </template>
     <template v-else>
-      <AppButton success @click="actionCalled = false" text="Cancel" />
+      <AppButton secondary @click="actionCalled = false" text="Cancel" />
       <AppButton icon="trash" danger @click="$emit('confirm')" text="Confirm" />
     </template>
   </div>

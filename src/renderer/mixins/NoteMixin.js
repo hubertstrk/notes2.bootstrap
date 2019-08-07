@@ -6,6 +6,7 @@ export const NoteMixin = {
       activeNoteId: state => state.ui.activeNoteId,
       notes: state => state.notes
     }),
+    ...mapState('settings', ['locations']),
     ...['starred', 'text', 'project', 'archived'].reduce((obj, prop) => {
       const computedProp = {
         get () {
@@ -20,7 +21,12 @@ export const NoteMixin = {
       }
       obj[prop] = computedProp
       return obj
-    }, {})
+    }, {}),
+    location () {
+      if (!this.activeNoteId) return ''
+      const note = this.notes[this.activeNoteId]
+      return this.locations.find(x => x.directory === note.directory)
+    }
   },
   methods: {
     ...mapActions('editor', [

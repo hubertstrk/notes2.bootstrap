@@ -10,12 +10,11 @@
       <div>
         <NoteCommands />
       </div>
-  </template>
-  <template v-else>
-    <ArchiveMenu />
-  </template>
-
-    </div>
+    </template>
+    <template v-else>
+      <ArchiveMenu />
+    </template>
+  </div>
 </template>
 
 <script>

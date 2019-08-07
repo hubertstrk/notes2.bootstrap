@@ -90,10 +90,27 @@ const deleteFile = (directory, filename) => {
   })
 }
 
+/**
+ * Asynchronously gets the file statistics
+ *
+ * @param {*} directory
+ * @param {*} filename
+ * @returns
+ */
+const getStatistic = (directory, filename) => {
+  return new Promise((resolve, reject) => {
+    fs.stat(path.join(directory, filename), (error, stat) => {
+      if (error) reject(error)
+      resolve(stat)
+    })
+  })
+}
+
 export default {
   createFile,
   readFile,
   writeFile,
   writeBinary,
-  deleteFile
+  deleteFile,
+  getStatistic
 }

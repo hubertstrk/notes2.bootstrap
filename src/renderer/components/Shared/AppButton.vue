@@ -9,6 +9,7 @@
   export default {
     props: {
       success: Boolean,
+      secondary: Boolean,
       danger: Boolean,
       warning: Boolean,
       primary: Boolean,
@@ -26,6 +27,7 @@
     computed: {
       variant () {
         if (this.primary) return 'primary'
+        else if (this.secondary) return 'secondary'
         else if (this.danger) return 'danger'
         else if (this.light) return 'light'
         else if (this.dark) return 'dark'
