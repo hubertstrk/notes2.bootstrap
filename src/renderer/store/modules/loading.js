@@ -6,9 +6,6 @@ const state = {
 const mutations = {
   setLoading (state, isLoading) {
     state.isLoading = isLoading
-  },
-  setPercentage (state, percentage) {
-    state.loadingPercentage = percentage
   }
 }
 
