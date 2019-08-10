@@ -48,26 +48,40 @@ const mutations = {
 }
 
 const actions = {
-  async reloadNotes ({rootState, commit}) {
-    const fileActions = rootState.settings.locations.map((dir) => {
+  reloadNotes ({rootState, commit}) {
+    const directoryReadActions = rootState.settings.locations.map((dir) => {
       return directoryApi.readDirectory(dir.directory, '.note')
     })
-    const paths = await Promise.all(fileActions)
+    return Promise.all(directoryReadActions).then((paths) => {
+      const fileReadActions = flatten(paths).map(path => fileApi.readFile(path.directory, path.name))
 
-    const readActions = flatten(paths).map(path => fileApi.readFile(path.directory, path.name))
-
-    const contents = await Promise.all(readActions)
-
-    const notes = contents.map(({buffer, directory, name}) => {
-      const note = noteApi.deserialize(buffer)
-      note.directory = directory
-      note.id = name
-      return note
+      return Promise.all(fileReadActions).then((contents) => {
+        const notes = contents.map(({buffer, directory, name}) => {
+          const note = noteApi.deserialize(buffer)
+          note.directory = directory
+          note.id = name
+          return note
+        })
+        commit('setNotes', notes)
+        if (notes.length > 0) {
+          commit('setActiveNoteId', notes[0].id)
+        }
+      })
     })
-    commit('setNotes', notes)
-    if (notes.length > 0) {
-      commit('setActiveNoteId', notes[0].id)
-    }
+
+    // const contents = await Promise.all(readActions)
+
+    // const notes = contents.map(({buffer, directory, name}) => {
+    //   const note = noteApi.deserialize(buffer)
+    //   note.directory = directory
+    //   note.id = name
+    //   return note
+    // })
+    // commit('setNotes', notes)
+
+    // if (notes.length > 0) {
+    //   commit('setActiveNoteId', notes[0].id)
+    // }
   },
   addNote ({commit}, {location, project, starred, title}) {
     const note = {

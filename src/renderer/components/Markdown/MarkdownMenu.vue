@@ -1,11 +1,7 @@
 <template>
   <div class="markup-menu">
-    <div>
-      <AppButton icon="print" @click="print" />
-    </div>
-    <div>
-      <AppButton primary icon="cog" text="Settings" @click="$router.push('/Settings/StorageLocations')" />
-    </div>
+    <AppButton icon="print" @click="print" />
+    <AppButton primary icon="cog" @click="$router.push('/Settings/StorageLocations')" />
   </div>
 </template>
 

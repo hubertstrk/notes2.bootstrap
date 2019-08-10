@@ -1,8 +1,6 @@
 <template>
   <div class="settings-menu">
-    <div class='settings-title'>
-      <h1 class="display-4">{{title}}</h1>
-    </div>
+    <h1 class="display-4">{{title}}</h1>
     <div class="settings-close" @click="$router.push('/')">
       <div><font-awesome-icon icon="times" size="3x" /></div>
       <h4 class="close-text">Close</h4>

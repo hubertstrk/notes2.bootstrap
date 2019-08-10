@@ -1,7 +1,7 @@
 <template>
   <div class="location-list-component">
-    <h3>Locations Info</h3>
-    <b-alert show variant="primary">When deleting a location your notes still remain and are not deleted. You can add the same location at any time.</b-alert>
+    <h3>Location Info</h3>
+    <!-- <b-alert show variant="primary">When deleting a location your notes still remain and are not deleted. You can add the same location at any time.</b-alert> -->
     <div class="location-cards">
       <LocationItem v-for="(location, i) in locations" :location="location" :key="i" />
     </div>

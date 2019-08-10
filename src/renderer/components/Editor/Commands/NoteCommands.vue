@@ -1,7 +1,7 @@
 <template>
   <div>
+    <AppButton @click="$router.push('/NoteInfo')" icon="info-circle" />
     <AppButton @click="archived = true" text="Archive" />
-    <AppButton @click="$router.push('/NoteInfo')" text="Info" />
   </div>
 </template>
 

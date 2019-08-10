@@ -8,7 +8,10 @@
       <font-awesome-icon icon="folder" />
       <div>{{location.directory}}</div>
     </div>
-    <!-- <div><b-badge variant="secondary">{{project}}</b-badge></div> -->
+    <div class="footer-group">
+      <font-awesome-icon icon="folder" />
+      <div>{{project}}</div>
+    </div>
   </div>
 </template>
 

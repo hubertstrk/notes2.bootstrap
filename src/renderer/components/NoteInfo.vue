@@ -4,8 +4,10 @@
 
     <template v-if="activeNote">
       <InfoDescription title="Name" :description="activeNote.id" />
+      <InfoDescription title="Project" :description="activeNote.project" />
       <InfoDescription title="Directoy" :description="location.directory" />
     </template>
+
     <template v-if="statistics">
       <InfoDescription title="Created" :description="statistics.birthtime" />
       <InfoDescription title="Modified" :description="statistics.mtime" />
@@ -17,7 +19,6 @@
 <script>
   import {mapState, mapActions} from 'vuex'
   import {NoteMixin} from '@/mixins/NoteMixin'
-
   import Menu from './Settings/Menu'
   import InfoDescription from '@/components/Shared/InfoDescription'
 

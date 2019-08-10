@@ -2,7 +2,6 @@
   <div class="editor-menu-component">
     <template v-if="!archived">
       <div>
-        <AppDevider xlarge />
         <ControlCommands />
         <AppDevider xlarge />
         <InsertCommands />

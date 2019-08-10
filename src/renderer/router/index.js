@@ -15,6 +15,11 @@ export default new Router({
       component: require('@/components/App').default
     },
     {
+      path: '/Loading',
+      name: 'Loading',
+      component: require('@/components/Loading').default
+    },
+    {
       path: '/NewNote',
       name: 'NewNote',
       component: require('@/components/NewNote').default

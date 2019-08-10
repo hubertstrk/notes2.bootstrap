@@ -1,7 +1,7 @@
 <template>
   <div class="note-info">
-    <span class="note-info-title">{{title}}</span>
-    <span class="note-info-description">{{description}}</span>
+    <span class="note-info-title lead">{{title}}</span>
+    <span class="note-info-description"><pre><code>{{description}}</code></pre></span>
   </div>
 </template>
 
@@ -16,12 +16,12 @@
 .note-info {
 
   .note-info-title {
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-transform: capitalize;
   }
 
   .note-info-description {
-    color: rgb(80,80,80);
+    font-size: 1.2em;
   }
 
 }

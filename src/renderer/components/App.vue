@@ -30,8 +30,12 @@
       Markdown
     },
     async created () {
-      await this.$store.dispatch('settings/reloadSettings')
-      await this.$store.dispatch('editor/reloadNotes')
+      this.$store.dispatch('settings/reloadSettings').then(() => {
+        this.$store.dispatch('editor/reloadNotes')
+          .then(() => {
+            this.$router.push('/')
+          })
+      })
     }
   }
 </script>
