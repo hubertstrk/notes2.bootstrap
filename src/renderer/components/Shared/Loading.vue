@@ -1,25 +1,12 @@
 <template>
   <div class="loading-screen">
-    <h1>Loading... {{percentage}}</h1>
+    <h3>Loading...</h3>
   </div>
 </template>
 
 <script>
-  import { EventBus } from '@/helper/EventBus'
-
   export default {
-    name: 'LoadingScreen',
-    data () {
-      return {
-        percentage: 0
-      }
-    },
-    created () {
-      EventBus.$on('loading-percentage', percentage => {
-        console.info(percentage)
-        this.percentage = percentage
-      })
-    }
+    name: 'LoadingScreen'
   }
 </script>
 
@@ -27,5 +14,8 @@
 .loading-screen {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

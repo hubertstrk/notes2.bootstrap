@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoading">
-      <Loading />
-    </div>
+    <Loading v-if="isLoading" />
     <div v-else id="component" class="component">
       <div class="navigation">
         <Navigation />
@@ -53,6 +51,7 @@
       await this.$store.dispatch('settings/reloadSettings')
       await this.$store.dispatch('editor/reloadNotes')
       this.setLoading(false)
+      console.info('App.vue created finished')
     }
   }
 </script>

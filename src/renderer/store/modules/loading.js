@@ -1,6 +1,5 @@
 const state = {
-  isLoading: false,
-  loadingPercentage: 0
+  isLoading: false
 }
 
 const mutations = {
