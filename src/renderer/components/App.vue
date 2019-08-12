@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-component">
     <Loading v-if="isLoading" />
     <div v-else id="component" class="component">
       <div class="navigation">
@@ -51,38 +51,42 @@
       await this.$store.dispatch('settings/reloadSettings')
       await this.$store.dispatch('editor/reloadNotes')
       this.setLoading(false)
-      console.info('App.vue created finished')
     }
   }
 </script>
 
 <style lang="scss" scoped>
-.component {
-  display: flex;
+.main-component {
+
   height: 100%;
 
-  .navigation {
-    min-width: 300px;
+  .component {
     display: flex;
-    flex: 1;
-    overflow-y: auto;
-  }
+    height: 100%;
 
-  .notes {
-    min-width: 300px;
-    display: flex;
-    flex: 1;
-    overflow-y: auto;
-  }
+    .navigation {
+      min-width: 300px;
+      display: flex;
+      flex: 1;
+      overflow-y: auto;
+    }
 
-  .editor {
-    display: flex;
-    flex: 2;
-  }
+    .notes {
+      min-width: 300px;
+      display: flex;
+      flex: 1;
+      overflow-y: auto;
+    }
 
-  .markup {
-    display: flex;
-    flex: 2;
+    .editor {
+      display: flex;
+      flex: 2;
+    }
+
+    .markup {
+      display: flex;
+      flex: 2;
+    }
   }
 }
 </style>

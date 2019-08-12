@@ -69,7 +69,7 @@ const actions = {
       commit('setActiveNoteId', notes[0].id)
     }
   },
-  addNote ({commit}, {location, project, starred, title}) {
+  async addNote ({commit}, {location, project, starred, title}) {
     const note = {
       id: uuidv4(),
       text: `# ${title}`,
@@ -78,12 +78,12 @@ const actions = {
       directory: location.directory
     }
 
-    commit('addNote', note)
-    commit('setActiveNoteId', note.id)
-    commit('setSelectedProject', project)
-
     const buffer = noteApi.serialize(note)
-    return fileApi.writeBinary(note.directory, note.id + '.note', buffer)
+    const noteId = note.id + '.note'
+    await fileApi.writeBinary(note.directory, noteId, buffer)
+    commit('addNote', note)
+    commit('setSelectedProject', project)
+    commit('setActiveNoteId', noteId)
   },
   updateNote ({state, commit}, note) {
     const copy = Object.assign({}, state.notes[note.id], note)

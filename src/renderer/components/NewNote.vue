@@ -37,9 +37,10 @@
 </template>
 
 <script>
-  import {mapState, mapActions, mapGetters} from 'vuex'
+  import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
   import Menu from './Settings/Menu'
   import AppButton from '@/components/Shared/AppButton'
+  import {notify} from '@/helper/AppNotifications'
 
   export default {
     components: {
@@ -82,8 +83,13 @@
       ...mapActions('editor', [
         'addNote'
       ]),
+      ...mapMutations('editor', [
+        'setSelectedProject',
+        'setActiveNoteId'
+      ]),
       async onNewNote () {
         await this.addNote({location: this.location, project: this.projectName, starred: this.starred, title: this.title})
+        notify('Note created')
         this.$router.push('/')
       }
     }
