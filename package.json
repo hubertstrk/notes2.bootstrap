@@ -43,10 +43,10 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/bookmark.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/bookmark.ico"
     },
     "linux": {
       "icon": "build/icons"
