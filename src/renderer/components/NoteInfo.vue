@@ -9,8 +9,8 @@
     </template>
 
     <template v-if="statistics">
-      <InfoDescription title="Created" :description="statistics.birthtime" />
-      <InfoDescription title="Modified" :description="statistics.mtime" />
+      <InfoDescription title="Created" :description="formatDate(statistics.birthtime)" />
+      <InfoDescription title="Modified" :description="formatDate(statistics.mtime)" />
       <InfoDescription title="Size" :description="`${statistics.size} bytes`" />
     </template>
   </div>
@@ -40,7 +40,14 @@
     methods: {
       ...mapActions('editor', [
         'loadStatistics'
-      ])
+      ]),
+      formatDate (dateTime) {
+        const date = new Date(dateTime)
+        const minutes = `${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
+        const hours = `${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}`
+        const seconds = `${date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()}`
+        return `${date.toDateString()} ${hours}:${minutes}:${seconds}`
+      }
     },
     created () {
       this.loadStatistics()

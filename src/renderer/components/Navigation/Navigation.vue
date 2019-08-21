@@ -52,7 +52,7 @@
 <style lang="scss" scoped>
 .navigation {
   background-color: #2D3134;
-  color: #73777A;
+  color: rgb(160, 160, 160);
   padding: 20px;
 }
 </style>
