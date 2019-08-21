@@ -8,7 +8,7 @@
       <app-button @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
-      <template v-for="note in visibleNotes">
+      <template v-for="note in filteredNotes">
         <NoteCard :note="note" :key="note.id" @click="setActiveNoteId(note.id)" />
       </template>
     </div>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+  import Fuse from 'fuse.js'
   import {mapMutations, mapGetters} from 'vuex'
 
   import AppButton from '@/components/Shared/AppButton'
@@ -25,7 +26,15 @@
     name: 'NoteList',
     data () {
       return {
-        search: ''
+        search: '',
+        options: {
+          keys: ['text'],
+          threshold: 0.1,
+          location: 0,
+          distance: 65535,
+          maxPatternLength: 16,
+          minMatchCharLength: 1
+        }
       }
     },
     components: {
@@ -35,7 +44,12 @@
     computed: {
       ...mapGetters('editor', [
         'visibleNotes'
-      ])
+      ]),
+      filteredNotes () {
+        if (this.search.length <= 0) return this.visibleNotes
+        const fuse = new Fuse(this.visibleNotes, this.options)
+        return fuse.search(this.search)
+      }
     },
     methods: {
       ...mapMutations('editor', [
