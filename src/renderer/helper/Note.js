@@ -1,3 +1,5 @@
+import {getHeadings} from '@/helper/Marked'
+
 const props = ['starred', 'archived', 'text', 'project']
 
 export const noteEquals = (a, b) => {
@@ -7,4 +9,9 @@ export const noteEquals = (a, b) => {
     }
   }
   return true
+}
+
+export const getTitle = (markdown) => {
+  const headings = getHeadings(markdown)
+  return headings && headings[0] ? headings[0].title : 'no title'
 }

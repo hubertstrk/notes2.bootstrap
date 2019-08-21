@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import {getHeadings} from '@/helper/Marked'
+  import {getTitle} from '@/helper/Note'
   import {NoteMixin} from '@/mixins/NoteMixin'
 
   export default {
@@ -20,8 +20,7 @@
     props: ['note'],
     computed: {
       title () {
-        const headings = getHeadings(this.note.text)
-        return headings && headings[0] ? headings[0].title : 'no title'
+        return getTitle(this.note.text)
       }
     }
   }

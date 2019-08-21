@@ -8,7 +8,7 @@
       <app-button @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
-      <template v-for="note in filteredNotes">
+      <template v-for="note in sortedNotes">
         <NoteCard :note="note" :key="note.id" @click="setActiveNoteId(note.id)" />
       </template>
     </div>
@@ -16,8 +16,11 @@
 </template>
 
 <script>
-  import Fuse from 'fuse.js'
+  import {getTitle} from '@/helper/Note'
+  import {sortBy} from 'lodash'
   import {mapMutations, mapGetters} from 'vuex'
+
+  import Fuse from 'fuse.js'
 
   import AppButton from '@/components/Shared/AppButton'
   import NoteCard from './NoteCard'
@@ -49,6 +52,10 @@
         if (this.search.length <= 0) return this.visibleNotes
         const fuse = new Fuse(this.visibleNotes, this.options)
         return fuse.search(this.search)
+      },
+      sortedNotes () {
+        const sortEnabledNotes = this.filteredNotes.map(note => ({...note, title: getTitle(note.text)}))
+        return sortBy(sortEnabledNotes, ['title'])
       }
     },
     methods: {

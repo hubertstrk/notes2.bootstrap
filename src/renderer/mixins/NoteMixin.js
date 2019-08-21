@@ -6,7 +6,9 @@ export const NoteMixin = {
       activeNoteId: state => state.ui.activeNoteId,
       notes: state => state.notes
     }),
-    ...mapState('settings', ['locations']),
+    ...mapState('settings', [
+      'locations'
+    ]),
     ...['starred', 'text', 'project', 'archived'].reduce((obj, prop) => {
       const computedProp = {
         get () {
