@@ -14,3 +14,7 @@ p {
 }
 
 a {text-decoration: none;}
+
+.card {
+  border-radius: 0 !important;
+}
