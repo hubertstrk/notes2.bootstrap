@@ -32,13 +32,15 @@ const actions = {
     const settings = await readSettings()
     commit('setSettings', settings)
   },
-  addLocation ({state, commit}, location) {
+  async addLocation ({state, commit, dispatch}, location) {
     commit('addLocation', location)
-    writeSettings({...state})
+    await writeSettings({...state})
+    dispatch('editor/reloadNotes', null, {root: true})
   },
-  deleteLocation ({commit}, location) {
+  async deleteLocation ({commit, dispatch}, location) {
     commit('deleteLocation', location)
-    writeSettings({...state})
+    await writeSettings({...state})
+    dispatch('editor/reloadNotes', null, {root: true})
   },
   setFontSize ({state, commit}, size) {
     commit('setFontSize', size)

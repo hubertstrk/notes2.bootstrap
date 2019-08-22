@@ -23,7 +23,8 @@ import {
   faStrikethrough,
   faTimes,
   faInfoCircle,
-  faDatabase
+  faDatabase,
+  faChartLine
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -54,6 +55,7 @@ library.add(
   faTimes,
   faInfoCircle,
   faDatabase,
+  faChartLine,
   farBookmark
 )
 
