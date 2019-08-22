@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="!actionCalled">
-      <AppButton @click="actionCalled = true" :text="text" primary />
+      <AppButton icon="trash" danger @click="actionCalled = true" :text="text" />
     </template>
     <template v-else>
       <AppButton secondary @click="actionCalled = false" text="Cancel" />

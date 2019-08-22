@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <AppButton @click="onArchive" text="Restore" />
+  <div class="archive-menu-actions">
+    <AppButton success @click="onArchive" text="Restore" />
     <ConfirmButton text="Delete" @confirm="deleteNote()" />
   </div>
 </template>
@@ -38,4 +38,11 @@
 </script>
 
 <style lang="scss" scoped>
+.archive-menu-actions {
+
+  > * {
+    margin-right: 4px;
+  }
+
+}
 </style>
