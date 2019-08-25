@@ -119,6 +119,7 @@ const actions = {
   onDropped ({commit, dispatch}, project) {
     dispatch('updateNote', {id: state.dragId, project: project})
     commit('setProjectForNoteId', {id: state.dragId, project: project})
+    commit('setDropId', null)
   }
 }
 
