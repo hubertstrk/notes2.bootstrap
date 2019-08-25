@@ -1,6 +1,6 @@
 <template>
   <div
-    @dragover.prevent @drop="onDrop"
+    @dragover="onDragOver" @drop="onDrop"
     class="navigation-card"
     :class="{active: selectedName === name}"
     @click="$emit('click', name)"
@@ -30,6 +30,9 @@
       onDrop (event) {
         event.preventDefault()
         this.onDropped(this.name)
+      },
+      onDragOver (event) {
+        event.preventDefault()
       }
     }
   }
