@@ -55,6 +55,7 @@
 
   .editor-menu {
     display: flex;
+    height: 60px;
   }
 
   .editor-ace {

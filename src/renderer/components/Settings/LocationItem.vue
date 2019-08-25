@@ -14,9 +14,10 @@
       <b-progress :value="notesAtLocation.length" :max="Object.values(notes).length" class="mb-3"></b-progress>
     </b-card-text>
 
-    <b-card-text>
+    <b-card-text class="location-item-actions">
       <ConfirmButton text="Delete" @confirm="onDeleteLocation()" />
     </b-card-text>
+
   </b-card>
 </template>
 
@@ -83,6 +84,10 @@
     > * {
       margin-right: 10px;
     }
+  }
+
+  .location-item-actions {
+    height: 50px;
   }
 }
 </style>

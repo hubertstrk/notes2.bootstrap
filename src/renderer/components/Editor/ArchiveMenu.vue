@@ -40,6 +40,9 @@
 <style lang="scss" scoped>
 .archive-menu-actions {
 
+  display: flex;
+  align-items: start;
+
   > * {
     margin-right: 4px;
   }
