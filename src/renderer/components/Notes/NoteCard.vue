@@ -1,16 +1,20 @@
 <template>
   <div
+    ref="note"
     class="note-card"
+    draggable
+    @dragstart="onDragStart"
     :class="{'active-note' : note.id === activeNoteId}"
     @click="$emit('click', note.id)"
   >
     <div class="note-card-title">
-      <div class="lead">{{title}}</div>
+      <div>{{title}}</div>
     </div>
   </div>
 </template>
 
 <script>
+  import {mapState, mapMutations} from 'vuex'
   import {getTitle} from '@/helper/Note'
   import {NoteMixin} from '@/mixins/NoteMixin'
 
@@ -19,8 +23,20 @@
     mixins: [NoteMixin],
     props: ['note'],
     computed: {
+      ...mapState('editor', [
+        'notes'
+      ]),
       title () {
         return getTitle(this.note.text)
+      }
+    },
+    methods: {
+      ...mapMutations('editor', [
+        'setDropId'
+      ]),
+      onDragStart (event) {
+        console.info('starting drag')
+        this.setDropId(this.note.id)
       }
     }
   }

@@ -14,7 +14,8 @@ const state = {
     activeNoteId: null,
     selectedProject: null
   },
-  statistics: null
+  statistics: null,
+  dragId: null
 }
 
 const mutations = {
@@ -44,6 +45,12 @@ const mutations = {
   },
   setStatistics (state, statistics) {
     state.statistics = statistics
+  },
+  setDropId (state, id) {
+    state.dragId = id
+  },
+  setProjectForNoteId (state, {id, project}) {
+    state.notes[id].project = project
   }
 }
 
@@ -108,6 +115,10 @@ const actions = {
           commit('setStatistics', statistics)
         })
     }
+  },
+  onDropped ({commit, dispatch}, project) {
+    commit('setProjectForNoteId', {id: state.dragId, project: project})
+    dispatch('updateNote', state.notes[state.dragId])
   }
 }
 

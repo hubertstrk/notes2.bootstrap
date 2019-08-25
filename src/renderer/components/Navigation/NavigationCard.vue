@@ -1,5 +1,6 @@
 <template>
   <div
+    @dragover.prevent @drop="onDrop"
     class="navigation-card"
     :class="{active: selectedName === name}"
     @click="$emit('click', name)"
@@ -17,9 +18,20 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
+
   export default {
     name: 'NavigationCard',
-    props: ['name', 'selectedName']
+    props: ['name', 'selectedName'],
+    methods: {
+      ...mapActions('editor', [
+        'onDropped'
+      ]),
+      onDrop (event) {
+        event.preventDefault()
+        this.onDropped(this.name)
+      }
+    }
   }
 </script>
 
