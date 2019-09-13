@@ -94,6 +94,7 @@
 
 <style lang="scss" scoped>
 .new-note-component {
+  width: 100%;
   padding: 30px;
 
   .new-note-form {
