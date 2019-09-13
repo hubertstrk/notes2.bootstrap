@@ -1,15 +1,22 @@
 <template>
   <div class="note-info">
-    <span class="note-info-title lead">{{title}}</span>
-    <span class="note-info-description"><pre><code>{{description}}</code></pre></span>
+    <div class="note-info-title lead">{{title}}</div>
+    <div class="note-info-description">
+        <slot />
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'InfoDescription',
-    props: ['title', 'description']
+import NumericTween from '@/components/Shared/NumericTween'
+
+export default {
+  name: 'InfoDescription',
+  props: ['title'],
+  components: {
+    NumericTween
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -21,7 +28,7 @@
   }
 
   .note-info-description {
-    font-size: 1.2em;
+    font-size: 1.0em;
   }
 
 }

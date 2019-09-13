@@ -3,15 +3,27 @@
     <Menu title="Info" />
 
     <template v-if="activeNote">
-      <InfoDescription title="Name" :description="activeNote.id" />
-      <InfoDescription title="Project" :description="activeNote.project" />
-      <InfoDescription title="Directoy" :description="location.directory" />
+      <InfoDescription title="Name">
+        {{activeNote.id}}
+      </InfoDescription>
+      <InfoDescription title="Project">
+        {{activeNote.project}}
+      </InfoDescription>
+      <InfoDescription title="Directoy">
+        {{location.directory}}
+      </InfoDescription>
     </template>
 
     <template v-if="statistics">
-      <InfoDescription title="Created" :description="formatDate(statistics.birthtime)" />
-      <InfoDescription title="Modified" :description="formatDate(statistics.mtime)" />
-      <InfoDescription title="Size" :description="`${statistics.size} bytes`" />
+      <InfoDescription title="Created">
+        {{formatDate(statistics.birthtime)}}
+      </InfoDescription>
+      <InfoDescription title="Modified">
+        {{formatDate(statistics.mtime)}}
+      </InfoDescription>
+      <InfoDescription title="Size">
+        <NumericTween :value="statistics.size" /> byte
+      </InfoDescription>
     </template>
   </div>
 </template>
@@ -20,12 +32,14 @@
   import {mapState, mapActions} from 'vuex'
   import {NoteMixin} from '@/mixins/NoteMixin'
   import Menu from './Settings/Menu'
+  import NumericTween from '@/components/Shared/NumericTween'
   import InfoDescription from '@/components/Shared/InfoDescription'
 
   export default {
     name: 'NoteInfo',
     components: {
       Menu,
+      NumericTween,
       InfoDescription
     },
     mixins: [NoteMixin],
@@ -58,6 +72,7 @@
 <style lang="scss" scoped>
 .note-info-component {
 
+  width: 100%;
   padding: 30px;
 
 }

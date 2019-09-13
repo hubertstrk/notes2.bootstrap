@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <span>
     {{numericValue.value}}
-  </div>
+  </span>
 </template>
 
 <script>
