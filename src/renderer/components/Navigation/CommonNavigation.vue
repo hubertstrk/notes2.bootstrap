@@ -15,7 +15,7 @@
       </template>
 
       <template #info>
-        {{groupStatistics[link.name]}}
+        <NumericTween :value="groupStatistics[link.name]" />
       </template>
 
     </NavigationCard>
@@ -26,11 +26,13 @@
   import {mapState, mapMutations, mapGetters} from 'vuex'
 
   import NavigationCard from './NavigationCard'
+  import NumericTween from '@/components/Shared/NumericTween'
 
   export default {
     name: 'CommonNavigation',
     components: {
-      NavigationCard
+      NavigationCard,
+      NumericTween
     },
     data () {
       return {
