@@ -15,7 +15,8 @@ const state = {
     selectedProject: null
   },
   statistics: null,
-  dragId: null
+  dragId: null,
+  loading: false
 }
 
 const mutations = {

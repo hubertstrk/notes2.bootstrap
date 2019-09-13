@@ -21,5 +21,7 @@
 <style lang="scss" scoped>
 .settings {
   padding: 30px;
+  flex: 1;
+  overflow: auto;
 }
 </style>

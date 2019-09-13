@@ -2,10 +2,10 @@
   <div class="confirm-button-component">
     <transition name="slide">
       <div class="confirm-button-component-action" v-if="!actionCalled" key="delete">
-        <AppButton icon="trash" warning @click="actionCalled = true" :text="text" />
+        <AppButton icon="trash" secondary @click="actionCalled = true" :text="text" />
       </div>
       <div v-else key="confirm" class="confirm-button-component-action">
-        <AppButton secondary @click="actionCalled = false" text="Cancel" />
+        <AppButton success @click="actionCalled = false" text="Cancel" />
         <AppButton icon="trash" danger @click="$emit('confirm')" text="Confirm" />
       </div>
     </transition>
