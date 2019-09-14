@@ -49,9 +49,6 @@ const mutations = {
   },
   setDropId (state, id) {
     state.dragId = id
-  },
-  setProjectForNoteId (state, {id, project}) {
-    state.notes[id].project = project
   }
 }
 
@@ -119,7 +116,6 @@ const actions = {
   },
   onDropped ({commit, dispatch}, project) {
     dispatch('updateNote', {id: state.dragId, project: project})
-    commit('setProjectForNoteId', {id: state.dragId, project: project})
     commit('setDropId', null)
   }
 }

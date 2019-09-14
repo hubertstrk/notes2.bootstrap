@@ -21,11 +21,9 @@
       }
     },
     watch: {
-      value: {
-        immediate: false,
-        handler (oldVal, newVal) {
-          this.tween(oldVal, newVal)
-        }
+      value (oldValue, newValue) {
+        console.info(`numericTween watch ${newValue}`)
+        this.tween(oldValue, newValue)
       }
     },
     mounted () {

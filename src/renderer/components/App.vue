@@ -59,6 +59,7 @@
 .main-component {
 
   height: 100%;
+  width: 100%;
 
   .component {
     display: flex;
