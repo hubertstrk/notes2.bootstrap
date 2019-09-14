@@ -16,9 +16,6 @@ export const NoteMixin = {
         },
         set (value) {
           this.updateNote({id: this.activeNoteId, [prop]: value})
-          if (prop === 'archived') {
-            this.setSelectionMode('archived')
-          }
         }
       }
       obj[prop] = computedProp

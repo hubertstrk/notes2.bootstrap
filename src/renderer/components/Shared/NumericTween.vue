@@ -16,18 +16,17 @@
       }
     },
     methods: {
-      tween (oldValue, newValue) {
-        TweenLite.to(this.tweenObject, 1, {value: newValue, onUpdate: () => { this.numericValue.value = this.tweenObject.value.toFixed(0) }})
+      tween (value) {
+        TweenLite.to(this.tweenObject, 1, {value: value, onUpdate: () => { this.numericValue.value = this.tweenObject.value.toFixed(0) }})
       }
     },
     watch: {
-      value (oldValue, newValue) {
-        console.info(`numericTween watch ${newValue}`)
-        this.tween(oldValue, newValue)
+      value (value) {
+        this.tween(value)
       }
     },
     mounted () {
-      this.tween(0, this.value)
+      this.tween(this.value)
     }
   }
 </script>

@@ -13,7 +13,7 @@
       </template>
 
       <template #info>
-        <NumericTween :value="all.filter(x => x.project === project).length" />
+        <NumericTween :value="all.filter(x => x.project === project).filter(x => !x.archived).length" />
       </template>
 
     </NavigationCard>

@@ -32,11 +32,10 @@
     },
     methods: {
       ...mapMutations('editor', [
-        'setDropId'
+        'setDragId'
       ]),
       onDragStart (event) {
-        console.info('starting drag')
-        this.setDropId(this.note.id)
+        this.setDragId(this.note.id)
       }
     }
   }

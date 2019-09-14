@@ -15,7 +15,7 @@
       </template>
 
       <template #info>
-        <NumericTween :value="groupStatistics[link.name]" />
+        <NumericTween :value="groupStatistic[link.name]" />
       </template>
 
     </NavigationCard>
@@ -48,23 +48,9 @@
         selectionMode: state => state.ui.selectionMode
       }),
       ...mapGetters('editor', [
-        'all',
-        'starred',
-        'archived',
+        'groupStatistic',
         'projects'
-      ]),
-      groupStatistics () {
-        // return ['starred', 'all', 'archived'].reduce((lookup, group) => {
-        //   lookup[group] = this[group].length
-        //   return lookup
-        // }, {})
-        console.info('groupStatistics triggered')
-        return {
-          starred: this.starred.length,
-          archived: this.archived.length,
-          all: this.all.length
-        }
-      }
+      ])
     },
     methods: {
       ...mapMutations('editor', [

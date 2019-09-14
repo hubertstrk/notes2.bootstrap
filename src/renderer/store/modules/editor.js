@@ -47,7 +47,7 @@ const mutations = {
   setStatistics (state, statistics) {
     state.statistics = statistics
   },
-  setDropId (state, id) {
+  setDragId (state, id) {
     state.dragId = id
   }
 }
@@ -116,7 +116,7 @@ const actions = {
   },
   onDropped ({commit, dispatch}, project) {
     dispatch('updateNote', {id: state.dragId, project: project})
-    commit('setDropId', null)
+    commit('setDragId', null)
   }
 }
 
@@ -139,16 +139,24 @@ const getters = {
     }
   },
   all (state) {
-    return Object.values(state.notes).filter(x => !x.archived)
+    return Object.values(state.notes)
   },
   starred (state, getters) {
-    return getters.all.filter(x => x.starred)
+    return getters.all.filter(x => x.starred).filter(x => !x.archived)
   },
   archived (state) {
     return Object.values(state.notes).filter(x => x.archived)
   },
   notesByProject (state, getters) {
-    return getters.all.filter(x => x.project === state.ui.selectedProject)
+    return getters.all.filter(x => x.project === state.ui.selectedProject).filter(x => !x.archived)
+  },
+  groupStatistic (state, getters) {
+    const stats = {
+      all: getters.all.length,
+      starred: getters.starred.length,
+      archived: getters.archived.length
+    }
+    return stats
   }
 }
 
