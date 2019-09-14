@@ -20,7 +20,7 @@
       </NavigationCard>
     </div>
 
-    <b-collapse id="collapse-1" class="collapse-container">
+    <b-collapse id="collapse-1" class="collapse-container" visible>
       <ProjectNavigation />
     </b-collapse>
 
