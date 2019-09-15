@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import {flatten} from 'lodash'
-import {noteEquals} from '@/helper/Note'
+import {noteEquals, getTitle} from '@/helper/Note'
 import directoryApi from '@/api/directory'
 import fileApi from '@/api/file'
 import noteApi from '@/api/note'
@@ -39,6 +39,7 @@ const mutations = {
     state.ui.activeNoteId = id
   },
   updateNote (state, note) {
+    note.title = getTitle(note.text)
     Vue.set(state.notes, note.id, note)
   },
   deleteNote (state, id) {
@@ -67,6 +68,7 @@ const actions = {
       const note = noteApi.deserialize(buffer)
       note.directory = directory
       note.id = name
+      note.title = getTitle(note.text)
       return note
     })
     commit('setNotes', notes)
@@ -82,6 +84,7 @@ const actions = {
       project: project,
       directory: location.directory
     }
+    note.title = getTitle(note.text)
 
     const buffer = noteApi.serialize(note)
     const noteId = note.id + '.note'

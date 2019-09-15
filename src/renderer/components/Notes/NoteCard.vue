@@ -8,14 +8,13 @@
     @click="$emit('click', note.id)"
   >
     <div class="note-card-title">
-      <div>{{title}}</div>
+      <div>{{note.title}}</div>
     </div>
   </div>
 </template>
 
 <script>
   import {mapState, mapMutations} from 'vuex'
-  import {getTitle} from '@/helper/Note'
   import {NoteMixin} from '@/mixins/NoteMixin'
 
   export default {
@@ -25,10 +24,7 @@
     computed: {
       ...mapState('editor', [
         'notes'
-      ]),
-      title () {
-        return getTitle(this.note.text)
-      }
+      ])
     },
     methods: {
       ...mapMutations('editor', [

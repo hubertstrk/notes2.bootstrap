@@ -16,7 +16,6 @@
 </template>
 
 <script>
-  import {getTitle} from '@/helper/Note'
   import {sortBy} from 'lodash'
   import {mapMutations, mapGetters} from 'vuex'
 
@@ -54,8 +53,7 @@
         return fuse.search(this.search)
       },
       sortedNotes () {
-        const sortEnabledNotes = this.filteredNotes.map(note => ({...note, title: getTitle(note.text)}))
-        return sortBy(sortEnabledNotes, ['title'])
+        return sortBy(this.filteredNotes, ['title'])
       }
     },
     methods: {
