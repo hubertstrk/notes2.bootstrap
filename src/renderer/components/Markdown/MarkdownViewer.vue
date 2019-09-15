@@ -40,11 +40,6 @@
         if (this.text) {
           this.addMarkup(this.text)
         }
-      },
-      activeNoteId () {
-        if (!this.activeNoteId) {
-          this.addMarkup('')
-        }
       }
     },
     mounted () {

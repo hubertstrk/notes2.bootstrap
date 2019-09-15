@@ -9,7 +9,11 @@ export const NoteMixin = {
     ...mapState('settings', [
       'locations'
     ]),
-    ...['starred', 'text', 'project', 'archived'].reduce((obj, prop) => {
+    text () {
+      if (!this.activeNoteId) return ''
+      return this.notes[this.activeNoteId].text
+    },
+    ...['starred', 'project', 'archived'].reduce((obj, prop) => {
       const computedProp = {
         get () {
           return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null

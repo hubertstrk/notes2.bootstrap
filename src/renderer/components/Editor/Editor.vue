@@ -9,8 +9,9 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   import {NoteMixin} from '@/mixins/NoteMixin'
+  import {debounce} from 'lodash'
 
   import EditorMenu from './EditorMenu'
   import Ace from './Ace'
@@ -30,11 +31,15 @@
       })
     },
     methods: {
-      onTextChanged (text) {
-        if (text !== '') {
-          this.text = text
+      ...mapActions('editor', [
+        'updateNote'
+      ]),
+      onTextChanged: debounce(function (text) {
+        if (text === '') {
+          return
         }
-      }
+        this.updateNote({id: this.activeNoteId, text})
+      }, 300)
     }
   }
 </script>
