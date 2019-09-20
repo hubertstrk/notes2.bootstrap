@@ -44,10 +44,10 @@
 }
 
 .slide-enter-active {
-  animation: fade-in .5s;
+  animation: fade-in .3s;
 }
 .slide-leave-active {
-  animation: fade-out .5s;
+  animation: fade-out .3s;
 }
 
 @keyframes fade-in {

@@ -6,7 +6,9 @@
       <a href="#" @click="$router.push('/Settings/About')">About</a>
     </div>
     <div class="settings-tab-content">
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -40,7 +42,13 @@
 
   .settings-tab-content {
     display: flex;
-    flex: 4;
+
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .2s;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
   }
 }
 </style>
