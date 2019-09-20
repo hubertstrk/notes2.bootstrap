@@ -2,7 +2,7 @@
   <div class="editor-component">
     <div class="editor-upper">
       <EditorMenu class="editor-menu" />
-      <Ace class="editor-ace" :value="text" @input="onTextChanged" :options="{fontSize}" />
+      <Ace class="editor-ace" :value="activeText" @input="onTextChanged" :options="{fontSize}" />
     </div>
     <Footer />
   </div>
@@ -28,7 +28,11 @@
     computed: {
       ...mapState('settings', {
         fontSize: state => state.fontSize
-      })
+      }),
+      activeText () {
+        if (!this.activeNoteId) return ''
+        return this.notes[this.activeNoteId].text
+      }
     },
     methods: {
       ...mapActions('editor', [

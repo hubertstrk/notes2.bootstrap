@@ -1,6 +1,9 @@
 <template>
   <div class="editor-menu-component">
-    <template v-if="!archived">
+    <template v-if="selectionMode === 'archived'">
+      <ArchiveMenu />
+    </template>
+    <template v-else>
       <div>
         <ControlCommands />
         <AppDevider xlarge />
@@ -9,9 +12,6 @@
       <div>
         <NoteCommands />
       </div>
-    </template>
-    <template v-else>
-      <ArchiveMenu />
     </template>
   </div>
 </template>
@@ -23,6 +23,7 @@
   import NoteCommands from './Commands/NoteCommands'
   import ArchiveMenu from './ArchiveMenu'
 
+  import {mapState} from 'vuex'
   import {NoteMixin} from '@/mixins/NoteMixin'
 
   export default {
@@ -33,6 +34,11 @@
       ControlCommands,
       NoteCommands,
       ArchiveMenu
+    },
+    computed: {
+      ...mapState('editor', {
+        selectionMode: state => state.ui.selectionMode
+      })
     },
     mixins: [NoteMixin]
   }

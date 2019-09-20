@@ -107,6 +107,12 @@ const actions = {
         commit('setActiveNoteId', null)
       })
   },
+  setArchived ({state, commit, dispatch}, archived) {
+    const current = Object.values(state.notes).find(x => x.id === state.ui.activeNoteId)
+    const note = {id: current.id, archived}
+    dispatch('updateNote', note)
+    commit('setActiveNoteId', null)
+  },
   loadStatistics ({state, commit}) {
     commit('setStatistics', null)
     if (state.ui.activeNoteId) {
@@ -142,7 +148,7 @@ const getters = {
     }
   },
   all (state) {
-    return Object.values(state.notes)
+    return Object.values(state.notes).filter(x => !x.archived)
   },
   starred (state, getters) {
     return getters.all.filter(x => x.starred).filter(x => !x.archived)

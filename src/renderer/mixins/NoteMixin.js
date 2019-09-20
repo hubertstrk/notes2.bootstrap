@@ -9,22 +9,25 @@ export const NoteMixin = {
     ...mapState('settings', [
       'locations'
     ]),
-    text () {
-      if (!this.activeNoteId) return ''
-      return this.notes[this.activeNoteId].text
-    },
-    ...['starred', 'project', 'archived'].reduce((obj, prop) => {
+    ...['starred', 'project'].reduce((obj, prop) => {
       const computedProp = {
         get () {
           return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null
         },
         set (value) {
-          this.updateNote({id: this.activeNoteId, [prop]: value})
+          if (value) {
+            this.updateNote({id: this.activeNoteId, [prop]: value})
+          }
         }
       }
       obj[prop] = computedProp
       return obj
     }, {}),
+    archived () {
+      if (this.activeNoteId) {
+        return this.notes[this.activeNoteId].archived
+      }
+    },
     location () {
       if (!this.activeNoteId) return ''
       const note = this.notes[this.activeNoteId]

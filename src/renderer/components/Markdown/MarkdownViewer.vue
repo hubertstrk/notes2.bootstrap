@@ -36,10 +36,9 @@
       }
     },
     watch: {
-      text () {
-        if (this.text) {
-          this.addMarkup(this.text)
-        }
+      activeNoteId (id) {
+        const markdown = id ? this.notes[id].text : '<div></div>'
+        this.addMarkup(markdown)
       }
     },
     mounted () {

@@ -1,6 +1,6 @@
 <template>
   <div class="archive-menu-actions">
-    <AppButton success @click="onArchive" text="Restore" />
+    <AppButton success @click="setArchived(false)" text="Restore" />
     <ConfirmButton text="Delete" @confirm="deleteNote()" />
   </div>
 </template>
@@ -24,14 +24,12 @@
     },
     methods: {
       ...mapActions('editor', [
-        'deleteNote'
+        'deleteNote',
+        'setArchived'
       ]),
       async onDeleteNote () {
         await this.deleteNote()
         notify('Note deleted')
-      },
-      onArchive () {
-        this.archived = !this.archived
       }
     }
   }
