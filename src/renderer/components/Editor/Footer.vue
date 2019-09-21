@@ -1,19 +1,11 @@
 <template>
   <div class="editor-footer-component">
-    <div class="editor-group">
-      <div class="footer-group-item">
-        <font-awesome-icon icon="database" />
-        <div>{{location.name}}</div>
-      </div>
-      <div class="footer-group-item">
-        <font-awesome-icon icon="folder" />
-        <div class="footer-directory">{{location.directory}}</div>
-      </div>
-    </div>
-    <div class="footer-group-item">
-      <font-awesome-icon icon="folder" />
-      <div>{{project}}</div>
-    </div>
+    <font-awesome-icon icon="database" />
+    <div>{{location.name}}</div>
+    <font-awesome-icon icon="folder" />
+    <div>{{location.directory}}</div>
+    <font-awesome-icon icon="folder" />
+    <div>{{project}}</div>
   </div>
 </template>
 
@@ -27,7 +19,6 @@
     computed: {
       ...mapState('editor', ['notes']),
       location () {
-        if (!this.activeNoteId) return ''
         const note = this.notes[this.activeNoteId]
         return this.locations.find(x => x.directory === note.directory)
       }
@@ -39,40 +30,15 @@
 .editor-footer-component {
 
   display: flex;
-  justify-content: space-between;
   border-top: 1px solid rgb(243, 243, 243);
   height: 30px;
   align-items: center;
-  padding: 2px 10px;
+  padding: 2px 5px;
   font-size: 0.9em;
 
   > * {
-    margin-right: 12px;
+    margin-left: 10px;
   }
 
-  .editor-group {
-    display: flex;
-
-    > * {
-      margin-right: 12px;
-    }
-
-  }
-
-  .footer-group-item {
-    display: flex;
-    align-items: center;
-
-    > * {
-      margin-right: 4px;
-    }
-  }
-
-  .footer-directory {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 200px;
-  }
 }
 </style>

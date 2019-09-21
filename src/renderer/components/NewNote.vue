@@ -37,10 +37,11 @@
 </template>
 
 <script>
+  import {notify} from '@/helper/AppNotifications'
   import {mapState, mapActions, mapGetters} from 'vuex'
+
   import Menu from './Settings/Menu'
   import AppButton from '@/components/Shared/AppButton'
-  import {notify} from '@/helper/AppNotifications'
 
   export default {
     components: {

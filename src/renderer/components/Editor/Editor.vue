@@ -2,9 +2,9 @@
   <div class="editor-component">
     <div class="editor-upper">
       <EditorMenu class="editor-menu" />
-      <Ace class="editor-ace" :value="activeText" @input="onTextChanged" :options="{fontSize}" />
+      <Ace v-if="activeNoteId" class="editor-ace" :value="activeText" @input="onTextChanged" :options="{fontSize}" />
     </div>
-    <Footer />
+    <Footer v-if="activeNoteId" />
   </div>
 </template>
 

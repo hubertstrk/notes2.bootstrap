@@ -27,11 +27,6 @@ export const NoteMixin = {
       if (this.activeNoteId) {
         return this.notes[this.activeNoteId].archived
       }
-    },
-    location () {
-      if (!this.activeNoteId) return ''
-      const note = this.notes[this.activeNoteId]
-      return this.locations.find(x => x.directory === note.directory)
     }
   },
   methods: {

@@ -1,21 +1,27 @@
 <template>
   <div class="markdown-component">
     <MarkdownMenu />
-    <MarkdownViewer />
+    <MarkdownViewer v-if="activeNoteId" />
   </div>
 </template>
 
 <script>
-  import MarkdownMenu from './MarkdownMenu'
-  import MarkdownViewer from './MarkdownViewer'
+import {mapState} from 'vuex'
+import MarkdownMenu from './MarkdownMenu'
+import MarkdownViewer from './MarkdownViewer'
 
-  export default {
-    name: 'Markdown',
-    components: {
-      MarkdownMenu,
-      MarkdownViewer
-    }
+export default {
+  name: 'Markdown',
+  components: {
+    MarkdownMenu,
+    MarkdownViewer
+  },
+  computed: {
+    ...mapState('editor', {
+      activeNoteId: state => state.ui.activeNoteId
+    })
   }
+}
 </script>
 
 <style lang="scss" scoped>
