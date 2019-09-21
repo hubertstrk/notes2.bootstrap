@@ -2,7 +2,8 @@ import {ensureSettingsFile, readSettings, writeSettings} from '@/helper/Settings
 
 const state = {
   locations: [],
-  fontSize: 20
+  fontSize: 20,
+  reader: false
 }
 
 const mutations = {
@@ -20,6 +21,9 @@ const mutations = {
   },
   setFontSize (state, size) {
     state.fontSize = size
+  },
+  toggleReader (state) {
+    state.reader = !state.reader
   }
 }
 

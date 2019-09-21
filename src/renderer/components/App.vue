@@ -2,10 +2,10 @@
   <div class="main-component">
     <Loading v-if="isLoading" />
     <div v-else id="component" class="component">
-      <div class="navigation">
+      <div class="navigation" :class="{reading: reader}">
         <Navigation />
       </div>
-      <div class="notes">
+      <div class="notes" :class="{reading: reader}">
         <NoteList />
       </div>
       <div class="editor">
@@ -39,7 +39,10 @@
     computed: {
       ...mapState('loading', [
         'isLoading'
-      ])
+      ]),
+      ...mapState('settings', {
+        reader: state => state.reader
+      })
     },
     methods: {
       ...mapMutations('loading', [
@@ -57,7 +60,6 @@
 
 <style lang="scss" scoped>
 .main-component {
-
   height: 100%;
   width: 100%;
 
@@ -66,17 +68,24 @@
     height: 100%;
 
     .navigation {
-      min-width: 300px;
-      display: flex;
+      width: 300px;
       flex: 1;
+      display: flex;
       overflow-y: auto;
+      transition: all .5s;
     }
 
     .notes {
-      min-width: 300px;
-      display: flex;
+      width: 300px;
       flex: 1;
+      display: flex;
       overflow-y: auto;
+      transition: all 1s;
+    }
+
+    .reading {
+      width: 0px;
+      flex: 0;
     }
 
     .editor {

@@ -24,7 +24,8 @@ import {
   faTimes,
   faInfoCircle,
   faDatabase,
-  faChartLine
+  faChartLine,
+  faBookOpen
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -56,7 +57,8 @@ library.add(
   faInfoCircle,
   faDatabase,
   faChartLine,
-  farBookmark
+  farBookmark,
+  faBookOpen
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

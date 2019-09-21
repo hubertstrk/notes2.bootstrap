@@ -8,9 +8,9 @@
       <app-button @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
-      <template v-for="note in sortedNotes">
-        <NoteCard :note="note" :key="note.id" @click="setActiveNoteId(note.id)" />
-      </template>
+      <transition-group name="list-complete" tag="div">
+          <NoteCard class="list-complete-item" v-for="note in sortedNotes" :key="note.id" :note="note" @click="setActiveNoteId(note.id)" />
+      </transition-group>
     </div>
   </div>
 </template>
@@ -65,6 +65,7 @@
 </script>
 
 <style lang="scss" scoped>
+
 .note-list-component {
 
   display: flex;
@@ -93,6 +94,23 @@
 
     > div:first-child {
       border-top: 1px solid rgb(220, 220, 220);
+    }
+
+    .list-complete-item {
+
+      transition: all 0.4s;
+      display: inline-block;
+
+    }
+    .list-complete-enter, .list-complete-leave-to {
+
+      opacity: 0;
+      transform: translateY(10px);
+
+    }
+    .list-complete-leave-active {
+
+      position: absolute;
     }
   }
 }

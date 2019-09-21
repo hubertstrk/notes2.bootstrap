@@ -41,4 +41,7 @@
 </script>
 
 <style lang="scss" scoped>
+.text {
+  margin-left: 5px;
+}
 </style>
