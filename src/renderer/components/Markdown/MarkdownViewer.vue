@@ -3,48 +3,61 @@
 </template>
 
 <script>
-  import {getHtml} from '@/helper/Marked'
-  import {NoteMixin} from '@/mixins/NoteMixin'
+import {mapState} from 'vuex'
+import {getHtml} from '@/helper/Marked'
+import {NoteMixin} from '@/mixins/NoteMixin'
 
-  export default {
-    name: 'MarkdownViewer',
-    mixins: [NoteMixin],
-    data () {
-      return {
-        iFrame: null
-      }
-    },
-    methods: {
-      createIFrame () {
-        const iFrame = document.createElement('iframe')
-        iFrame.setAttribute('id', 'iframe')
-        iFrame.classList.add('iframe')
-        iFrame.setAttribute('src', '/static/page/index.html')
-        iFrame.setAttribute('frameborder', 0)
-        iFrame.setAttribute('border', 0)
-        iFrame.setAttribute('height', '100%')
-        iFrame.setAttribute('width', '100%')
-        this.$refs.iFrameContainer.appendChild(iFrame)
-      },
-      addMarkup (text) {
-        const html = getHtml(text)
-        const container = document.createElement('div')
-        container.innerHTML = html
-
-        const iFrame = document.querySelector('#iframe')
-        iFrame.contentDocument.body.innerHTML = container.innerHTML
-      }
-    },
-    watch: {
-      activeNoteId (id) {
-        const markdown = id ? this.notes[id].text : '<div></div>'
-        this.addMarkup(markdown)
-      }
-    },
-    mounted () {
-      this.createIFrame()
+export default {
+  name: 'MarkdownViewer',
+  mixins: [NoteMixin],
+  data () {
+    return {
+      iFrame: null
     }
+  },
+  computed: {
+    ...mapState('editor', {
+      activeNoteId: state => state.ui.activeNoteId,
+      all: state => state.notes
+    }),
+    text () {
+      return this.activeNoteId ? this.notes[this.activeNoteId].text : '<div></div>'
+    }
+  },
+  methods: {
+    createIFrame () {
+      const iFrame = document.createElement('iframe')
+      iFrame.setAttribute('id', 'iframe')
+      iFrame.classList.add('iframe')
+      iFrame.setAttribute('src', '/static/page/index.html')
+      iFrame.setAttribute('frameborder', 0)
+      iFrame.setAttribute('border', 0)
+      iFrame.setAttribute('height', '100%')
+      iFrame.setAttribute('width', '100%')
+      this.$refs.iFrameContainer.appendChild(iFrame)
+    },
+    addMarkup (text) {
+      const html = getHtml(text)
+      const container = document.createElement('div')
+      container.innerHTML = html
+
+      const iFrame = document.querySelector('#iframe')
+      iFrame.contentDocument.body.innerHTML = container.innerHTML
+    }
+  },
+  watch: {
+    activeNoteId (id) {
+      const text = id ? this.notes[id].text : '<div></div>'
+      this.addMarkup(text)
+    },
+    text () {
+      this.addMarkup(this.text)
+    }
+  },
+  mounted () {
+    this.createIFrame()
   }
+}
 </script>
 
 <style lang="scss" scoped>

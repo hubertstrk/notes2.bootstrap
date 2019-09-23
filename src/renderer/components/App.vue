@@ -19,43 +19,43 @@
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
-  import Navigation from './Navigation/Navigation'
-  import NoteList from './Notes/NoteList'
-  import Editor from './Editor/Editor'
-  import Markdown from './Markdown/Markdown'
-  import Loading from './Shared/Loading'
+import Navigation from './Navigation/Navigation'
+import NoteList from './Notes/NoteList'
+import Editor from './Editor/Editor'
+import Markdown from './Markdown/Markdown'
+import Loading from './Shared/Loading'
 
-  export default {
-    name: 'App',
-    components: {
-      Navigation,
-      NoteList,
-      Editor,
-      Markdown,
-      Loading
-    },
-    computed: {
-      ...mapState('loading', [
-        'isLoading'
-      ]),
-      ...mapState('settings', {
-        reader: state => state.reader
-      })
-    },
-    methods: {
-      ...mapMutations('loading', [
-        'setLoading'
-      ])
-    },
-    async created () {
-      this.setLoading(true)
-      await this.$store.dispatch('settings/reloadSettings')
-      await this.$store.dispatch('editor/reloadNotes')
-      this.setLoading(false)
-    }
+export default {
+  name: 'App',
+  components: {
+    Navigation,
+    NoteList,
+    Editor,
+    Markdown,
+    Loading
+  },
+  computed: {
+    ...mapState('loading', [
+      'isLoading'
+    ]),
+    ...mapState('settings', {
+      reader: state => state.reader
+    })
+  },
+  methods: {
+    ...mapMutations('loading', [
+      'setLoading'
+    ])
+  },
+  async created () {
+    this.setLoading(true)
+    await this.$store.dispatch('settings/reloadSettings')
+    await this.$store.dispatch('editor/reloadNotes')
+    this.setLoading(false)
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -72,7 +72,7 @@
       flex: 1;
       display: flex;
       overflow-y: auto;
-      transition: all .5s;
+      transition: all .4s;
     }
 
     .notes {
@@ -80,7 +80,7 @@
       flex: 1;
       display: flex;
       overflow-y: auto;
-      transition: all 1s;
+      transition: all .4s;
     }
 
     .reading {
