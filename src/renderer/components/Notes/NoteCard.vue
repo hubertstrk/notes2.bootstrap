@@ -40,6 +40,7 @@
 <style lang="scss" scoped>
 .note-card {
 
+  width: 100%;
   padding: 10px;
   cursor: pointer;
 

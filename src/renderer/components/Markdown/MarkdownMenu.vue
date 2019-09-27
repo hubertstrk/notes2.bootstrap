@@ -9,28 +9,18 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 import AppButton from '@/components/Shared/AppButton'
 
 export default {
   components: {
     AppButton
   },
-  computed: {
-    isReaderMode: {
-      get () {
-        return this.reader
-      },
-      set (value) {
-        this.toggleReader()
-      }
-    }
-  },
   methods: {
     ...mapState('settings', {
       reader: state => state.reader
     }),
-    ...mapMutations('settings', [
+    ...mapActions('settings', [
       'toggleReader'
     ]),
     print () {

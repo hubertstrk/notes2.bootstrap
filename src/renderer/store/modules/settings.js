@@ -1,6 +1,7 @@
 import {ensureSettingsFile, readSettings, writeSettings} from '@/helper/Settings'
 
 const state = {
+  activeNoteId: null,
   locations: [],
   fontSize: 20,
   reader: false
@@ -22,19 +23,26 @@ const mutations = {
   setFontSize (state, size) {
     state.fontSize = size
   },
-  toggleReader (state) {
-    state.reader = !state.reader
+  toggleReader (state, value) {
+    state.reader = value
+  },
+  setActiveNoteId (state, id) {
+    state.activeNoteId = id
   }
 }
 
 const actions = {
-  async reloadSettings ({state, commit}) {
+  async reloadSettings ({state, commit, dispatch}) {
     const created = await ensureSettingsFile()
     if (created) {
       await writeSettings({...state})
     }
     const settings = await readSettings()
     commit('setSettings', settings)
+
+    if (settings.activeNoteId) {
+      dispatch('editor/setActiveNoteId', settings.activeNoteId, {root: true})
+    }
   },
   async addLocation ({state, commit, dispatch}, location) {
     commit('addLocation', location)
@@ -48,6 +56,14 @@ const actions = {
   },
   setFontSize ({state, commit}, size) {
     commit('setFontSize', size)
+    writeSettings({...state})
+  },
+  toggleReader ({state, commit}) {
+    commit('toggleReader', !state.reader)
+    writeSettings({...state})
+  },
+  setActiveNoteId ({state, commit}, id) {
+    commit('setActiveNoteId', id)
     writeSettings({...state})
   }
 }

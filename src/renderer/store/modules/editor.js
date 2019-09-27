@@ -72,11 +72,8 @@ const actions = {
       return note
     })
     commit('setNotes', notes)
-    if (notes.length > 0) {
-      commit('setActiveNoteId', notes[0].id)
-    }
   },
-  async addNote ({commit}, {location, project, starred, title}) {
+  async addNote ({commit, dispatch}, {location, project, starred, title}) {
     const note = {
       id: uuidv4(),
       text: `# ${title}`,
@@ -91,7 +88,7 @@ const actions = {
     await fileApi.writeBinary(note.directory, noteId, buffer)
     commit('addNote', note)
     commit('setSelectedProject', project)
-    commit('setActiveNoteId', noteId)
+    dispatch('setActiveNoteId', noteId)
   },
   updateNote ({state, commit}, note) {
     const copy = Object.assign({}, state.notes[note.id], note)
@@ -99,19 +96,19 @@ const actions = {
       commit('updateNote', copy)
     }
   },
-  deleteNote ({state, commit}) {
+  deleteNote ({state, commit, dispatch}) {
     const activeNote = state.notes[state.ui.activeNoteId]
     return fileApi.deleteFile(activeNote.directory, activeNote.id)
       .then(() => {
         commit('deleteNote', activeNote.id)
-        commit('setActiveNoteId', null)
+        dispatch('setActiveNoteId', null)
       })
   },
   setArchived ({state, commit, dispatch}, archived) {
     const current = Object.values(state.notes).find(x => x.id === state.ui.activeNoteId)
     const note = {id: current.id, archived}
     dispatch('updateNote', note)
-    commit('setActiveNoteId', null)
+    dispatch('setActiveNoteId', note.id)
   },
   loadStatistics ({state, commit}) {
     commit('setStatistics', null)
@@ -126,6 +123,10 @@ const actions = {
   onDropped ({commit, dispatch}, project) {
     dispatch('updateNote', {id: state.dragId, project: project})
     commit('setDragId', null)
+  },
+  setActiveNoteId ({commit, dispatch}, id) {
+    commit('setActiveNoteId', id)
+    dispatch('settings/setActiveNoteId', id, {root: true})
   }
 }
 
