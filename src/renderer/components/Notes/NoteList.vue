@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import {sortBy} from 'lodash'
-  import {mapActions, mapGetters} from 'vuex'
+import {sortBy} from 'lodash'
+import {mapActions, mapGetters} from 'vuex'
 
 import ErrorBoundary from '../ErrorBoundary.js'
 import Fuse from 'fuse.js'
@@ -62,31 +62,12 @@ export default {
       const fuse = new Fuse(this.visibleNotes, this.options)
       return fuse.search(this.search)
     },
-    components: {
-      AppButton,
-      NoteCard
-    },
-    computed: {
-      ...mapGetters('editor', [
-        'visibleNotes'
-      ]),
-      filteredNotes () {
-        if (this.search.length <= 0) return this.visibleNotes
-        const fuse = new Fuse(this.visibleNotes, this.options)
-        return fuse.search(this.search)
-      },
-      sortedNotes () {
-        return sortBy(this.filteredNotes, ['title'])
-      }
-    },
-    methods: {
-      ...mapActions('editor', [
-        'setActiveNoteId'
-      ])
+    sortedNotes () {
+      return sortBy(this.filteredNotes, ['title'])
     }
   },
   methods: {
-    ...mapMutations('editor', [
+    ...mapActions('editor', [
       'setActiveNoteId'
     ])
   }
