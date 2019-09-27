@@ -19,48 +19,51 @@
 </template>
 
 <script>
-  import AppButton from '@/components/Shared/AppButton'
-  import {mapState, mapActions} from 'vuex'
-  const {dialog} = require('electron').remote
+import {notify} from '@/helper/AppNotifications'
+import AppButton from '@/components/Shared/AppButton'
+import {mapState, mapActions} from 'vuex'
+const {dialog} = require('electron').remote
 
-  export default {
-    name: 'NewStorageLocation',
-    components: {
-      AppButton
-    },
-    data () {
-      return {
-        location: {
-          directory: null,
-          name: null
-        }
-      }
-    },
-    computed: {
-      ...mapState('settings', {
-        locations: state => state.locations
-      })
-    },
-    methods: {
-      ...mapActions('settings', [
-        'addLocation'
-      ]),
-      openDirectorySelection () {
-        dialog.showOpenDialog({
-          title: 'Select Folder',
-          properties: ['openDirectory']
-        }, (folders) => {
-          if (folders && folders.length === 1) {
-            this.location.directory = folders[0]
-          }
-        })
-      },
-      async onAddLocation () {
-        await this.addLocation(this.location)
-        this.location = {directory: null, name: null}
+export default {
+  name: 'NewStorageLocation',
+  components: {
+    AppButton
+  },
+  data () {
+    return {
+      location: {
+        directory: null,
+        name: null
       }
     }
+  },
+  computed: {
+    ...mapState('settings', {
+      locations: state => state.locations
+    })
+  },
+  methods: {
+    ...mapActions('settings', [
+      'addLocation'
+    ]),
+    openDirectorySelection () {
+      dialog.showOpenDialog({
+        title: 'Select Folder',
+        properties: ['openDirectory']
+      }, (folders) => {
+        if (folders && folders.length === 1) {
+          this.location.directory = folders[0]
+        }
+      })
+    },
+    async onAddLocation () {
+      await this.addLocation(this.location)
+      this.location = {directory: null, name: null}
+      this.$router.push('/Settings/LocationManagement2')
+      notify('Location added')
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

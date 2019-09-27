@@ -8,60 +8,70 @@
       <app-button @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
-      <transition-group name="list-complete" tag="div">
-          <NoteCard class="list-complete-item" v-for="note in sortedNotes" :key="note.id" :note="note" @click="setActiveNoteId(note.id)" />
+      <transition-group name="list-complete" tag="div" class="notes-list-transition-group">
+        <template v-for="note in sortedNotes">
+          <ErrorBoundary :key="note.id">
+            <NoteCard
+              :note="note"
+              class="list-complete-item"
+              @click="setActiveNoteId(note.id)"
+            />
+          </ErrorBoundary>
+        </template>
       </transition-group>
     </div>
   </div>
 </template>
 
 <script>
-  import {sortBy} from 'lodash'
-  import {mapMutations, mapGetters} from 'vuex'
+import {sortBy} from 'lodash'
+import {mapMutations, mapGetters} from 'vuex'
 
-  import Fuse from 'fuse.js'
+import ErrorBoundary from '../ErrorBoundary.js'
+import Fuse from 'fuse.js'
 
-  import AppButton from '@/components/Shared/AppButton'
-  import NoteCard from './NoteCard'
+import AppButton from '@/components/Shared/AppButton'
+import NoteCard from './NoteCard'
 
-  export default {
-    name: 'NoteList',
-    data () {
-      return {
-        search: '',
-        options: {
-          keys: ['text'],
-          threshold: 0.1,
-          location: 0,
-          distance: 65535,
-          maxPatternLength: 16,
-          minMatchCharLength: 1
-        }
+export default {
+  name: 'NoteList',
+  data () {
+    return {
+      search: '',
+      options: {
+        keys: ['text'],
+        threshold: 0.1,
+        location: 0,
+        distance: 65535,
+        maxPatternLength: 16,
+        minMatchCharLength: 1
       }
-    },
-    components: {
-      AppButton,
-      NoteCard
-    },
-    computed: {
-      ...mapGetters('editor', [
-        'visibleNotes'
-      ]),
-      filteredNotes () {
-        if (this.search.length <= 0) return this.visibleNotes
-        const fuse = new Fuse(this.visibleNotes, this.options)
-        return fuse.search(this.search)
-      },
-      sortedNotes () {
-        return sortBy(this.filteredNotes, ['title'])
-      }
-    },
-    methods: {
-      ...mapMutations('editor', [
-        'setActiveNoteId'
-      ])
     }
+  },
+  components: {
+    AppButton,
+    NoteCard,
+    ErrorBoundary
+  },
+  computed: {
+    ...mapGetters('editor', [
+      'visibleNotes'
+    ]),
+    filteredNotes () {
+      if (this.search.length <= 0) return this.visibleNotes
+      const fuse = new Fuse(this.visibleNotes, this.options)
+      return fuse.search(this.search)
+    },
+    sortedNotes () {
+      return sortBy(this.filteredNotes, ['title'])
+    }
+  },
+  methods: {
+    ...mapMutations('editor', [
+      'setActiveNoteId'
+    ])
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -81,6 +91,18 @@
     }
   }
 
+  .notes-list-transition-group {
+
+    > * {
+      border-bottom: 1px solid rgb(220, 220, 220);
+    }
+
+    > *:first-child {
+      border-top: 1px solid rgb(220, 220, 220);
+    }
+
+  }
+
   .note-list {
 
     display: flex;
@@ -88,28 +110,16 @@
     flex: 1;
     overflow: auto;
 
-    > div {
-      border-bottom: 1px solid rgb(220, 220, 220);
-    }
-
-    > div:first-child {
-      border-top: 1px solid rgb(220, 220, 220);
-    }
-
     .list-complete-item {
-
-      transition: all 0.4s;
-      display: inline-block;
-
+      transition: all .6s;
     }
-    .list-complete-enter, .list-complete-leave-to {
 
+    .list-complete-enter, .list-complete-leave-to {
       opacity: 0;
       transform: translateY(10px);
-
     }
-    .list-complete-leave-active {
 
+    .list-complete-leave-active {
       position: absolute;
     }
   }

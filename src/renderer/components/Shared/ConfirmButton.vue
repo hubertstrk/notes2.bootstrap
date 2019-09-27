@@ -6,7 +6,7 @@
       </div>
       <div v-else key="confirm" class="confirm-button-component-action">
         <AppButton success @click="actionCalled = false" text="Cancel" />
-        <AppButton icon="trash" danger @click="$emit('confirm')" text="Confirm" />
+        <AppButton icon="trash" danger @click="onConfirm" text="Confirm" />
       </div>
     </transition>
   </div>
@@ -21,6 +21,12 @@
     data () {
       return {
         actionCalled: false
+      }
+    },
+    methods: {
+      onConfirm () {
+        this.$emit('confirm')
+        this.actionCalled = false
       }
     },
     components: {

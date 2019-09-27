@@ -4,7 +4,7 @@
       <font-awesome-icon icon="book-open" /> Reader
     </b-form-checkbox>
     <AppButton secondary icon="print" @click="print" text="Print" />
-    <AppButton secondary icon="cog" @click="$router.push('/Settings/LocationManagement')" text="Settings" />
+    <AppButton secondary icon="cog" @click="$router.push('/Settings/LocationManagement2')" text="Settings" />
   </div>
 </template>
 

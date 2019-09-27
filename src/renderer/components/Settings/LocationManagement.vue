@@ -14,27 +14,28 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-  import LocationItem from './LocationItem'
-  import AppButton from '@/components/Shared/AppButton'
+import {mapState} from 'vuex'
+import LocationItem from './LocationItem'
+import AppButton from '@/components/Shared/AppButton'
 
-  export default {
-    name: 'LocationList',
-    components: {
-      LocationItem,
-      AppButton
-    },
-    computed: {
-      ...mapState('settings', [
-        'locations'
-      ])
-    }
+export default {
+  name: 'LocationManagement',
+  components: {
+    LocationItem,
+    AppButton
+  },
+  computed: {
+    ...mapState('settings', [
+      'locations'
+    ])
   }
+}
 </script>
 
 <style lang="scss" scoped>
 .location-list-component {
 
+  width: 100%;
   display: flex;
   flex-direction: column;
 

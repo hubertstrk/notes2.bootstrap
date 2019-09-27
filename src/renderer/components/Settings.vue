@@ -6,22 +6,22 @@
 </template>
 
 <script>
-  import Menu from './Settings/Menu'
-  import Content from './Settings/Content'
+import Menu from './Settings/Menu'
+import Content from './Settings/Content'
 
-  export default {
-    name: 'Settings',
-    components: {
-      Menu,
-      Content
-    }
+export default {
+  name: 'Settings',
+  components: {
+    Menu,
+    Content
   }
+}
 </script>
 
 <style lang="scss" scoped>
 .settings {
+  width: 100%;
   padding: 30px;
-  flex: 1;
   overflow: auto;
 }
 </style>

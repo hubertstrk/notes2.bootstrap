@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Appearance from '../components/Settings/Appearance'
 import About from '../components/Settings/About'
-import LocationManagement from '../components/Settings/LocationManagement'
+import LocationManagement2 from '../components/Settings/LocationManagement2'
 import NewStorageLocation from '../components/Settings/NewStorageLocation'
 
 Vue.use(Router)
@@ -31,9 +31,9 @@ export default new Router({
       component: require('@/components/Settings').default,
       children: [
         {
-          name: 'LocationManagement',
-          path: 'LocationManagement',
-          component: LocationManagement
+          name: 'LocationManagement2',
+          path: 'LocationManagement2',
+          component: LocationManagement2
         },
         {
           name: 'NewStorageLocation',

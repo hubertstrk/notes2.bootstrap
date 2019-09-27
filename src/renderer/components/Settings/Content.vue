@@ -1,7 +1,7 @@
 <template>
   <div class="settings-component">
     <div class="settings-sidebar">
-      <a href="#" @click="$router.push('/Settings/LocationManagement')">Locations</a>
+      <a href="#" @click="$router.push('/Settings/LocationManagement2')">Locations</a>
       <a href="#" @click="$router.push('/Settings/Appearance')">Appearance</a>
       <a href="#" @click="$router.push('/Settings/About')">About</a>
     </div>
