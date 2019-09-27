@@ -17,7 +17,7 @@
 
 <script>
   import {sortBy} from 'lodash'
-  import {mapMutations, mapGetters} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
 
   import Fuse from 'fuse.js'
 
@@ -57,7 +57,7 @@
       }
     },
     methods: {
-      ...mapMutations('editor', [
+      ...mapActions('editor', [
         'setActiveNoteId'
       ])
     }
