@@ -12,7 +12,8 @@ export default {
   mixins: [NoteMixin],
   data () {
     return {
-      iFrame: null
+      iFrame: null,
+      markdown: '<div></div>'
     }
   },
   computed: {
@@ -34,6 +35,9 @@ export default {
       iFrame.setAttribute('border', 0)
       iFrame.setAttribute('height', '100%')
       iFrame.setAttribute('width', '100%')
+      iFrame.onload = () => {
+        this.addMarkup(this.markdown)
+      }
       this.$refs.iFrameContainer.appendChild(iFrame)
     },
     addMarkup (text) {
@@ -42,16 +46,23 @@ export default {
       container.innerHTML = html
 
       const iFrame = document.querySelector('#iframe')
+      console.info('add Markup')
       iFrame.contentDocument.body.innerHTML = container.innerHTML
     }
   },
   watch: {
-    activeNoteId (id) {
-      const text = id ? this.notes[id].text : '<div></div>'
-      this.addMarkup(text)
+    text: {
+      immediate: true,
+      handler (text) {
+        if (text) {
+          this.markdown = text
+        }
+      }
     },
-    text () {
-      this.addMarkup(this.text)
+    markdown () {
+      if (this.markdown) {
+        this.addMarkup(this.markdown)
+      }
     }
   },
   mounted () {
