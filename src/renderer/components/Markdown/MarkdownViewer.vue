@@ -46,7 +46,6 @@ export default {
       container.innerHTML = html
 
       const iFrame = document.querySelector('#iframe')
-      console.info('add Markup')
       iFrame.contentDocument.body.innerHTML = container.innerHTML
     }
   },
