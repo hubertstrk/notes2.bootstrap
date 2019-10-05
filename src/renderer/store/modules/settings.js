@@ -40,9 +40,9 @@ const actions = {
     const settings = await readSettings()
     commit('setSettings', settings)
 
-    if (settings.activeNoteId) {
-      dispatch('editor/setActiveNoteId', settings.activeNoteId, {root: true})
-    }
+    // if (settings.activeNoteId) {
+    //   dispatch('editor/selectNote', settings.activeNoteId, {root: true})
+    // }
   },
   async addLocation ({state, commit, dispatch}, location) {
     commit('addLocation', location)

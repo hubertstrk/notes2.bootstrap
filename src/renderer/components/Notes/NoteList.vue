@@ -14,7 +14,7 @@
             <NoteCard
               :note="note"
               class="list-complete-item"
-              @click="setActiveNoteId(note.id)"
+              @click="selectNote(note.id)"
             />
           </ErrorBoundary>
         </template>
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions('editor', [
-      'setActiveNoteId'
+      'selectNote'
     ])
   }
 }

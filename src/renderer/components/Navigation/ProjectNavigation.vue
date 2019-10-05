@@ -5,7 +5,8 @@
       @click="setSelectedProject(project)"
     >
       <template #icon>
-        <font-awesome-icon icon="folder" />
+        <font-awesome-icon v-if="selectedProject === project" icon="folder-open" />
+        <font-awesome-icon v-else icon="folder" />
       </template>
 
       <template #title>
