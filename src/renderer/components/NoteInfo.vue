@@ -13,21 +13,21 @@
       </InfoDescription>
 
       <InfoDescription title="Directoy">
-        {{location.directory}}
+        <font-awesome-icon icon="folder" /> <span class="info-description-value">{{location.directory}}</span>
       </InfoDescription>
     </template>
 
     <template v-if="statistics">
       <InfoDescription title="Created">
-        {{formatDate(statistics.birthtime)}}
+        <font-awesome-icon icon="calendar-alt" /> <span class="info-description-value">{{formatDate(statistics.birthtime)}}</span>
       </InfoDescription>
 
       <InfoDescription title="Modified">
-        {{formatDate(statistics.mtime)}}
+        <font-awesome-icon icon="calendar-alt" /> <span class="info-description-value">{{formatDate(statistics.mtime)}}</span>
       </InfoDescription>
 
       <InfoDescription title="Size">
-        <NumericTween :value="statistics.size" /> byte
+        <font-awesome-icon icon="hdd" /> <span class="info-description-value"><NumericTween :value="statistics.size" /> byte</span>
       </InfoDescription>
     </template>
   </div>
@@ -79,6 +79,10 @@
 
   width: 100%;
   padding: 30px;
+
+  .info-description-value {
+    margin-left: 4px;
+  }
 
 }
 </style>

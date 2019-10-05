@@ -8,14 +8,9 @@
 </template>
 
 <script>
-import NumericTween from '@/components/Shared/NumericTween'
-
 export default {
   name: 'InfoDescription',
-  props: ['title'],
-  components: {
-    NumericTween
-  }
+  props: ['title']
 }
 </script>
 
@@ -31,5 +26,8 @@ export default {
     font-size: 1.0em;
   }
 
+  > div {
+    margin: 6px 0;
+  }
 }
 </style>
