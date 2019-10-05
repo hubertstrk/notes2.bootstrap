@@ -68,3 +68,8 @@ h6:before {
     counter-increment: h6counter;
     content: counter(h2counter) '.' counter(h3counter) '.' counter(h4counter) '.' counter(h5counter) '.' counter(h6counter) '. ';
 }
+
+code {
+  color: rgb(27, 27, 27) !important;
+  background: none !important;
+}
