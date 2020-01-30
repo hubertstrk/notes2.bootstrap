@@ -7,9 +7,11 @@
 html, body {
   overflow-y: hidden;
   overflow-x: hidden;
+  line-height: 1.4rem !important;
 }
 
 p {
+  margin-top: 0rem;
   margin-bottom: 0rem;
 }
 

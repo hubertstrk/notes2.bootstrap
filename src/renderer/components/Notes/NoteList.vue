@@ -111,7 +111,7 @@ export default {
     overflow: auto;
 
     .list-complete-item {
-      transition: all .6s;
+      transition: all .2s;
     }
 
     .list-complete-enter, .list-complete-leave-to {

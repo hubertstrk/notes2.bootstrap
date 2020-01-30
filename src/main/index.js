@@ -20,9 +20,9 @@ function createWindow () {
    * Initial window optionsP
    */
   mainWindow = new BrowserWindow({
-    height: 1000,
+    height: 600,
     useContentSize: true,
-    width: 1600,
+    width: 1000,
     icon: path.join(__dirname, '../../build/icons/bookmark.png')
   })
 

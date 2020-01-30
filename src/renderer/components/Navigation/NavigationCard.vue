@@ -39,7 +39,7 @@
 </script>
 
 <style lang="scss" scoped>
-$active-color: rgb(200, 200, 200);
+$active-color: rgb(220, 220, 220);
 
 .navigation-card {
   display: flex;

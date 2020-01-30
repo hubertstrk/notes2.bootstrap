@@ -9,6 +9,7 @@
   >
     <div class="note-card-title">
       <div>{{note.title}}</div>
+      <div class="note-card-subtitle">{{note.project}}</div>
     </div>
   </div>
 </template>
@@ -45,12 +46,17 @@
   cursor: pointer;
 
   .note-card-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+  }
+  .note-card-subtitle {
+    font-size: 0.8rem;
+    color:rgb(120, 120, 120);
   }
 }
 
 .active-note {
   background-color: rgb(240,240,240);
+  border-left: 8px solid rgb(255, 100, 100);
 }
 
 </style>
