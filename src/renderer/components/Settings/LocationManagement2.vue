@@ -3,7 +3,7 @@
     <h3>Storage Locations</h3>
 
     <div class="new-location-btn">
-      <AppButton success @click="$router.push('/Settings/NewStorageLocation')" text="New Storage Location" />
+      <AppButton icon="plus" success @click="$router.push('/Settings/NewStorageLocation')" text="New Storage Location" />
     </div>
 
     <div class="location-management-table">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="new-location-btn">
-      <AppButton :disabled="!selectedRow" danger @click="onDeleteLocation()" text="Delete Storage Location" />
+      <AppButton icon="trash" :disabled="!selectedRow" danger @click="onDeleteLocation()" text="Delete Storage Location" />
     </div>
 
   </div>

@@ -42,6 +42,6 @@
 
 <style lang="scss" scoped>
 .text {
-  margin-left: 5px;
+  margin-left: 7px;
 }
 </style>

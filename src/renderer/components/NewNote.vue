@@ -31,7 +31,7 @@
 
     </div>
 
-    <AppButton :disabled="!createEnabled" primary @click="onNewNote()" text="Create Note" />
+    <AppButton icon="plus" :disabled="!createEnabled" primary @click="onNewNote()" text="Create Note" />
 
   </div>
 </template>

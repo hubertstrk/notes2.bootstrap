@@ -3,7 +3,7 @@
     <h3>Storage Locations</h3>
 
     <div>
-      <AppButton success @click="$router.push('/Settings/NewStorageLocation')" text="New Storage Location" />
+      <AppButton icon="plus" success @click="$router.push('/Settings/NewStorageLocation')" text="New Storage Location" />
     </div>
 
     <!-- <b-alert show variant="primary">When deleting a location your notes still remain and are not deleted. You can add the same location at any time.</b-alert> -->

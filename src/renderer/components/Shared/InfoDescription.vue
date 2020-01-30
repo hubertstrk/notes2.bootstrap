@@ -18,12 +18,12 @@ export default {
 .note-info {
 
   .note-info-title {
-    font-size: 1.4em;
+    font-size: 1.4rem;
     text-transform: capitalize;
   }
 
   .note-info-description {
-    font-size: 1.0em;
+    font-size: 1.0rem;
   }
 
   > div {

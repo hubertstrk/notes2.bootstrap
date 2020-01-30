@@ -13,6 +13,6 @@
 .boundary-error {
   padding: 4px;
   color: red;
-  font-size: 14px;
+  font-size: 1.5rem;
 }
 </style>

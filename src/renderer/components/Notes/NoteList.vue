@@ -5,7 +5,7 @@
       <b-input-group>
         <b-input id="inline-form-input-search" v-model="search" placeholder="Search"></b-input>
       </b-input-group>
-      <app-button @click="$router.push('NewNote')" text=" Add" />
+      <app-button icon="plus" @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
       <transition-group name="list-complete" tag="div" class="notes-list-transition-group">

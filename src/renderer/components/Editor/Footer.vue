@@ -31,10 +31,10 @@
 
   display: flex;
   border-top: 1px solid rgb(243, 243, 243);
-  height: 30px;
+  height: 2rem;
   align-items: center;
   padding: 2px 5px;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 
   > * {
     margin-left: 10px;
