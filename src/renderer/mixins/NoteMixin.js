@@ -15,7 +15,7 @@ export const NoteMixin = {
           return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null
         },
         set (value) {
-          if (value) {
+          if (value !== null) {
             this.updateNote({id: this.activeNoteId, [prop]: value})
           }
         }
