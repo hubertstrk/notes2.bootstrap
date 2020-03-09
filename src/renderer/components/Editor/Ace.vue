@@ -1,6 +1,6 @@
 <template>
   <AceEditor v-model="content" :options="options" @init="intialize"
-    lang="markdown" theme="github" :onresize="resize()" />
+    lang="markdown" theme="monokai" :onresize="resize()" />
 </template>
 
 <script>
@@ -35,9 +35,13 @@ export default {
       require('brace/mode/markdown')
       require('brace/snippets/markdown')
       require('brace/theme/github')
+      require('brace/theme/chaos')
       require('brace/theme/xcode')
       require('brace/theme/crimson_editor')
       require('brace/theme/tomorrow')
+      require('brace/theme/ambiance')
+      require('brace/theme/monokai')
+      require('brace/theme/solarized_dark')
 
       this.editor.setWrapBehavioursEnabled(true)
       this.editor.setShowFoldWidgets(false)

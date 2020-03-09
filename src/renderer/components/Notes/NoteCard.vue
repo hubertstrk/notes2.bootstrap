@@ -56,7 +56,7 @@
 
 .active-note {
   background-color: rgb(240,240,240);
-  border-left: 8px solid rgb(255, 100, 100);
+  // border-left: 8px solid rgb(255, 100, 100);
 }
 
 </style>
