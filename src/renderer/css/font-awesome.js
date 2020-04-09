@@ -28,7 +28,8 @@ import {
   faChartLine,
   faCalendarAlt,
   faHdd,
-  faBookOpen
+  faBookOpen,
+  faPalette
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -64,7 +65,8 @@ library.add(
   faBookOpen,
   faCalendarAlt,
   faHdd,
-  farBookmark
+  farBookmark,
+  faPalette
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

@@ -1,36 +1,27 @@
-import marked from 'marked'
+import { Remarkable } from 'remarkable'
+import hljs from 'highlight.js'
 
-var renderer = new marked.Renderer()
+var md = new Remarkable({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value
+      } catch (err) {}
+    }
 
-let headings = []
+    try {
+      return hljs.highlightAuto(str).value
+    } catch (err) {}
 
-renderer.heading = function (text, level) {
-  const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-')
-  headings.push({title: text, level})
-  return `
-    <h${level} id="${escapedText}">
-      ${text}
-    </h${level}>`
-}
-
-marked.setOptions({
-  renderer,
-  pedantic: false,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false
+    return '' // use external default escaping
+  }
 })
 
-export const getHeadings = (markdown) => {
-  headings = []
-  marked(markdown, {})
-  return headings
-}
+md = new Remarkable('full', {
+  html: true,
+  typographer: true
+})
 
 export const getHtml = (markdown) => {
-  return marked(markdown, {})
+  return md.render(markdown)
 }
