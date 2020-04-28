@@ -1,6 +1,7 @@
 import { Remarkable } from 'remarkable'
 import toc from 'markdown-toc'
 import hljs from 'highlight.js'
+import emoji from 'remarkable-emoji'
 
 const options = {
   highlight: function (str, lang) {
@@ -20,10 +21,8 @@ const options = {
   typographer: true
 }
 
-// var md = new Remarkable('full', options).use(toc.plugin(options))
-
 function render (str, options) {
-  return new Remarkable(options)
+  return new Remarkable(options).use(emoji)
     .render(str)
 }
 
