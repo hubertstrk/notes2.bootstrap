@@ -5,7 +5,7 @@
       <b-input-group>
         <b-input id="inline-form-input-search" v-model="search" placeholder="Search"></b-input>
       </b-input-group>
-      <app-button icon="plus" @click="$router.push('NewNote')" text=" Add" />
+      <app-button @click="$router.push('NewNote')" text=" Add" />
     </div>
     <div class="note-list">
       <transition-group name="list-complete" tag="div" class="notes-list-transition-group">
@@ -94,11 +94,11 @@ export default {
   .notes-list-transition-group {
 
     > * {
-      border-bottom: 1px solid rgb(220, 220, 220);
+      border-bottom: 1px solid rgb(240, 240, 240);
     }
 
     > *:first-child {
-      border-top: 1px solid rgb(220, 220, 220);
+      border-top: 1px solid rgb(240, 240, 240);
     }
 
   }

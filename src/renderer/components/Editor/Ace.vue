@@ -1,6 +1,6 @@
 <template>
   <AceEditor v-model="content" :options="options" @init="intialize"
-    lang="markdown" theme="monokai" :onresize="resize()" />
+    lang="markdown" theme="github" :onresize="resize()" />
 </template>
 
 <script>

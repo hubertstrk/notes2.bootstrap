@@ -1,6 +1,6 @@
 <template>
   <div class="location-list-component">
-    <h3>Storage Locations</h3>
+    <h1>Storage Locations</h1>
 
     <div class="new-location-btn">
       <AppButton icon="plus" success @click="$router.push('/Settings/NewStorageLocation')" text="New Storage Location" />
