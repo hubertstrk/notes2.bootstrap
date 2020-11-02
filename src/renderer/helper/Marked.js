@@ -22,7 +22,8 @@ const options = {
 }
 
 function render (str, options) {
-  return new Remarkable(options).use(emoji)
+  return new Remarkable(options)
+    .use(emoji)
     .render(str)
 }
 
