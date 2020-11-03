@@ -1,10 +1,10 @@
 <template>
   <div class="markup-menu">
-    <b-form-checkbox :value="reader" @input="toggleReader()" button button-variant="success">
+    <b-form-checkbox :value="reader" @input="toggleReader()" button button-variant="primary">
       <font-awesome-icon icon="book-open" /> Reader
     </b-form-checkbox>
-    <AppButton secondary icon="print" @click="print" text="Print" />
-    <AppButton secondary icon="cog" @click="$router.push('/Settings/LocationManagement2')" text="Settings" />
+    <AppButton icon="print" @click="print" text="Print" />
+    <AppButton icon="cog" @click="$router.push('/Settings/LocationManagement2')" text="Settings" />
   </div>
 </template>
 

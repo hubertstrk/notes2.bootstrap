@@ -1,6 +1,6 @@
 <template>
   <div class="archive-menu-actions">
-    <AppButton success @click="setArchived(false)" text="Restore" />
+    <AppButton @click="setArchived(false)" text="Restore" />
     <ConfirmButton text="Delete" @confirm="deleteNote()" />
   </div>
 </template>

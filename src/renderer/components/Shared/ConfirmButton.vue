@@ -5,7 +5,7 @@
         <AppButton icon="trash" secondary @click="actionCalled = true" :text="text" />
       </div>
       <div v-else key="confirm" class="confirm-button-component-action">
-        <AppButton success @click="actionCalled = false" text="Cancel" />
+        <AppButton @click="actionCalled = false" text="Cancel" />
         <AppButton icon="trash" danger @click="onConfirm" text="Confirm" />
       </div>
     </transition>

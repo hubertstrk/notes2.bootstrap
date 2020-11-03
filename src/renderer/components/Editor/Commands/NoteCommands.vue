@@ -1,7 +1,7 @@
 <template>
   <div>
-    <AppButton info @click="$router.push('/NoteInfo')" icon="info-circle" />
-    <AppButton icon="archive" warning @click="setArchived(true)" text="Archive" />
+    <AppButton light @click="$router.push('/NoteInfo')" icon="info-circle" />
+    <AppButton light icon="archive" @click="setArchived(true)" text="Archive" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <AceEditor v-model="content" :options="options" @init="intialize"
-    lang="markdown" theme="github" :onresize="resize()" />
+    lang="markdown" theme="crimson_editor" :onresize="resize()" />
 </template>
 
 <script>
@@ -51,6 +51,10 @@ export default {
       this.editor.getSession().setUseWrapMode(true)
       this.editor.resize()
       this.editor.setReadOnly(true)
+
+      this.editor.setOptions({
+        fontFamily: 'Fira Code'
+      })
     },
     resize () {
       if (this.editor) {
