@@ -1,6 +1,6 @@
 <template>
   <AceEditor v-model="content" :options="options" @init="intialize"
-    lang="markdown" theme="crimson_editor" :onresize="resize()" />
+    lang="markdown" theme="" :onresize="resize()" />
 </template>
 
 <script>
