@@ -6,7 +6,7 @@
         <Navigation />
       </div>
       <div class="notes" :class="{reading: reader}">
-        <NoteList />
+        <NoteList :sort="selectionMode !== 'recent'" />
       </div>
       <div class="editor">
         <Editor />
@@ -42,6 +42,9 @@ export default {
     ]),
     ...mapState('settings', {
       reader: state => state.reader
+    }),
+    ...mapState('editor', {
+      selectionMode: state => state.ui.selectionMode
     })
   },
   methods: {

@@ -14,7 +14,7 @@
         {{link.title}}
       </template>
 
-      <template #info>
+      <template #info v-if="link.showInfo">
         {{groupStatistic[link.name]}}
       </template>
 
@@ -35,9 +35,10 @@
     data () {
       return {
         links: [
-          {name: 'all', icon: 'sticky-note', title: 'All'},
-          {name: 'starred', icon: 'star', title: 'Starred'},
-          {name: 'archived', icon: 'archive', title: 'Archived'}
+          {name: 'all', icon: 'sticky-note', title: 'All', showInfo: true},
+          {name: 'recent', icon: 'eye', title: 'Recent', showInfo: false},
+          {name: 'starred', icon: 'heart', title: 'Starred', showInfo: true},
+          {name: 'archived', icon: 'archive', title: 'Archived', showInfo: true}
         ]
       }
     },

@@ -4,6 +4,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {
   faStar,
+  faHeart,
+  faEye,
   faStickyNote,
   faTrash,
   faFolder,
@@ -40,6 +42,8 @@ import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome
 
 library.add(
   faStar,
+  faHeart,
+  faEye,
   faStickyNote,
   faTrash,
   faFolder,

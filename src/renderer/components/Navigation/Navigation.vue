@@ -2,7 +2,7 @@
   <div class="d-flex flex-column navigation">
     <CommonNavigation />
 
-    <div v-b-toggle.collapse-1>
+    <!-- <div v-b-toggle.collapse-1>
       <NavigationCard name="project-collapse">
 
         <template #icon>
@@ -18,7 +18,7 @@
         </template>
 
       </NavigationCard>
-    </div>
+    </div> -->
 
     <b-collapse id="collapse-1" class="collapse-container" visible>
       <ProjectNavigation />

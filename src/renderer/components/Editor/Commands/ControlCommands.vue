@@ -1,7 +1,7 @@
 <template>
   <b-button-group>
     <b-form-checkbox v-model="starred" button>
-      <font-awesome-icon icon="star" />
+      <font-awesome-icon icon="heart" />
     </b-form-checkbox>
     <AppButton icon="search-plus" @click="zoom(1)" />
     <AppButton icon="search-minus" @click="zoom(-1)" />

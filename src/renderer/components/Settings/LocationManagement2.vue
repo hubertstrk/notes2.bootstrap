@@ -18,7 +18,7 @@
       >
         <template v-slot:table-busy>
           <div class="text-center" style="color: gray">
-            <b-spinner class="align-middle"></b-spinner>
+            <b-spinner class="align-middle" type="grow"></b-spinner>
             <div style="margin-top: 6px;">Loading</div>
           </div>
         </template>

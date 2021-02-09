@@ -1,10 +1,12 @@
 import {ensureSettingsFile, readSettings, writeSettings} from '@/helper/Settings'
+import {uniq} from 'lodash'
 
 const state = {
   activeNoteId: null,
   locations: [],
   fontSize: 20,
-  reader: false
+  reader: false,
+  recent: []
 }
 
 const mutations = {
@@ -28,11 +30,25 @@ const mutations = {
   },
   setActiveNoteId (state, id) {
     state.activeNoteId = id
+  },
+  addRecentNote (state, id) {
+    if (!id) return
+    const count = state.recent.unshift(id)
+    if (count > 10) {
+      state.recent.pop()
+    }
+    state.recent = uniq(state.recent)
+  },
+  removeRecentNote (state, id) {
+    const index = state.recent.indexOf(id)
+    if (index !== -1) {
+      state.recent.splice(index, 1)
+    }
   }
 }
 
 const actions = {
-  async reloadSettings ({state, commit, dispatch}) {
+  async reloadSettings ({state, commit}) {
     const created = await ensureSettingsFile()
     if (created) {
       await writeSettings({...state})
@@ -64,6 +80,15 @@ const actions = {
   },
   setActiveNoteId ({state, commit}, id) {
     commit('setActiveNoteId', id)
+    writeSettings({...state})
+  },
+  addRecentNote ({state, commit}, id) {
+    commit('removeRecentNote', id)
+    commit('addRecentNote', id)
+    writeSettings({...state})
+  },
+  removeRecentNote ({state, commit}, id) {
+    commit('removeRecentNote', id)
     writeSettings({...state})
   }
 }

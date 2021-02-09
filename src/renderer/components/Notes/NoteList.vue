@@ -48,6 +48,12 @@ export default {
       }
     }
   },
+  props: {
+    sort: {
+      tyoe: Boolean,
+      default: () => true
+    }
+  },
   components: {
     AppButton,
     NoteCard,
@@ -63,7 +69,7 @@ export default {
       return fuse.search(this.search)
     },
     sortedNotes () {
-      return sortBy(this.filteredNotes, ['title'])
+      return this.sort ? sortBy(this.filteredNotes, ['title']) : this.filteredNotes
     }
   },
   methods: {

@@ -10,7 +10,7 @@ const uuidv4 = require('uuid/v4')
 const state = {
   notes: {},
   ui: {
-    selectionMode: null, // all, starred, archived
+    selectionMode: null, // all, starred, archived, recent
     activeNoteId: null,
     selectedProject: null
   },
@@ -102,18 +102,48 @@ const actions = {
       commit('updateNote', copy)
     }
   },
-  deleteNote ({state, commit, dispatch}) {
-    const currentNote = state.notes[state.ui.activeNoteId]
-    return fileApi.deleteFile(currentNote.directory, currentNote.id)
-      .then(() => {
-        commit('deleteNote', currentNote.id)
-      })
+  selectNote ({state, commit, dispatch}, id) {
+    const note = state.notes[id]
+    if (!note) return
+
+    commit('setActiveNoteId', id)
+    if (id && !state.ui.selectionMode) {
+      commit('setSelectedProject', note.project)
+    }
+
+    dispatch('settings/setActiveNoteId', id, {root: true})
+
+    // add recent note only in case user clicked on a real note in one of the projects
+    if (id && state.ui.selectionMode !== 'recent') {
+      dispatch('settings/addRecentNote', id, {root: true})
+    }
   },
-  setArchived ({state, commit, dispatch}, archived) {
+  async deleteNote ({state, commit, dispatch}) {
+    const currentNote = state.notes[state.ui.activeNoteId]
+
+    // delete note from settings
+    await dispatch('settings/setActiveNoteId', null, {root: true})
+    await dispatch('settings/removeRecentNote', currentNote.id, {root: true})
+
+    // delete note from internal state
+    commit('setActiveNoteId', null)
+    commit('deleteNote', currentNote.id)
+
+    // physically remove file
+    await fileApi.deleteFile(currentNote.directory, currentNote.id)
+  },
+  async setArchived ({state, commit, dispatch}, archived) {
     const current = Object.values(state.notes).find(x => x.id === state.ui.activeNoteId)
     const note = {id: current.id, archived}
-    dispatch('updateNote', note)
+
+    // update note
+    await dispatch('updateNote', note)
     commit('setActiveNoteId', null)
+
+    // update settings
+    await dispatch('settings/setActiveNoteId', null, {root: true})
+
+    // the archived note still exists as recent note since the user might reactivate the note again
   },
   loadStatistics ({state, commit}) {
     commit('setStatistics', null)
@@ -128,15 +158,6 @@ const actions = {
   onDropped ({commit, dispatch}, project) {
     dispatch('updateNote', {id: state.dragId, project: project})
     commit('setDragId', null)
-  },
-  selectNote ({state, commit, dispatch}, id) {
-    commit('setActiveNoteId', id)
-    const note = state.notes[id]
-    if (!note) return
-    if (id && !state.ui.selectionMode) {
-      commit('setSelectedProject', note.project)
-    }
-    dispatch('settings/setActiveNoteId', id, {root: true})
   }
 }
 
@@ -148,15 +169,7 @@ const getters = {
     if (state.ui.selectedProject) {
       return getters.notesByProject
     }
-    if (state.ui.selectionMode === 'all') {
-      return getters.all
-    }
-    if (state.ui.selectionMode === 'starred') {
-      return getters.starred
-    }
-    if (state.ui.selectionMode === 'archived') {
-      return getters.archived
-    }
+    return getters[state.ui.selectionMode]
   },
   all (state) {
     return Object.values(state.notes).filter(x => !x.archived)
@@ -167,14 +180,18 @@ const getters = {
   archived (state) {
     return Object.values(state.notes).filter(x => x.archived)
   },
+  recent (state, getters, rootGetters) {
+    return rootGetters.settings.recent.map(x => state.notes[x]).filter(x => !x.archived)
+  },
   notesByProject (state, getters) {
     return getters.all.filter(x => x.project === state.ui.selectedProject).filter(x => !x.archived)
   },
-  groupStatistic (state, getters) {
+  groupStatistic (state, getters, rootGetters) {
     const stats = {
       all: getters.all.length,
       starred: getters.starred.length,
-      archived: getters.archived.length
+      archived: getters.archived.length,
+      recent: rootGetters.settings.recent.length
     }
     return stats
   }
