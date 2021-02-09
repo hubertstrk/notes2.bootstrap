@@ -58,8 +58,10 @@
       }
     },
     computed: {
-      ...mapState('settings', {
-        locations: state => state.locations
+      ...mapState('settings', ['locations']),
+      ...mapState('editor', {
+        notes: state => state.notes,
+        activeNoteId: state => state.ui.activeNoteId
       }),
       ...mapGetters('editor', [
         'projects'
@@ -89,6 +91,10 @@
         notify('Note created')
         this.$router.push('/')
       }
+    },
+    mounted () {
+      if (!this.activeNoteId) return
+      this.projectName = this.notes[this.activeNoteId].project
     }
   }
 </script>
