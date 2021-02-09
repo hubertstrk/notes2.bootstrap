@@ -31,6 +31,7 @@
       }),
       activeText () {
         if (!this.activeNoteId) return ''
+        if (Object.keys(this.notes).length === 0) return ''
         return this.notes[this.activeNoteId].text
       }
     },

@@ -12,6 +12,7 @@ export const NoteMixin = {
     ...['starred', 'project'].reduce((obj, prop) => {
       const computedProp = {
         get () {
+          if (Object.keys(this.notes).length === 0) return null
           return this.activeNoteId ? this.notes[this.activeNoteId][prop] : null
         },
         set (value) {

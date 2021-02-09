@@ -131,6 +131,7 @@ const actions = {
   selectNote ({state, commit, dispatch}, id) {
     commit('setActiveNoteId', id)
     const note = state.notes[id]
+    if (!note) return
     if (id && !state.ui.selectionMode) {
       commit('setSelectedProject', note.project)
     }
