@@ -24,6 +24,7 @@ function createWindow () {
     useContentSize: true,
     width: 1000,
     webPreferences: {
+      enableRemoteModule: true,
       nodeIntegration: true // add this
     }
     // icon: path.join(__dirname, '../../build/icons/bookmark.png')

@@ -22,7 +22,7 @@
 import {notify} from '@/helper/AppNotifications'
 import AppButton from '@/components/Shared/AppButton'
 import {mapState, mapActions} from 'vuex'
-const {dialog} = require('electron').remote
+const { dialog } = require('electron').remote
 
 export default {
   name: 'NewStorageLocation',
