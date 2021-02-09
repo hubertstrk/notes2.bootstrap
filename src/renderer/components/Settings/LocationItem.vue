@@ -6,7 +6,7 @@
     </div>
     <b-card-text class="location-item-info">
         <font-awesome-icon icon="database" />
-        <NumericTween :value="notesAtLocation.length" />
+        {{notesAtLocation.length}}
       <div><font-awesome-icon icon="archive" /> {{archivedNotes.length}}</div>
       <div><font-awesome-icon icon="chart-line" /> {{percentage}}%</div>
     </b-card-text>
@@ -25,7 +25,6 @@
 <script>
   import {mapState, mapActions, mapGetters} from 'vuex'
   import ConfirmButton from '@/components/Shared/ConfirmButton'
-  import NumericTween from '@/components/Shared/NumericTween'
 
   export default {
     name: 'LocationItem',
@@ -36,8 +35,7 @@
       }
     },
     components: {
-      ConfirmButton,
-      NumericTween
+      ConfirmButton
     },
     computed: {
       ...mapState('editor', [

@@ -27,7 +27,7 @@
       </InfoDescription>
 
       <InfoDescription title="Size">
-        <font-awesome-icon icon="hdd" /> <span class="info-description-value"><NumericTween :value="statistics.size" /> byte</span>
+        <font-awesome-icon icon="hdd" /> <span class="info-description-value">{{statistics.size}} byte</span>
       </InfoDescription>
     </template>
   </div>
@@ -39,14 +39,12 @@
 
   import {format} from '../helper/index'
   import Menu from './Settings/Menu'
-  import NumericTween from '@/components/Shared/NumericTween'
   import InfoDescription from '@/components/Shared/InfoDescription'
 
   export default {
     name: 'NoteInfo',
     components: {
       Menu,
-      NumericTween,
       InfoDescription
     },
     mixins: [

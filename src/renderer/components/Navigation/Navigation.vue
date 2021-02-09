@@ -14,7 +14,7 @@
         </template>
 
         <template #info>
-          <NumericTween :value="projects.length" />
+          {{projects.length}}
         </template>
 
       </NavigationCard>
@@ -33,15 +33,13 @@
   import NavigationCard from './NavigationCard'
   import CommonNavigation from './CommonNavigation'
   import ProjectNavigation from './ProjectNavigation'
-  import NumericTween from '@/components/Shared/NumericTween'
 
   export default {
     name: 'Navigation',
     components: {
       NavigationCard,
       CommonNavigation,
-      ProjectNavigation,
-      NumericTween
+      ProjectNavigation
     },
     computed: {
       ...mapGetters('editor', [

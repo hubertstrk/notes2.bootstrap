@@ -14,7 +14,7 @@
       </template>
 
       <template #info>
-        <NumericTween :value="all.filter(x => x.project === project).filter(x => !x.archived).length" />
+        {{all.filter(x => x.project === project).filter(x => !x.archived).length}}
       </template>
 
     </NavigationCard>
@@ -25,13 +25,11 @@
 import {mapState, mapMutations, mapGetters} from 'vuex'
 
 import NavigationCard from './NavigationCard'
-import NumericTween from '@/components/Shared/NumericTween'
 
 export default {
   name: 'Navigation',
   components: {
-    NavigationCard,
-    NumericTween
+    NavigationCard
   },
   computed: {
     ...mapGetters('editor', [
