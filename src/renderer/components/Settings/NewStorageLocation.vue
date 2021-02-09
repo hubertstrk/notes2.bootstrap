@@ -47,14 +47,6 @@ export default {
       'addLocation'
     ]),
     openDirectorySelection () {
-      // dialog.showOpenDialog({
-      //   title: 'Select Folder',
-      //   properties: ['openDirectory']
-      // }, (canceled, folders) => {
-      //   if (folders && folders.length === 1) {
-      //     this.location.directory = folders[0]
-      //   }
-      // })
       dialog.showOpenDialog({
         title: 'Select Folder',
         properties: ['openDirectory']
