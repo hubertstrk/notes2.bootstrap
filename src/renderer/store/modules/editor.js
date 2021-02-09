@@ -113,6 +113,7 @@ const actions = {
     const current = Object.values(state.notes).find(x => x.id === state.ui.activeNoteId)
     const note = {id: current.id, archived}
     dispatch('updateNote', note)
+    commit('setActiveNoteId', null)
   },
   loadStatistics ({state, commit}) {
     commit('setStatistics', null)
