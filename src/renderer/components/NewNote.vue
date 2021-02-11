@@ -61,7 +61,7 @@
       ...mapState('settings', ['locations']),
       ...mapState('editor', {
         notes: state => state.notes,
-        activeNoteId: state => state.ui.activeNoteId
+        selectedProject: state => state.ui.selectedProject
       }),
       ...mapGetters('editor', [
         'projects'
@@ -93,8 +93,8 @@
       }
     },
     mounted () {
-      if (!this.activeNoteId) return
-      this.projectName = this.notes[this.activeNoteId].project
+      if (!this.selectedProject) return
+      this.projectName = this.selectedProject
     }
   }
 </script>

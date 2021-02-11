@@ -34,7 +34,7 @@ const mutations = {
   addRecentNote (state, id) {
     if (!id) return
     const count = state.recent.unshift(id)
-    if (count > 10) {
+    if (count > 50) {
       state.recent.pop()
     }
     state.recent = uniq(state.recent)
