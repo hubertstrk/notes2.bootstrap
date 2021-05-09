@@ -65,7 +65,7 @@
     "ci": "^2.0.0",
     "fuse.js": "^3.6.1",
     "highlight.js": "^10.6.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "markdown-toc": "^1.2.0",
     "marked": "^0.7.0",
     "mixin-deep": "^2.0.1",
