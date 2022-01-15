@@ -67,7 +67,7 @@
     "highlight.js": "^10.6.0",
     "lodash": "^4.17.20",
     "markdown-toc": "^1.2.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "mixin-deep": "^2.0.1",
     "node-sass": "^4.14.1",
     "remarkable": "^2.0.1",
